@@ -1,0 +1,17 @@
+// abstract
+@import "./abstract/colors";
+// base
+// components
+@import "./components/side-menu";
+// layout
+// pages
+// themes
+// vendors
+
+html {
+    width: 100%;
+    height: 100%;
+    background-image: url("../assets/imgs/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }

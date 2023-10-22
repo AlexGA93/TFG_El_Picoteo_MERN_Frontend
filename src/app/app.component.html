@@ -1,4 +1,22 @@
-<!-- side menu -->
-<app-side-menu />
-<!-- routing -->
-<router-outlet />
+<mat-sidenav-container class="app-container">
+    <mat-sidenav 
+        class="app-sidenav"
+        #sidenav 
+        mode="side" 
+        [(opened)]="opened" 
+        (opened)="events.push('open!')"
+        (closed)="events.push('close!')">
+    <app-side-menu />
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
+    
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <main class="main">
+    <app-side-menu />
+    <router-outlet />
+</main> -->
