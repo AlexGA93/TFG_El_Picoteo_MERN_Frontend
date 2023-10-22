@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   // authentication
   {
-    path: 'auth',
+    path: 'public',
     loadChildren: () => import('./pages/Public/public.module').then(module => module.PublicModule)
   },
   // protected routes
@@ -15,7 +15,7 @@ const routes: Routes = [
   // default routes
   {
     path: '**',
-    redirectTo: 'auth'
+    redirectTo: 'public'
   }
 ];
 
