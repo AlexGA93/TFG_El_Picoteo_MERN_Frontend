@@ -1,1 +1,31 @@
-<p>welcome works!</p>
+<section class="welcome">
+
+  <div class="welcome__title">
+    <h1 class="welcome-title">El Picoteo S.L</h1>
+  </div>
+
+  <div class="welcome__buttons">
+    <div class="buttons-container">
+      <button
+      class="button-client"
+      id="client"
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="redirect('client')"
+    >
+      Soy Cliente
+    </button>
+    <button
+      class="button-employee"
+      id="employee"
+      type="button"
+      mat-raised-button
+      color="primary"
+      (click)="redirect('login')"
+    >
+      Soy Empleado
+    </button>
+    </div>
+  </div>
+</section>

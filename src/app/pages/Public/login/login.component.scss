@@ -1,0 +1,17 @@
+
+.login_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    &--title {
+        h1 {
+            font-weight: 800;
+        }
+    }
+
+    &--form {
+        // background-color: blue;
+        // height: 200px;
+    }
+}

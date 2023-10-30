@@ -10,15 +10,22 @@
 
     .app-sidenav {
         width: 333px;
-        opacity:0.5;
-        background-color: $solid-color-black;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
+        background: fade-out($solid-color-black, 0.5);
     }
   }
   
-  .app-events {
-    width: 300px;
-    height: 200px;
-    overflow: auto;
-    border: 1px solid #555;
+  .app-content {
+    padding: 45px;
+    &__container {
+      height: 100%;
+      background: fade-out($solid-color-light, 0.5);
+      border-radius: 10px;
+      
+      display: grid;
+      place-items: center;
+    }
   }
   

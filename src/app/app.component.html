@@ -1,22 +1,13 @@
 <mat-sidenav-container class="app-container">
-    <mat-sidenav 
-        class="app-sidenav"
-        #sidenav 
-        mode="side" 
-        [(opened)]="opened" 
-        (opened)="events.push('open!')"
-        (closed)="events.push('close!')">
+  <mat-sidenav class="app-sidenav" #sidenav mode="side" [(opened)]="opened">
     <app-side-menu />
   </mat-sidenav>
 
-  <mat-sidenav-content>
-    <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p>
-    
-    <router-outlet></router-outlet>
+  <mat-sidenav-content class="app-content">
+    <div class="app-content__container">
+      <!-- <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p> -->
+
+      <router-outlet></router-outlet>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <main class="main">
-    <app-side-menu />
-    <router-outlet />
-</main> -->

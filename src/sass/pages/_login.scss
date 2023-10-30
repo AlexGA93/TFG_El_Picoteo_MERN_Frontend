@@ -1,0 +1,21 @@
+@import "../abstract/colors";
+
+.login_section {
+
+    display: grid;
+    place-items: center;
+
+    background-color: $solid-color-light;
+    // responsive
+    width: 718px;
+    height: 600px;
+
+    border-radius: 10px;
+
+    h1 {
+        color: $solid-color-gray;
+      font-size: 100px;
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+    &--form {}
+}

@@ -1,0 +1,43 @@
+@import "../abstract/colors";
+
+.welcome {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+
+  &__title {
+    margin: 20px;
+    h1 {
+      color: $solid-color-gray;
+      font-size: 100px;
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+  }
+  &__buttons {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+
+    .buttons-container {
+      margin: 10px;
+      width: 200px;
+
+      button {
+        width: 182px;
+        height: 42px;
+        margin: 10px;
+        font-size: 19px;
+        border-radius: 10px;
+        background-color: $solid-color-green;
+      }
+
+      button:hover {
+        background-color: $solid-color-green-dark;
+      }
+    }
+  }
+}
