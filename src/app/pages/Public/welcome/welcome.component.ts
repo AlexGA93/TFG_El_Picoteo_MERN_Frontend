@@ -11,8 +11,6 @@ export class WelcomeComponent {
   constructor(private router: Router) {}
 
   redirect(flag: string) {
-    console.log(`/${flag==='login' ? 'login' : 'menu'}`);
-    
     this.router.navigateByUrl(`public/${flag}`);
   }
 }

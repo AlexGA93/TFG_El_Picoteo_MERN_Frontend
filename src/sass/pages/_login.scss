@@ -1,21 +1,29 @@
 @import "../abstract/colors";
 
-.login_section {
-
-    display: grid;
-    place-items: center;
-
+.login {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  &-container {
+    padding: 20px;
     background-color: $solid-color-light;
     // responsive
     width: 718px;
     height: 600px;
-
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     h1 {
-        color: $solid-color-gray;
+      color: $solid-color-gray;
+      text-align: center;
       font-size: 100px;
-      font-family: 'Merriweather Sans', sans-serif;
+      font-weight: 800;
+      font-family: "Merriweather Sans", sans-serif;
     }
-    &--form {}
+    &--form {
+    }
+  }
 }

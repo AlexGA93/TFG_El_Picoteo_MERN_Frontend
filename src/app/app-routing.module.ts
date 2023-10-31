@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { validTokenGuard } from './guards/valid-token.guard';
 
 const routes: Routes = [
   // authentication
@@ -10,7 +11,10 @@ const routes: Routes = [
   // protected routes
   { 
     path: 'private',
-    loadChildren: () => import('./pages/Private/private.module').then(module => module.PrivateModule) 
+    loadChildren: () => import('./pages/Private/private.module').then(module => module.PrivateModule),
+    // guard to protect private routes if there is no login token
+    canActivate: [validTokenGuard],
+    canMatch: [validTokenGuard]
   },
   // default routes
   {
