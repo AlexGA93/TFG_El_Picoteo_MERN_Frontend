@@ -1,10 +1,14 @@
 // abstract
 @import "./abstract/colors";
 // base
+@import "./base/typography";
 // components
 @import "./components/side-menu";
+@import "./components/login-form";
 // layout
 // pages
+@import "./pages/welcome";
+@import "./pages/login";
 // themes
 // vendors
 

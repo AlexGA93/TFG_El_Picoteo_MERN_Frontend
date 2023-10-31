@@ -1,0 +1,37 @@
+<section class="login-form">
+  <form class="form" [formGroup]="myForm" autocomplete="off" (ngSubmit)="submitForm()">
+    <!-- email -->
+    <fieldset class="fieldset-email">
+      <label class="label-email" for="email">Email</label>
+      <input
+        type="text"
+        id="email"
+        class="email"
+        placeholder="Type email here..."
+        formControlName="email"
+      />
+    </fieldset>
+    <!-- password -->
+    <fieldset class="fieldset-password">
+      <label class="label-password" for="password">Password</label>
+      <input
+        type="text"
+        id="password"
+        class="password"
+        formControlName="password"
+        placeholder="Type password here..."
+      />
+    </fieldset>
+    <!-- button -->
+    <button
+      class="button-login"
+      id="login-button"
+      type="submit"
+      [disabled]="myForm.invalid"
+      mat-raised-button
+      color="primary"
+    >
+      Login
+    </button>
+  </form>
+</section>
