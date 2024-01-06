@@ -7,18 +7,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator'
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatInputModule
   ],
   exports: [
     MatSidenavModule,
@@ -28,7 +23,9 @@ import {MatInputModule} from '@angular/material/input';
     MatCheckboxModule,
     MatCheckboxModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule { }

@@ -3,6 +3,7 @@ import { JWTValidationResponseType, LoginFormType, LoginResponseType, UserDataTy
 import { environment } from 'src/env/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
+import { deleteContent, getContent } from '../utils/local-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +30,12 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem("user");
+    deleteContent("user");
   }
 
   verifyToken(): Observable<boolean> {
     // configure HTTP Headers
-    const headers = new HttpHeaders().set('x-auth-token', localStorage.getItem('user') || '');
+    const headers = new HttpHeaders().set('x-auth-token', getContent('user') || '');
 
     // response : { status: boolean }
     return this.httpService.get<JWTValidationResponseType>(`${this._baseUrl}/auth/validate`, {headers}).pipe(map(res => {

@@ -1,6 +1,49 @@
-<p>dashboard works!</p>
+<!-- 
+    * Secciones a mostrar en el componente 
+    - Dias Desde Ultima Compra
+    - Capital Invertido
+    - Capital Ganado
+    - Recetas
+    - Stock
+    - Inventario
+ -->
 
-<p *ngIf="Pagos">Ganancias Totales: {{getGanancias()}}</p>
-<p>Gastos del mes: {{getGastos()}}</p>
-<!-- tabla Almacen -->
-<!-- Tabla Inventario -->
+<section class="dashboard">
+  <!-- Earned Capital -->
+  <div class="dashboard-container earned-capital">
+    <!-- Title -->
+    <h3 class="earned-capital-title">Capital Ganado</h3>
+    <!-- Amount -->
+    <p class="earned-capital-amount">{{ getEarnedCapital() | currency:'EUR' }}</p>
+  </div>
+  <!-- Invested Capital -->
+  <div class="dashboard-container invested-capital">
+    <!-- Title -->
+    <h3 class="invested-capital-title">Capital Invertido</h3>
+    <!-- Amount -->
+    <p class="invested-capital-amount">{{ getInvestedCapital() | currency:'EUR'}}</p>
+  </div>
+  <!-- Recipes -->
+  <div class="dashboard-container recipes">
+    <!-- Title -->
+    <h3 class="recipes-title">Productos</h3>
+    <!-- Table -->
+    <app-simple-table [payload]="Productos"></app-simple-table>
+    <!-- <p class="recipes-table">Tabla Recetas</p> -->
+  </div>
+  <!-- Stock -->
+  <div class="dashboard-container stock">
+    <!-- Title -->
+    <h3 class="stock-title">Stock</h3>
+    <!-- Table -->
+    <app-simple-table [payload]="Stock"></app-simple-table>
+  </div>
+  <!-- Inventory -->
+  <div class="dashboard-container inventory">
+    <!-- Title -->
+    <h3 class="Inventory-title">Inventario</h3>
+    <!-- Table -->
+    <!-- <p class="inventory-table">Tabla Inventario</p> -->
+    <app-simple-table [payload]="Inventario"></app-simple-table>
+  </div>
+</section>

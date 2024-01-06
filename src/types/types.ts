@@ -37,3 +37,16 @@ export interface PagosType {
     precio: number;
     fecha: string;
 }
+
+export interface StockType {
+    id: number;
+    id_producto: number;
+    unidades: number;
+    fecha: string;
+}
+
+export interface ProductosType {
+    id: number;
+    nombre: string;
+    precio_producto: number;
+}

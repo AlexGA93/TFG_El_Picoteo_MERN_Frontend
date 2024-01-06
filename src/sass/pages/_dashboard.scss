@@ -1,0 +1,63 @@
+@import "../abstract/colors";
+
+.dashboard {
+  
+  height: 100%;
+  padding: 38px;
+  display: grid;
+  grid-template-areas:
+    "earned earned recipes recipes recipes stock stock stock"
+    "invested invested recipes recipes recipes stock stock stock"
+    "inventory inventory inventory inventory inventory inventory inventory inventory "
+    "inventory inventory inventory inventory inventory inventory inventory inventory "
+    "inventory inventory inventory inventory inventory inventory inventory inventory "
+    "inventory inventory inventory inventory inventory inventory inventory inventory "
+    ;
+
+  gap: 10px;
+
+  &-container {
+    border-radius: 15px;
+    background-color: $solid-color-light;
+    
+  }
+
+  div {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  h3 {
+    color: $solid-color-brown-secondary;
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
+
+.earned-capital {
+  grid-area: earned;
+  &-amount {
+    color: $solid-color-brown;
+    font-size: 24px;
+  }
+}
+
+.invested-capital {
+  grid-area: invested;
+  &-amount {
+    color: $solid-color-brown;
+    font-size: 24px;
+  }
+}
+
+.recipes {
+  grid-area: recipes;
+}
+
+.stock {
+  grid-area: stock;
+}
+
+.inventory {
+  grid-area: inventory;
+}
