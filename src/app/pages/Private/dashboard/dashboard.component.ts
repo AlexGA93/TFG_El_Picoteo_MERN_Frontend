@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class DashboardComponent implements OnInit{
 
   constructor(private as: AuthService) {
-    console.log(this.as.user);
+    // console.log(this.as.user);
     
   }
 

@@ -1,13 +1,6 @@
-<mat-sidenav-container class="app-container">
-  <mat-sidenav class="app-sidenav" #sidenav mode="side" [(opened)]="opened">
-    <app-side-menu />
-  </mat-sidenav>
-
-  <mat-sidenav-content class="app-content">
-    <div class="app-content__container">
-      <!-- <p><mat-checkbox [(ngModel)]="opened">sidenav.opened</mat-checkbox></p> -->
-
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="app__container">
+  <app-navbar/>
+  <div class="app__container-router">
+    <router-outlet/>
+  </div>
+</div>

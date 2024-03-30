@@ -3,6 +3,7 @@
 // base
 @import "./base/typography";
 // components
+@import "./components/navbar";
 @import "./components/side-menu";
 @import "./components/login-form";
 // layout
@@ -12,10 +13,11 @@
 // themes
 // vendors
 
-html {
-    width: 100%;
-    height: 100%;
-    background-image: url("../assets/imgs/background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+html , body{
+  width: 100%;
+  height: auto;
+  background: url("../assets/imgs/vintage-old-rustic-cutlery-dark-rotated.png") 0 0 no-repeat;
+  background-size: cover;
+  transform-origin: center center;
+}
+

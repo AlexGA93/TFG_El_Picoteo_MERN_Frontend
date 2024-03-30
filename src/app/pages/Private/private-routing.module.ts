@@ -7,6 +7,10 @@ const routes: Routes = [{
   children: [
     // dashboard
     { path: 'dashboard', component: DashboardComponent },
+    // inventario
+    { path: 'inventario', component: DashboardComponent },
+    // recetas
+    { path: 'recetas', component: DashboardComponent },
     // default
     { path: '**', redirectTo: 'dashboard' }
   ]

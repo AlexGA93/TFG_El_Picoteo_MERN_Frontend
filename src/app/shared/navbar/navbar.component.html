@@ -1,0 +1,44 @@
+<nav class="navbar" id="navbar">
+  <!-- icon & name container-->
+  <div class="navbar__name">
+    <img
+      class="navbar__icon"
+      src="../../../assets/icons/icon_big_white.png"
+      alt="alex_icon"
+    />
+    <p class="navbar_name"><strong>El Picoteo</strong></p>
+  </div>
+  <!-- routes container -->
+  <div class="navbar__routes">
+    <ul class="routes__list">
+      <!-- Only visible if user is logged -->
+      <li
+        *ngIf="userLogged"
+        class="routes__list-item"
+        routerLinkActive="active"
+      >
+        <a [routerLink]="['/private/dashboard']" class="item-link">Dashboard</a>
+      </li>
+      <li
+        *ngIf="userLogged"
+        class="routes__list-item"
+        routerLinkActive="active"
+      >
+        <a [routerLink]="['/private/inventario']" class="item-link"
+          >Inventario</a
+        >
+      </li>
+      <li
+        *ngIf="userLogged"
+        class="routes__list-item"
+        routerLinkActive="active"
+      >
+        <a [routerLink]="['/private/recetas']" class="item-link">Recetas</a>
+      </li>
+      <li class="routes__list-item" routerLinkActive="active">
+        <a [routerLink]="['/public/stock']" class="item-link">Stock</a>
+      </li>
+      <button *ngIf="userLogged" type="button" (click)="LogOut()" class=" btn btn-danger item-link">Log Out</button>
+    </ul>
+  </div>
+</nav>

@@ -2,7 +2,7 @@
 
 .welcome {
   width: 100%;
-  height: 100%;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -11,20 +11,32 @@
 
   &__title {
     margin: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     h1 {
-      color: $solid-color-gray;
+      color: $solid-color-white;
       font-size: 100px;
       font-family: 'Merriweather Sans', sans-serif;
+      line-height: normal;
+    }
+    img {
+      width: 200px;
+      height: 157px;
     }
   }
   &__buttons {
     margin: 20px;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
 
     .buttons-container {
       margin: 10px;
-      width: 200px;
+      width: 100%;
 
       button {
         width: 182px;
