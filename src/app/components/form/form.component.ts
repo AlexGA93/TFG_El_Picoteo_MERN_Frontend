@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { saveToLocalStorage } from 'src/utils/localStorage';
 
 @Component({
   selector: 'app-form',
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class FormComponent implements OnInit {
 
   myForm: FormGroup = this.fb.group({
+    //TODO: delete credentials
     email: ['johnDoe@elpicoteo.com', [Validators.required, Validators.email]],
     password: ['92johnDOE4ever', [Validators.required, Validators.minLength(8)]]
   });
@@ -30,7 +32,7 @@ export class FormComponent implements OnInit {
         .login(this.myForm.value)
         .subscribe((response) => {
           // store in local storage
-          localStorage.setItem("user", response.token);
+          saveToLocalStorage("user", response.token);
           // redirect to dashboard
           this.router.navigateByUrl("/private");
         });

@@ -11,6 +11,9 @@ const routes: Routes = [{
     { path: 'welcome' ,component: WelcomeComponent},
     // login
     { path: 'login', component: LoginComponent },
+    // stock
+    // TODO: Cambiar componente por el componente de Stock
+    { path: 'stock', component: LoginComponent },
     // default
     { path: '**', redirectTo: 'welcome' }
   ]

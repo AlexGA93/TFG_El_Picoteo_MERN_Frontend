@@ -1,0 +1,75 @@
+@import "../abstract/colors";
+
+.navbar {
+  color: $solid-color-white;
+  width: 100%;
+  height: 10%;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  p,
+  a {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  &__name {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 40px;
+    }
+  }
+
+  &__routes {
+    width: 50%;
+    height: 100%;
+    .routes__list {
+      list-style: none;
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      &-item {
+        padding: 20px;
+        width: 170px;
+        text-align: center;
+
+        a {
+          text-decoration: 0;
+          color: $solid-color-white;
+        }
+      }
+      &-item:hover {
+        background-color: $solid-color-light;
+        width: 170px;
+        border-radius: 10px;
+        .item-link {
+          color: $solid-color-black;
+        }
+      }
+    }
+  }
+}
+.navbar .routes__list-item.active {
+  background-color: $solid-color-light;
+  width: 170px;
+  border-radius: 10px;
+  a {
+    color: $solid-color-black;
+  }
+}

@@ -1,31 +1,15 @@
 @import "../styles.scss";
 
-.app-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: transparent;
-
-    .app-sidenav {
-        width: 333px;
-        height: 100%;
-        display: flex;
-        flex-flow: column;
-        background: fade-out($solid-color-black, 0.5);
-    }
+.app__container {
+  // background-color: green;
+  width: 100%;
+  height: 100vh;
+  padding: 20px 100px 100px 100px;
+  background-color: transparent;
+  &-router {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
-  
-  .app-content {
-    padding: 45px;
-    &__container {
-      height: 100%;
-      background: fade-out($solid-color-light, 0.5);
-      border-radius: 10px;
-      
-      // display: grid;
-      // place-items: center;
-    }
-  }
-  
+}
