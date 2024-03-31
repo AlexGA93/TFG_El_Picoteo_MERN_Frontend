@@ -10,12 +10,12 @@ import { deleteFromLocalStorage, getFromLocalStorage } from 'src/utils/localStor
 })
 export class AuthService {
 
-  private _baseUrl: string = environment.baseUrl;
+  public _baseUrl: string = environment.baseUrl;
   private _user!: UserDataType;
 
-  // declaramso un behaviour subject de tipo booleano para poder estar suscrito a todos sus cambios
-  private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  // declaramos un observable booleano para suscribirnos al subject
+  // boolean behaviour subject to be subscripted to every change
+  public isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  // boolean observable to be subscripted
   public isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
   // USER VARIABLE TO STORE LOAD DATA
@@ -31,23 +31,24 @@ export class AuthService {
   constructor(private httpService: HttpClient) {
     this.checkAuthentication();
   }
+
   private checkAuthentication(): void {
-    // asignamos un valor booleano a la variable en funcion de la presencia en local storage del token
-    let token = getFromLocalStorage("user");
-    let isAuthenticated: boolean = (token || token.length !==0) ? true : false;
+    let isAuthenticated: boolean = (getFromLocalStorage("user") !== "");
     this.isLoggedInSubject.next(isAuthenticated);
   }
 
+
   login(formValue: LoginFormType): Observable<LoginResponseType> {
-    let loginToken =  this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams });
-    // actualizamos el estado del observable a true para denotar que se ha iniciado sesion
+    let loginToken = this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams });
+    // update observable's state to notify the login process
     this.isLoggedInSubject.next(true);
     return loginToken;
   }
 
   logout(): void {
+    // delete from LS
     deleteFromLocalStorage("user");
-    // actualizamos el estado del observable a true para denotar que se ha cerrado sesion
+    // update observable's state to notify the login process
     this.isLoggedInSubject.next(false);
   }
 
@@ -57,10 +58,10 @@ export class AuthService {
 
     // response : { status: boolean }
     return this.httpService.get<JWTValidationResponseType>(`${this._baseUrl}/auth/validate`, {headers}).pipe(map(res => {
-
       const { name, second_name, email } = res.data;
+      // update user information from token
       this._user = { name, second_name, email };
-
+      // return boolean value if token has been verified
       return res.status;
     }));
   }

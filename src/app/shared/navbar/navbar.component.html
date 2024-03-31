@@ -38,7 +38,16 @@
       <li class="routes__list-item" routerLinkActive="active">
         <a [routerLink]="['/public/stock']" class="item-link">Stock</a>
       </li>
-      <button *ngIf="userLogged" type="button" (click)="LogOut()" class=" btn btn-danger item-link">Log Out</button>
+      <button
+        *ngIf="userLogged"
+        (click)="LogOut()"
+        type="button"
+        class="btn btn-danger item-link"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Log Out
+      </button>
     </ul>
   </div>
 </nav>

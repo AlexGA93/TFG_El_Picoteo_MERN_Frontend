@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { AlertConfig } from 'src/types/types';
 
 @Component({
   selector: 'app-navbar',
@@ -11,8 +13,12 @@ export class NavbarComponent implements OnInit{
 
   userLogged!: boolean;
 
-  constructor(private as: AuthService, private router: Router) {
-    this.as.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
+  constructor(
+    private _as: AuthService, 
+    private _router: Router,
+    private _sweet: SweetAlertService
+  ) {
+    this._as.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
       console.log(isLoggedIn);
       this.userLogged = isLoggedIn;
     })
@@ -21,9 +27,21 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
     
   }
-  LogOut() {
-    this.as.logout();
-    this.router.navigateByUrl(`public/welcome`);
+  LogOut(): void {
+    
+    let alertConfig: AlertConfig = {
+      title: "SALIR DE SESION",
+      html:"Vas a salir de sesion. Estas seguro?",
+      showCancelButton: true
+    };
+
+    this._sweet.showAlert(alertConfig).then((isConfirmed: boolean) => {
+      if(isConfirmed){
+        this._as.logout();
+        this._router.navigateByUrl(`public/welcome`);
+      }
+    });
+    
   }
   
 }

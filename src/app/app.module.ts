@@ -12,7 +12,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,3 +27,9 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+/**
+ * TODO: Especificar el uso de usuario en LS
+ * TODO: Unit testing
+ * TODO: Diseno dashboard
+ */

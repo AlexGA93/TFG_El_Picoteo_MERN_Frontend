@@ -12,6 +12,7 @@ import { saveToLocalStorage } from 'src/utils/localStorage';
 export class FormComponent implements OnInit {
 
   myForm: FormGroup = this.fb.group({
+    //TODO: delete credentials
     email: ['johnDoe@elpicoteo.com', [Validators.required, Validators.email]],
     password: ['92johnDOE4ever', [Validators.required, Validators.minLength(8)]]
   });
