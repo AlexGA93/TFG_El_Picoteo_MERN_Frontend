@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit{
     private _sweet: SweetAlertService
   ) {
     this._as.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
-      console.log(isLoggedIn);
       this.userLogged = isLoggedIn;
     })
   }

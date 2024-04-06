@@ -8,28 +8,26 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/navbar/navbar.component';
+import { PrimengModule } from './primeng/primeng.module';
+import { TrimmedPipe } from './pipes/trimmed.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    MaterialModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+
+    PrimengModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-/**
- * TODO: Especificar el uso de usuario en LS
- * TODO: Unit testing
- * TODO: Diseno dashboard
- */

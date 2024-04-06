@@ -28,3 +28,15 @@ export interface AlertConfig {
     confirmButtonText?: string;
     cancelButtonText?:  string;
 }
+
+export interface GlobalAlmacenResponseType {
+    data: Datum[];
+}
+
+export interface Datum {
+    nombre:        string;
+    unidades:      number;
+    precio_unidad: number;
+    precio_total:  number;
+    fecha:         Date;
+}

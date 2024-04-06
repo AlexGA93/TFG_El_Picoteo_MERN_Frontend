@@ -3,6 +3,7 @@
 // base
 @import "./base/typography";
 // components
+@import "./components/sorted-filtered-table.component";
 @import "./components/navbar";
 @import "./components/side-menu";
 @import "./components/login-form";
@@ -10,6 +11,7 @@
 // pages
 @import "./pages/welcome";
 @import "./pages/login";
+@import "./pages/dashboard";
 // themes
 // vendors
 

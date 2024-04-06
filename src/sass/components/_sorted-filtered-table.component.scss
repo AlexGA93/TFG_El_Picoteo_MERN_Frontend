@@ -1,0 +1,25 @@
+@import "../abstract/colors";
+
+
+.table {
+    margin: 0;
+    
+    table {
+        width: 100%;
+      }
+      
+      .mat-mdc-form-field {
+        font-size: 14px;
+        width: 100%;
+      }
+
+      
+      td, th {
+        text-align: left;
+      }
+
+      th[class~="mat-column"]{
+        width: 50%;
+      }
+      
+}
