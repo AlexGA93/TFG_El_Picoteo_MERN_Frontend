@@ -1,18 +1,1 @@
-@import "../styles.scss";
-
-.app__container {
-  // background-color: green;
-  width: 100%;
-  // height: 100vh;
-  // max-height: 100vh;
-  overflow: hidden;
-  padding: 20px 100px 100px 100px;
-  background-color: transparent;
-  &-router {
-    // height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: 40px 0;
-  }
-}
+@import '../styles.scss';

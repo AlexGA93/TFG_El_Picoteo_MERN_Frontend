@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { LoginComponent } from './login/login.component';
+
+const routes: Routes = [{
+  path: '',
+  // children routes
+  children: [
+    // welcome
+    { path: 'welcome' ,component: WelcomeComponent, pathMatch: 'full'},
+    // login
+    { path: 'login', component: LoginComponent },
+    // stock
+    // TODO: Cambiar componente por el componente de Stock
+    // { path: 'stock', component: LoginComponent },
+    // default
+    { path: '**', redirectTo: 'welcome' }
+  ]
+}];
+
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PublicRoutingModule { }

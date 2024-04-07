@@ -1,75 +1,228 @@
 @import "../abstract/colors";
 
 .navbar {
+  background-color: $solid-color-black-at;
   color: $solid-color-white;
-  width: 100%;
-  height: 10%;
-  margin-bottom: 20px;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-
-  p,
-  a {
-    font-size: 15px;
-    font-weight: bold;
-    margin: 0;
-  }
-
-  &__name {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: center;
-
-    img {
-      width: 50px;
-      height: 40px;
-    }
-  }
-
-  &__routes {
-    width: 50%;
-    height: 100%;
-    .routes__list {
-      list-style: none;
-      height: 100%;
-      margin: 0;
-      display: flex;
+  &__container {
+          display: flex;
       flex-direction: row;
+      flex-wrap: nowrap;
       justify-content: space-around;
       align-items: center;
+      margin-left: 20px;
+    .navbar__icon {
+      width: 32px;
+      height: 25px;
+    }
 
-      &-item {
-        padding: 13px;
-        width: 130px;
-        text-align: center;
-
-        a {
-          text-decoration: 0;
-          color: $solid-color-white;
-        }
-      }
-      &-item:hover {
-        background-color: $solid-color-light;
-        width: 130px;
-        border-radius: 10px;
-        .item-link {
-          color: $solid-color-black;
-        }
-      }
+    .navbar__name {
+      margin-left: 10px;
+      margin: 0;
+      padding-left: 10px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
     }
   }
+
+  .routes__list {
+              width: 50vw;
+              margin: 0 20px;
+              list-style: none;
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-start;
+              align-items: center;
+    
+              &-item {
+                  // padding: 13px;
+                  width: 150px;
+                  text-align: center;
+    
+                  a {
+                    text-decoration: 0;
+                    color: $solid-color-white;
+                  }
+                }
+                &-item:hover {
+                  background-color: $solid-color-light;
+                  width: 150px;
+                  border-radius: 10px;
+                  .item-link {
+                    color: $solid-color-black;
+                  }
+                }
 }
-.navbar .routes__list-item.active {
-  background-color: $solid-color-light;
-  width: 130px;
-  border-radius: 10px;
-  a {
-    color: $solid-color-black;
-  }
+
+// .navbar {
+//     display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: absolute;
+//   top: 0;
+
+//   width: 100%;
+//   height: auto;
+//   padding: 10px;
+//   background-color: $solid-color-black-at;
+//   color: $solid-color-white;
+
+//   &__name {
+//       margin-left: 10px;
+//       margin: 0;
+//       padding-left: 10px;
+//       display: flex;
+//       flex-direction: row;
+//       flex-wrap: nowrap;
+//       justify-content: space-around;
+//       align-items: center;
+
+//       img {
+//           width: 32px;
+//           height: 25px;
+
+//       }
+//   }
+
+//   &__routes {
+//       .routes__list {
+//           width: 50vw;
+//           margin: 0;
+//           list-style: none;
+//           display: flex;
+//           flex-direction: row;
+//           justify-content: space-around;
+//           align-items: center;
+
+//           &-item {
+//               padding: 13px;
+//               width: 150px;
+//               text-align: center;
+
+//               a {
+//                 text-decoration: 0;
+//                 color: $solid-color-white;
+//               }
+//             }
+//             &-item:hover {
+//               background-color: $solid-color-light;
+//               width: 150px;
+//               border-radius: 10px;
+//               .item-link {
+//                 color: $solid-color-black;
+//               }
+//             }
+
+//       }
+//   }
+// }
+
+// .navbar .routes__list-item.active {
+//   background-color: $solid-color-light;
+//   width: 150px;
+//   border-radius: 10px;
+//   a {
+//     color: $solid-color-black;
+//   }
+// }
+
+// .navbar__toggler {
+//   display: none;
+// }
+// @media (max-width: 768px) {
+//   .navbar__toggler {
+//     display: block;
+//   }
+//   .navbar__routes {
+//     display: none;
+//   }@import "../abstract/colors";
+
+// .navbar {
+//     display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   position: absolute;
+//   top: 0;
+
+//   width: 100%;
+//   height: auto;
+//   padding: 10px;
+//   background-color: $solid-color-black-at;
+//   color: $solid-color-white;
+
+//   &__name {
+//       margin-left: 10px;
+//       margin: 0;
+//       padding-left: 10px;
+//       display: flex;
+//       flex-direction: row;
+//       flex-wrap: nowrap;
+//       justify-content: space-around;
+//       align-items: center;
+
+//       img {
+//           width: 32px;
+//           height: 25px;
+
+//       }
+//   }
+
+//   &__routes {
+//       .routes__list {
+//           width: 50vw;
+//           margin: 0;
+//           list-style: none;
+//           display: flex;
+//           flex-direction: row;
+//           justify-content: space-around;
+//           align-items: center;
+
+//           &-item {
+//               padding: 13px;
+//               width: 150px;
+//               text-align: center;
+
+//               a {
+//                 text-decoration: 0;
+//                 color: $solid-color-white;
+//               }
+//             }
+//             &-item:hover {
+//               background-color: $solid-color-light;
+//               width: 150px;
+//               border-radius: 10px;
+//               .item-link {
+//                 color: $solid-color-black;
+//               }
+//             }
+
+//       }
+//   }
+// }
+
+// .navbar .routes__list-item.active {
+//   background-color: $solid-color-light;
+//   width: 150px;
+//   border-radius: 10px;
+//   a {
+//     color: $solid-color-black;
+//   }
+// }
+
+// .navbar__toggler {
+//   display: none;
+// }
+// @media (max-width: 768px) {
+//   .navbar__toggler {
+//     display: block;
+//   }
+//   .navbar__routes {
+//     display: none;
+//   }
+//   .navbar__routes.is-active {
+//     display: block;
+//   }
+// }
 }
