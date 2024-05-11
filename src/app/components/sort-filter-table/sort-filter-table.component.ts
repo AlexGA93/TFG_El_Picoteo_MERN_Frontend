@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Datum } from '../../../types/types';
+import { Inventory } from '../../../types/types';
 
 import { CommonModule } from '@angular/common';
 import { TrimmedPipe } from '../../pipes/trimmed.pipe';
@@ -21,11 +21,11 @@ export class SortFilterTableComponent implements OnChanges{
     // local variables
     title!:                               string;
     displayedColumns!:                    string[];
-    dataSource!:                          MatTableDataSource<Datum>;
+    dataSource!:                          MatTableDataSource<Inventory>;
   
     // Inputs from parent component
     @Input() displayedColumnsInput!:      string[];
-    @Input() dataSourceInput!:            Datum[];
+    @Input() dataSourceInput!:            Inventory[];
     @Input() titleInput!:                 string;
   
     // change detectors

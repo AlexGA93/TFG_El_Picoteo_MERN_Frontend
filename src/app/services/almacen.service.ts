@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import { Observable } from 'rxjs';
-import { GlobalAlmacenResponseType } from '../../types/types';
+import { GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType } from '../../types/types';
 import { getFromLocalStorage } from '../../utils/local-storage';
 
 @Injectable({
@@ -18,8 +18,15 @@ export class AlmacenService {
 
   constructor(private httpService: HttpClient) { }
 
-  getGlobalInventoryData():Observable<GlobalAlmacenResponseType> {
+  getGlobalInventoryData():Observable<GLobalTableResponseType> {
     const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
-    return this.httpService.get<GlobalAlmacenResponseType>(`${this._baseUrl}/databases/inventory`,{headers});
+    return this.httpService.get<GLobalTableResponseType>(`${this._baseUrl}/databases/inventory`,{headers});
   }
+
+  getGlobalStoreData(): Observable<GLobalTableResponseType> {
+    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
+    return this.httpService.get<GLobalTableResponseType>(`${this._baseUrl}/databases/store`,{headers});
+  }
+
+  getGLobalRecipesData() {}
 }

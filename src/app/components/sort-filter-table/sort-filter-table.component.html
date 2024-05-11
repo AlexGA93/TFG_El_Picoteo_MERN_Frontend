@@ -1,6 +1,6 @@
 <div class="table">
-    <h4>INVENTARIO</h4>
-  <mat-form-field>
+  <h4 class="table__title">INVENTARIO</h4>
+  <mat-form-field class="table__form">
     <mat-label>Filtro</mat-label>
     <input
       matInput
@@ -11,7 +11,7 @@
     />
   </mat-form-field>
 
-  <div class="mat-elevation-z8">
+  <div class="mat-elevation-z8 table__table">
     <table mat-table [dataSource]="dataSource" matSort>
       <div *ngFor="let data of displayedColumns; let i = index">
         <ng-container matColumnDef="{{ data }}">

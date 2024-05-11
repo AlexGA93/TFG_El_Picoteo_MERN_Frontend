@@ -1,60 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
-  
-  
-  
-  
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="navbar__container">
-    <img
-      class="navbar__icon"
-      src="../../../assets/icons/icon_big_white.png"
-      alt="alex_icon"
-    />
-  <p class="navbar__name">
-    @if(userLogged) {
-      <strong>{{ user.name }} {{ user.second_name }}</strong>
-    } @else {
-      <strong>El Picoteo</strong>
-    }
-  </p>
-  </div>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="routes__list navbar-nav">
-      @if(userLogged) {
-      <li class="routes__list-item nav-item" routerLinkActive="active">
-        <a [routerLink]="['/private/dashboard']" class="item-link nav-link">Dashboard</a>
-      </li>
-      <li class="routes__list-item  nav-item" routerLinkActive="active">
-        <a [routerLink]="['/private/inventario']" class="item-link nav-link">Inventario</a>
-      </li>
-      <li class="routes__list-item  nav-item" routerLinkActive="active">
-        <a [routerLink]="['/private/recetas']" class="item-link nav-link">Recetas</a>
-      </li>
-      <li class="routes__list-item  nav-item" routerLinkActive="active">
-        <a [routerLink]="['/public/stock']" class="item-link nav-link">Stock</a>
-      </li>
-      }
-      
-    </ul>
-  </div>
-  <form class="form-inline my-2 my-lg-0">
-    <button
-    (click)="logOut()"
-    type="button"
-    class="btn btn-danger item-link mr-2"
-    data-bs-toggle="modal"
-    data-bs-target="#exampleModal"
-  >
-    Log Out
-  </button>
-  </form>
-</nav>
-<!-- <nav class="navbar" id="navbar"> 
-  <div class="navbar__name">
     <img
       class="navbar__icon"
       src="../../../assets/icons/icon_big_white.png"
@@ -62,44 +7,61 @@
     />
     <p class="navbar__name">
       @if(userLogged) {
-        <strong>{{ user.name }} {{ user.second_name }}</strong>
+      <strong>{{ user.name }} {{ user.second_name }}</strong>
       } @else {
-        <strong>El Picoteo</strong>
+      <strong>El Picoteo</strong>
       }
     </p>
   </div>
 
-  <button class="navbar__toggler" (click)="toggleNavbar()">
-    <span class="toggler-icon"></span>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
   </button>
 
-
-  <div class="navbar__routes" [ngClass]="{'is-active': navbarOpen}">
-    <ul class="routes__list">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="routes__list navbar-nav">
       @if(userLogged) {
-      <li class="routes__list-item" routerLinkActive="active">
-        <a [routerLink]="['/private/dashboard']" class="item-link">Dashboard</a>
+      <li class="routes__list-item nav-item" routerLinkActive="active">
+        <a [routerLink]="['/private/dashboard']" class="item-link nav-link"
+          >Dashboard</a
+        >
       </li>
-      <li class="routes__list-item" routerLinkActive="active">
-        <a [routerLink]="['/private/inventario']" class="item-link">Inventario</a>
+      <li class="routes__list-item nav-item" routerLinkActive="active">
+        <a [routerLink]="['/private/inventario']" class="item-link nav-link"
+          >Inventario</a
+        >
       </li>
-      <li class="routes__list-item" routerLinkActive="active">
-        <a [routerLink]="['/private/recetas']" class="item-link">Recetas</a>
+      <li class="routes__list-item nav-item" routerLinkActive="active">
+        <a [routerLink]="['/private/recetas']" class="item-link nav-link"
+          >Recetas</a
+        >
       </li>
-      <li class="routes__list-item" routerLinkActive="active">
-        <a [routerLink]="['/public/stock']" class="item-link">Stock</a>
+      <li class="routes__list-item nav-item" routerLinkActive="active">
+        <a [routerLink]="['/public/stock']" class="item-link nav-link">Stock</a>
       </li>
-      <button
-        (click)="logOut()"
-        type="button"
-        class="btn btn-danger item-link"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Log Out
-      </button>
       }
-      
     </ul>
   </div>
-</nav> -->
+  <form class="form-inline my-2 my-lg-0">
+    @if(userLogged) {
+    <button
+      (click)="logOut()"
+      type="button"
+      style="margin-right: 10px;"
+      class="btn btn-danger item-link"
+      data-bs-toggle="modal"
+      data-bs-target="#exampleModal"
+    >
+      Log Out
+    </button>
+  }
+  </form>
+</nav>

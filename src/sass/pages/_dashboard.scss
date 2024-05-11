@@ -1,13 +1,34 @@
 @import "../abstract/colors";
 
-.dashboard__container {
-    background-color: $solid-color-light;
-    // opacity: 0.5;
-    border-radius: 10px;
-    width: 100%;
-    // height: 85vh;
-    padding: 20px;
+.dashboard-container {
+  .first-section { // flexbox
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: flex-start;
 
-    display: inline-block;
-    // width: 400px;
+    .inventory-container{
+        width: 72vw;
+    }
+
+    .gains-losses-container {
+    }
+  }
+
+  .second-section{
+  }
+
+  .second-section{
+  }
+}
+
+// containers common style
+.table-container {
+    background-color: $solid-color-light;
+        color: $solid-color-black;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px
 }

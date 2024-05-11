@@ -63,16 +63,11 @@ export class AuthenticationService {
 
   verifyToken(): Observable<boolean> {
     // configure HTTP Headers
-    const headers = new HttpHeaders().set(
-      'x-auth-token',
-      getFromLocalStorage('user')
-    );
+    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage('user'));
 
     // response : { status: boolean }
     return this.httpService
-      .get<JWTValidationResponseType>(`${this._baseUrl}/auth/validate`, {
-        headers,
-      })
+      .get<JWTValidationResponseType>(`${this._baseUrl}/auth/validate`, {headers})
       .pipe(
         map((res) => {
           const { name, second_name, email } = res.data;
