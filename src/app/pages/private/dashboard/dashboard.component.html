@@ -22,6 +22,8 @@
   <section class="second-section">
     <div class="second-section__container table-container recipes-container">
       <app-recipes-table 
+      [titleInput]="recipesTitle"
+      [displayedColumnsInput]="recipesDisplayedColumns"
       [recipes]="recipesDataSource"
       />
     </div>

@@ -70,6 +70,8 @@ export class AuthenticationService {
       .get<JWTValidationResponseType>(`${this._baseUrl}/auth/validate`, {headers})
       .pipe(
         map((res) => {
+          // console.log(res);
+          
           const { name, second_name, email } = res.data;
           // update user information from token
           this._user = { name, second_name, email };
@@ -77,5 +79,10 @@ export class AuthenticationService {
           return res.status;
         })
       );
+  }
+
+  isAuthenticated(): boolean {
+    const token = getFromLocalStorage("user");
+    return !!token; 
   }
 }

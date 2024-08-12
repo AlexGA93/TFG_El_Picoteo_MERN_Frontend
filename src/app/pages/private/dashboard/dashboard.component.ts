@@ -52,24 +52,29 @@ export class DashboardComponent {
     private authenticationService: AuthenticationService,
     private almacenService: AlmacenService
   ) {
+    // * Inventario
     this.almacenService
-      .getGlobalInventoryData()
-      .subscribe((result: GLobalTableResponseType) => {
-        // console.log(result['data']);
-        this.inventoryTitle = 'Inventario';
-        this.inventoryDisplayedColumns = Object.keys(result['data'][0]);
-        this.inventoryDataSource = result['data'] as Inventory[];
-      });
+    .getGlobalInventoryData()
+    .subscribe((result: GLobalTableResponseType) => {
+      console.log(result['data']);
+      this.inventoryTitle = 'Inventario';
+      this.inventoryDisplayedColumns = Object.keys(result['data'][0]);
+      this.inventoryDataSource = result['data'] as Inventory[];
+    });
 
-      // data composition about recipes, inventory, storage
-      this.almacenService.getGlobalStoreData()
-      .subscribe((result: GLobalTableResponseType) => {
-        console.log(result);
-        this.recipesTitle = 'Recetas';
-        this.recipesDisplayedColumns = Object.keys(result['data'][0]);
-        this.recipesDataSource = result['data'] as Store[];
-      })
+    // * Recipes
+    // data composition about recipes, inventory, storage
+    this.almacenService.getGlobalStoreData()
+    .subscribe((result: GLobalTableResponseType) => {
+      console.log(result['data']);
+      
+      this.recipesTitle = 'Recetas';
+      this.recipesDisplayedColumns = Object.keys(result['data'][0]);
+      this.recipesDataSource = result['data'] as Store[];
+    });
 
-    
+
   }
+
+  
 }

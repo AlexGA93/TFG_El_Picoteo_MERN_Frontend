@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { validTokenGuard } from './guards/valid-token.guard';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     // public routes - Welcome and Login
