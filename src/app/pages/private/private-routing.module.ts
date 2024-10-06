@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InventarioComponent } from './inventario/inventario.component';
+import { RecetasComponent } from './recetas/recetas.component';
 
 const routes: Routes = [{
   path: '',
@@ -8,9 +10,9 @@ const routes: Routes = [{
     // dashboard
     { path: 'dashboard', component: DashboardComponent },
     // inventario
-    { path: 'inventario', component: DashboardComponent },
+    { path: 'inventario', component: InventarioComponent },
     // recetas
-    { path: 'recetas', component: DashboardComponent },
+    { path: 'recetas', component: RecetasComponent },
     // default
     { path: '**', redirectTo: 'dashboard' }
   ]

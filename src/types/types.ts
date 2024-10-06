@@ -66,3 +66,5 @@ export interface Recipe {
     id_almacen:  number;
     cantidad:    number;
 }
+
+export type BaseType = Inventory | Store;

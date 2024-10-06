@@ -2,7 +2,7 @@
   <!-- Seccion INventario + Ganancias/Perdidas -->
   <section class="first-section">
     <div class="first-section__container table-container inventory-container">
-      <app-sort-filter-table
+      <inventory-table
         [titleInput]="inventoryTitle"
         [displayedColumnsInput]="inventoryDisplayedColumns"
         [dataSourceInput]="inventoryDataSource"
@@ -31,7 +31,7 @@
   <!-- Seccion Ventas -->
   <section class="third-section">
     <div class="third-section__container table-container sales-container">
-
+      <inventory-table/>
     </div>
   </section>
 </article>

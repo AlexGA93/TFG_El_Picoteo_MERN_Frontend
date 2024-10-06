@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SortFilterTableComponent } from './sort-filter-table.component';
+import { SortFilterTableComponent } from './inventory-table.component';
 
 describe('SortFilterTableComponent', () => {
   let component: SortFilterTableComponent;

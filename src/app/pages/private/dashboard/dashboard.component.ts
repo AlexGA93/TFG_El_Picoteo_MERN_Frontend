@@ -3,7 +3,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { CommonModule, JsonPipe } from '@angular/common';
 import { AlmacenService } from '../../../services/almacen.service';
 import { Inventory, Recipe, GLobalTableResponseType, Store } from '../../../../types/types';
-import { SortFilterTableComponent } from '../../../components/sort-filter-table/sort-filter-table.component';
+import { InventoryTableComponent } from '../../../components/inventory-table/inventory-table.component';
 import { TrimmedPipe } from '../../../pipes/trimmed.pipe';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -11,15 +11,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MoneyPannelComponent } from '../../../components/money-pannel/money-pannel.component';
 import { RecipesTableComponent } from '../../../components/recipes-table/recipes-table.component';
+// import { InventoryableComponent } from '../../../components/inventory-table/inventory-table.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     JsonPipe,
-    SortFilterTableComponent,
     RecipesTableComponent,
     MoneyPannelComponent,
+    InventoryTableComponent,
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -57,7 +58,7 @@ export class DashboardComponent {
     .getGlobalInventoryData()
     .subscribe((result: GLobalTableResponseType) => {
       console.log(result['data']);
-      this.inventoryTitle = 'Inventario';
+      this.inventoryTitle = 'inventario';
       this.inventoryDisplayedColumns = Object.keys(result['data'][0]);
       this.inventoryDataSource = result['data'] as Inventory[];
     });
@@ -68,7 +69,7 @@ export class DashboardComponent {
     .subscribe((result: GLobalTableResponseType) => {
       console.log(result['data']);
       
-      this.recipesTitle = 'Recetas';
+      this.recipesTitle = 'recetas';
       this.recipesDisplayedColumns = Object.keys(result['data'][0]);
       this.recipesDataSource = result['data'] as Store[];
     });

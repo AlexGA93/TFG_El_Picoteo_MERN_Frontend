@@ -1,5 +1,9 @@
 <div class="table">
-  <h4 class="table__title">{{ title | uppercase }}</h4>
+  <h4 class="table__title">
+    
+    <a [routerLink]="['/private/',title]">{{ title | uppercase }}</a>
+    
+  </h4>
   <mat-form-field class="table__form">
     <mat-label>Filtro</mat-label>
     <input
