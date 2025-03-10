@@ -3,13 +3,13 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { deleteFromLocalStorage } from '../../../utils/local-storage';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule ,MatDialogModule, RouterLink],
+  imports: [CommonModule ,MatDialogModule, RouterLink,RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

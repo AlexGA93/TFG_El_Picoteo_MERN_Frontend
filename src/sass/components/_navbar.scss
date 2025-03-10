@@ -46,13 +46,11 @@
         color: $solid-color-white;
       }
     }
-    &-item:hover {
+    &-item:hover, &-item a.active-link {
       background-color: $solid-color-light;
       width: 150px;
       border-radius: 10px;
-      .item-link {
-        color: $solid-color-black;
-      }
+      color: $solid-color-black;
     }
   }
 }

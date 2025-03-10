@@ -7,10 +7,11 @@
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-between;
-    align-items: flex-start;
+    // align-items: flex-start;
 
     .inventory-container{
-        width: 72vw;
+      width: 79.6vw;
+      max-width: 79.6vw;
     }
 
     .gains-losses-container {

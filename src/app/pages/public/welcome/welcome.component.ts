@@ -14,7 +14,7 @@ export class WelcomeComponent {
   constructor(private router: Router) {}
 
   redirect(flag: string) {
-    console.log(`public/${flag}`);
+    // console.log(`public/${flag}`);
     this.router.navigateByUrl(`public/${flag}`)
   }
 

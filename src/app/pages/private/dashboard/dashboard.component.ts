@@ -35,13 +35,13 @@ export class DashboardComponent {
   // local variables to implement parent component
 
   // INVENTORY DATA
-  inventoryTitle!: string;
+  inventoryTitle: string = "inventario";
   inventoryDisplayedColumns!: string[]; // cstring array with http request keys
   inventoryDataSource!: Inventory[]; // http request's data array
 
   
   // RECIPES DATA (STORAGE, INVENTORY, PRODUCTS)
-  recipesTitle!: string;
+  recipesTitle: string = "recetas";
   recipesDisplayedColumns!: string[]; // cstring array with http request keys
   recipesDataSource!: Store[]; // http request's data array
   
@@ -57,8 +57,9 @@ export class DashboardComponent {
     this.almacenService
     .getGlobalInventoryData()
     .subscribe((result: GLobalTableResponseType) => {
-      console.log(result['data']);
-      this.inventoryTitle = 'inventario';
+      // console.log(result['data']);
+      // console.log(Object.keys(result['data'][0]));
+      
       this.inventoryDisplayedColumns = Object.keys(result['data'][0]);
       this.inventoryDataSource = result['data'] as Inventory[];
     });
@@ -67,9 +68,6 @@ export class DashboardComponent {
     // data composition about recipes, inventory, storage
     this.almacenService.getGlobalStoreData()
     .subscribe((result: GLobalTableResponseType) => {
-      console.log(result['data']);
-      
-      this.recipesTitle = 'recetas';
       this.recipesDisplayedColumns = Object.keys(result['data'][0]);
       this.recipesDataSource = result['data'] as Store[];
     });

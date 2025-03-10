@@ -29,23 +29,23 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="routes__list navbar-nav">
       @if(userLogged) {
-      <li class="routes__list-item nav-item" routerLinkActive="active">
-        <a [routerLink]="['/private/dashboard']" class="item-link nav-link"
+      <li class="routes__list-item nav-item" >
+        <a [routerLink]="['/private/dashboard']" [routerLinkActive]="['active-link']" class="item-link nav-link"
           >Dashboard</a
         >
       </li>
-      <li class="routes__list-item nav-item" routerLinkActive="active">
-        <a [routerLink]="['/private/inventario']" class="item-link nav-link"
+      <li class="routes__list-item nav-item">
+        <a [routerLink]="['/private/inventario']" [routerLinkActive]="['active-link']" class="item-link nav-link"
           >Inventario</a
         >
       </li>
-      <li class="routes__list-item nav-item" routerLinkActive="active">
-        <a [routerLink]="['/private/recetas']" class="item-link nav-link"
+      <li class="routes__list-item nav-item">
+        <a [routerLink]="['/private/recetas']" [routerLinkActive]="['active-link']" class="item-link nav-link"
           >Recetas</a
         >
       </li>
-      <li class="routes__list-item nav-item" routerLinkActive="active">
-        <a [routerLink]="['/public/stock']" class="item-link nav-link">Stock</a>
+      <li class="routes__list-item nav-item">
+        <a [routerLink]="['/public/stock']"  [routerLinkActive]="['active-link']" class="item-link nav-link">Stock</a>
       </li>
       }
     </ul>
