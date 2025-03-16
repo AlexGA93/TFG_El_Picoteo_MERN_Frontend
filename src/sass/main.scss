@@ -1,23 +1,15 @@
-// abstract
-@import "./abstract/colors";
-// base
-@import "./base/typography";
-// components
-@import "./components/navbar";
-@import "./components/side-menu";
-@import "./components/login-form";
-// layout
 // pages
 @import "./pages/welcome";
 @import "./pages/login";
-// themes
-// vendors
+@import "./pages/dashboard";
+// components
+@import './components/navbar';
+@import './components/login-form';
+@import './components/simple-modal';
+@import './components/inventory-table';
+@import './components/money-pannel';
+@import './components/modular-table';
 
-html , body{
-  width: 100%;
-  height: auto;
-  background: url("../assets/imgs/vintage-old-rustic-cutlery-dark-rotated.png") 0 0 no-repeat;
-  background-size: cover;
-  transform-origin: center center;
+html, body {
+    color: white;
 }
-

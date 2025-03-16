@@ -1,47 +1,65 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { AlertConfig } from 'src/types/types';
+import { AuthenticationService } from '../../services/authentication.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { deleteFromLocalStorage } from '../../../utils/local-storage';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule ,MatDialogModule, RouterLink,RouterLinkActive],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrl: './navbar.component.scss'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   userLogged!: boolean;
+  navbarOpen: boolean = false;
 
   constructor(
-    private _as: AuthService, 
-    private _router: Router,
-    private _sweet: SweetAlertService
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    public dialog: MatDialog
   ) {
-    this._as.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
-      console.log(isLoggedIn);
+    // subscribe to a service's user information through login process
+    this.authenticationService.isLoggedIn$.subscribe((isLoggedIn: boolean) => {
       this.userLogged = isLoggedIn;
-    })
+    });
   }
 
-  ngOnInit(): void {
-    
-  }
-  LogOut(): void {
-    
-    let alertConfig: AlertConfig = {
-      title: "SALIR DE SESION",
-      html:"Vas a salir de sesion. Estas seguro?",
-      showCancelButton: true
-    };
+  ngOnInit(): void {}
 
-    this._sweet.showAlert(alertConfig).then((isConfirmed: boolean) => {
-      if(isConfirmed){
-        this._as.logout();
-        this._router.navigateByUrl(`public/welcome`);
+  get user(){
+    return this.authenticationService.user;
+  }
+
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
+  }
+
+  logOut() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      console.log(typeof result);
+      
+      if(result === true){
+        // delete user token from LS
+        this.authenticationService.logout();
+        // redirect to main page
+        this.router.navigateByUrl(`public/welcome`);
       }
     });
-    
   }
-  
 }
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: "/src/app/components/simple-modal/simple-modal.component.html",
+  styleUrl: "/src/app/components/simple-modal/simple-modal.component.scss",
+  standalone: true,
+  imports: [MatDialogModule, MatButtonModule],
+})
+export class DialogContentExampleDialog {}

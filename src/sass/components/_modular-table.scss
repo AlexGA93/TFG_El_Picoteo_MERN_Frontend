@@ -1,0 +1,25 @@
+.table {
+    .title {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 10px 0;
+
+        &--text {
+            margin: 0;
+        }
+        &--button {
+            margin: 0 15px;
+        }
+    }
+    
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: nowrap;
+
+    button {
+        margin: 0 10px;
+    }
+}

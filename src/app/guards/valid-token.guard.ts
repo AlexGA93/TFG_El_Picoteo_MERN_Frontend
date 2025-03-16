@@ -1,8 +1,8 @@
 import { inject } from '@angular/core';
 import { CanActivateFn } from '@angular/router';
 import { map } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { AuthenticationService } from '../services/authentication.service';
 
-export const validTokenGuard: CanActivateFn = () => {
-  return inject(AuthService).verifyToken().pipe(map(result => result));
+export const validTokenGuard: CanActivateFn = (route, state) => {
+  return inject(AuthenticationService).verifyToken().pipe(map(result => result));
 };
