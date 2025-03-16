@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import { Observable } from 'rxjs';
-import { GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType } from '../../types/types';
+import { AddNewInventoryResponseType, GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType } from '../../types/types';
 import { getFromLocalStorage } from '../../utils/local-storage';
 
 @Injectable({
@@ -29,4 +29,9 @@ export class AlmacenService {
   }
 
   getGLobalRecipesData() {}
+
+  addNewInventory(data: any): Observable<AddNewInventoryResponseType> {
+    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
+    return this.httpService.post<AddNewInventoryResponseType>(`${this._baseUrl}/databases/add-product-inventory`, data, {headers});
+  }
 }

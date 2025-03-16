@@ -1,5 +1,5 @@
 import { CommonModule, CurrencyPipe, JsonPipe, UpperCasePipe } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Type, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,11 +7,25 @@ import { MatSort } from '@angular/material/sort';
 import { TrimmedPipe } from '../../pipes/trimmed.pipe';
 import { BaseType, Inventory, Store } from '../../../types/types';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { GeneralModalComponent } from '../general-modal/general-modal.component';
+
 
 @Component({
   selector: 'app-modular-table',
   standalone: true,
-  imports: [CommonModule, UpperCasePipe, CurrencyPipe, TrimmedPipe, JsonPipe, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginator,],
+  imports: [
+    CommonModule, 
+    UpperCasePipe, 
+    CurrencyPipe, 
+    TrimmedPipe, 
+    JsonPipe, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatTableModule, 
+    MatPaginator
+  ],
   templateUrl: './modular-table.component.html',
   styleUrl: './modular-table.component.scss'
 })
@@ -31,7 +45,10 @@ export class ModularTableComponent implements OnChanges{
   @ViewChild(MatPaginator) paginator!:  MatPaginator;
   @ViewChild(MatSort) sort!:            MatSort;
 
-  constructor() {}
+  constructor(
+    private dialog: MatDialog,
+    private modalService: NgbModal
+  ) {}
 
   ngOnChanges(): void {
     this.title = this.titleInput;
@@ -56,4 +73,19 @@ export class ModularTableComponent implements OnChanges{
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openModal(flag: string) {
+
+    const modalRef = this.modalService.open(GeneralModalComponent);
+
+    // Pasamos el 'inputData' al modal
+    modalRef.componentInstance.inputData = flag;
+    
+    modalRef.result.then((result) => {
+      console.log('El modal se cerró con el resultado: ', result);
+    }, (reason) => {
+      console.log('El modal se cerró con la razón: ', reason);
+    });
+  }
+
 }

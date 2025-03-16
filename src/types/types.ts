@@ -68,3 +68,15 @@ export interface Recipe {
 }
 
 export type BaseType = Inventory | Store;
+
+
+export interface AddNewInventoryType {
+    name:     string;
+    price:    number;
+    quantity: number;
+}
+
+export interface AddNewInventoryResponseType {
+    status: string;
+    message: string;
+}
