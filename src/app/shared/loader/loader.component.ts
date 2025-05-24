@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-loader',
-    imports: [],
+    standalone: true,
+    selector: 'shared-loader',
     templateUrl: './loader.component.html',
     styleUrl: './loader.component.scss'
 })

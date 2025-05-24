@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button'; 
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-welcome',
-    imports: [MatButtonModule],
-    templateUrl: './welcome.component.html',
-    styleUrl: './welcome.component.scss'
+  standalone: true,
+  selector: 'app-welcome',
+  imports: [RouterLink],
+  templateUrl: './welcome.component.html',
+  styleUrl: './welcome.component.scss'
 })
 export class WelcomeComponent {
 

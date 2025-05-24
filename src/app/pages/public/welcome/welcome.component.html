@@ -1,34 +1,29 @@
-<section class="welcome">
-
-    <div class="welcome__title">
-      <h2 class="welcome-title">El Picoteo S.L</h2>
-      <img class="welcome-icon" src="../../../../assets/icons/icon_big_white.png" alt="icon_image">
+<section class="flex flex-col lg:flex-row justify-center min-h-screen p-4">
+  <div class="welcome__title m-2 flex md:flex-row">
+    <div class="welcome__title-container flex flex-col items-center justify-center w-full">
+      <p class="text-8xl text-center lg:text-[100px] text-white">
+        <span class="flex flex-col flex-nowrap items-center">
+          El Picoteo S.L
+          <img
+            width="71"
+            height="58"
+            class="welcome-icon"
+            src="../../../../assets/icons/icon_big_white.png"
+            alt="icon_image"
+          />
+        </span>
+      </p>
     </div>
-  
-    <div class="welcome__buttons">
-      <div class="buttons-container">
-        <button
-        class="button-client"
-        id="client"
-        type="button"
-        mat-raised-button
-        color="primary"
-        (click)="redirect('stock')"
-      >
-        Soy Cliente
-      </button>
-      <button
-        class="button-employee"
-        id="employee"
-        type="button"
-        mat-raised-button
-        color="primary"
-        (click)="redirect('login')"
-      >
-        Soy Empleado
-      </button>
+  </div>
+  <div class="welcome__access w-full lg:m-5 max-w-2xl">
+    <div class="welcome__access-container p-3 lg:backdrop-blur-md bg-brand-primary-opacity h-full rounded-2xl flex flex-col items-center justify-center">
+      <p class="font-bold text-[25px] lg:text-[30px] text-center text-white">
+        “El punto de encuentro para el buen picoteo.”
+      </p>
+      <div class="flex flex-col lg:flex-row items-center justify-center">
+        <button class="btn btn-green m-2 text-white mr-4">Soy Cliente</button>
+        <button [routerLink]="['/public/login']" class="btn btn-green m-2 text-white">Soy Empleado</button>
       </div>
     </div>
-    
-  </section>
-  
+  </div>
+</section>
