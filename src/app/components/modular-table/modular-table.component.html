@@ -6,7 +6,7 @@
         </h4>
         <button 
         class="title--button btn btn-success"
-        (click)="openModal('nuevo-inventario')"
+        (click)="openModal('add')"
         >Nuevo Registro</button>
     </div>
     
@@ -42,8 +42,8 @@
                   {{ row[data] | currency : "USD" : "symbol" }}
                 </div>
                 <div *ngSwitchCase="'acciones'" class="button-container">
-                    <button class="btn btn-info">Editar</button>    
-                    <button class="btn btn-danger">Borrar</button>  
+                    <button class="btn btn-info" (click)="openModal('edit', row)">Editar</button>    
+                    <button class="btn btn-danger"(click)="openModal('delete', row)">Borrar</button>  
                 </div>
               </ng-container>
             </td>

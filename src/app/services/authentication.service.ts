@@ -69,9 +69,7 @@ export class AuthenticationService {
     return this.httpService
       .get<JWTValidationResponseType>(`${this._baseUrl}/auth/validate`, {headers})
       .pipe(
-        map((res) => {
-          // console.log(res);
-          
+        map((res: JWTValidationResponseType) => {
           const { name, second_name, email } = res.data;
           // update user information from token
           this._user = { name, second_name, email };

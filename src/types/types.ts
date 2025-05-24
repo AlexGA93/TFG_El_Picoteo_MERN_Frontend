@@ -41,7 +41,7 @@ export interface Inventory {
     unidades:      number;
     precio_unidad: number;
     precio_total:  number;
-    fecha:         Date;
+    fecha?:        Date;
 }
 
 // STORE
