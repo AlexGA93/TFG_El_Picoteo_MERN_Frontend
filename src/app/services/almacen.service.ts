@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import { Observable } from 'rxjs';
-import { GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType } from '../../types/types';
+import { AddNewInventoryResponseType, AddNewInventoryType, GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType, Inventory } from '../../types/types';
 import { getFromLocalStorage } from '../../utils/local-storage';
 
 @Injectable({
@@ -29,4 +29,20 @@ export class AlmacenService {
   }
 
   getGLobalRecipesData() {}
+  
+
+  addNewInventory(data: Inventory): Observable<AddNewInventoryResponseType> {
+    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
+    return this.httpService.post<AddNewInventoryResponseType>(`${this._baseUrl}/databases/add-product-inventory`, data, {headers});
+  }
+
+  editInventory(data: Inventory): Observable<AddNewInventoryResponseType> {
+    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
+    return this.httpService.put<AddNewInventoryResponseType>(`${this._baseUrl}/databases/edit-product-inventory`, data, {headers});
+  }
+
+  deleteInventory(data: string): Observable<AddNewInventoryResponseType> {
+    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
+    return this.httpService.delete<AddNewInventoryResponseType>(`${this._baseUrl}/databases/delete-product-inventory/${data}`, {headers, body: data});
+  }
 }

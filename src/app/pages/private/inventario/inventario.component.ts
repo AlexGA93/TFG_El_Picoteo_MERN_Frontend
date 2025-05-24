@@ -29,5 +29,4 @@ export class InventarioComponent implements OnInit{
       this.inventoryData = result['data'] as Inventory[];
     });
   }
-
 }

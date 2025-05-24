@@ -1,0 +1,77 @@
+<div class="modal-header">
+    <h4 class="modal-header__title">{{ modalTitle }}</h4>
+  </div>
+  <div class="modal-body">
+    <section class="edit-product">
+        <form class="edit-product__form" [formGroup]="myForm" autocomplete="off">
+          
+          <!-- Nombre -->
+          <fieldset class="edit-product__fieldset edit-product__fieldset--name">
+            <label for="nombre" class="edit-product__label">Producto: </label>
+            <input
+              type="text"
+              id="nombre"
+              class="edit-product__input"
+              formControlName="nombre"
+            />
+            <div *ngIf="myForm.get('nombre')?.invalid && myForm.get('nombre')?.touched" class="edit-product__error">
+              Nombre es requerido
+            </div>
+          </fieldset>
+      
+          <!-- Precio por unidad -->
+          <fieldset class="edit-product__fieldset edit-product__fieldset--price">
+            <label for="precio_unidad" class="edit-product__label">Precio: </label>
+            <input
+              type="number"
+              id="precio_unidad"
+              min="0"
+              class="edit-product__input"
+              formControlName="precio_unidad"
+            />
+            <div *ngIf="myForm.get('precio_unidad')?.invalid && myForm.get('precio_unidad')?.touched" class="edit-product__error">
+              Precio es requerido y debe ser un número positivo.
+            </div>
+          </fieldset>
+      
+          <!-- Unidades -->
+          <fieldset class="edit-product__fieldset edit-product__fieldset--quantity">
+            <label for="unidades" class="edit-product__label">Unidades: </label>
+            <input
+              type="number"
+              id="unidades"
+              class="edit-product__input"
+              min="0"
+              formControlName="unidades"
+            />
+            <div *ngIf="myForm.get('unidades')?.invalid && myForm.get('unidades')?.touched" class="edit-product__error">
+              La cantidad es requerida y debe ser un número positivo.
+            </div>
+          </fieldset>
+      
+          <!-- Precio Total -->
+          <fieldset class="edit-product__fieldset edit-product__fieldset--total">
+            <label for="precio_total" class="edit-product__label">Precio Total: </label>
+            <input
+              type="number"
+              id="precio_total"
+              class="edit-product__input"
+              formControlName="precio_total"
+              [readOnly]="true"
+            />
+          </fieldset>
+      
+        </form>
+      </section>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close()">Cerrar</button>
+    <button type="button" class="btn btn-primary" (click)="addProduct()">
+      Actualizar
+    </button>
+  </div>
+  
+  <div *ngIf="isLoading" class="loader-container">
+  <app-loader/>
+  </div>
+  

@@ -41,7 +41,7 @@ export interface Inventory {
     unidades:      number;
     precio_unidad: number;
     precio_total:  number;
-    fecha:         Date;
+    fecha?:        Date;
 }
 
 // STORE
@@ -68,3 +68,15 @@ export interface Recipe {
 }
 
 export type BaseType = Inventory | Store;
+
+
+export interface AddNewInventoryType {
+    name:     string;
+    price:    number;
+    quantity: number;
+}
+
+export interface AddNewInventoryResponseType {
+    status: string;
+    message: string;
+}

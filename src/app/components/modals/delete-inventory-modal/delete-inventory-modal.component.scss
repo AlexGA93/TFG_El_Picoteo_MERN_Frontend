@@ -1,0 +1,112 @@
+/* Fondo del modal */
+.ngb-modal-window {
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px; /* Espaciado interno */
+    max-width: 500px; /* Máximo ancho */
+    min-width: 300px; /* Mínimo ancho */
+  }
+  
+  /* Título del modal */
+  .modal-header {
+    background-color: #f7f1d5; /* Fondo azul */
+    color: black; /* Texto blanco */
+    font-size: 1.5rem; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo en la parte superior */
+    padding: 15px; /* Espaciado */
+  
+    &__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: black;
+    }
+  }
+  
+  .modal-header .close {
+    color: black; /* Color del icono de cierre */
+    font-size: 1.5rem; /* Tamaño del icono */
+  }
+  
+  /* Cuerpo del modal */
+  .modal-body {
+    font-size: 1rem; /* Tamaño de fuente */
+    color: #555; /* Color gris oscuro para el texto */
+    line-height: 1.5; /* Altura de línea */
+    padding: 20px; /* Espaciado interno */
+    text-align: center; /* Centrar el texto */
+  }
+  
+  /* Botones del modal */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end; /* Alinear los botones a la derecha */
+    padding: 10px 20px; /* Espaciado */
+  }
+  
+  /* Botón de cerrar */
+  .btn-secondary {
+    background-color: #ccc; /* Fondo gris */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px 16px; /* Espaciado */
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Transición suave */
+  }
+  
+  /* Efecto de hover en el botón de cerrar */
+  .btn-secondary:hover {
+    background-color: #999; /* Color de fondo cuando se pasa el mouse */
+    cursor: pointer;
+  }
+  
+  /* Botón de acción */
+  .btn-primary {
+    background-color: #f7f1d5; /* Fondo azul */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 8px 16px; /* Espaciado */
+    font-weight: bold;
+    color: black;
+    transition: background-color 0.3s ease; /* Transición suave */
+  }
+  
+  /* Efecto de hover en el botón de acción */
+  .btn-primary:hover {
+    background-color: #f7f1d5; /* Color de fondo cuando se pasa el mouse */
+    cursor: pointer;
+  }
+  
+  /* Animación para abrir/cerrar el modal */
+  .ngb-modal.fade .modal-dialog {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .ngb-modal.show .modal-dialog {
+    transform: scale(1);
+  }
+  
+  .loader-container {
+    background-color: #f7f1d5;
+    z-index: 9999;
+  
+    position: absolute; /* Posición absoluta dentro del modal-body */
+    top: 50%; /* 50% desde la parte superior */
+    left: 50%; /* 50% desde la parte izquierda */
+    transform: translate(
+      -50%,
+      -50%
+    ); /* Ajusta el elemento para que esté centrado */
+    width: 100%; /* Ocupa todo el ancho */
+    height: 100%; /* Ocupa todo el alto */
+    display: flex; /* Usa flexbox para centrar el contenido dentro */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+    z-index: 1000; /* Asegura que el loader quede encima de los demás contenidos */
+  }
+  
+  .modal-body {
+    position: relative; /* Necesario para el contenedor absoluto de loader */
+  }
