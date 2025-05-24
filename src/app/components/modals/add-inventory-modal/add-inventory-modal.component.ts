@@ -8,11 +8,10 @@ import { AlmacenService } from '../../../services/almacen.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-add-inventory-modal',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, LoaderComponent],
-  templateUrl: './add-inventory-modal.component.html',
-  styleUrl: './add-inventory-modal.component.scss'
+    selector: 'app-add-inventory-modal',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, LoaderComponent],
+    templateUrl: './add-inventory-modal.component.html',
+    styleUrl: './add-inventory-modal.component.scss'
 })
 export class AddInventoryModalComponent {
 

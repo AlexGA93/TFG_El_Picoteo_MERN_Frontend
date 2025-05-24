@@ -7,11 +7,10 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule ,MatDialogModule, RouterLink,RouterLinkActive],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+    selector: 'app-navbar',
+    imports: [CommonModule, MatDialogModule, RouterLink, RouterLinkActive],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
 
@@ -56,10 +55,9 @@ export class NavbarComponent implements OnInit {
 }
 
 @Component({
-  selector: 'dialog-content-example-dialog',
-  templateUrl: "/src/app/components/simple-modal/simple-modal.component.html",
-  styleUrl: "/src/app/components/simple-modal/simple-modal.component.scss",
-  standalone: true,
-  imports: [MatDialogModule, MatButtonModule],
+    selector: 'dialog-content-example-dialog',
+    templateUrl: "/src/app/components/simple-modal/simple-modal.component.html",
+    styleUrl: "/src/app/components/simple-modal/simple-modal.component.scss",
+    imports: [MatDialogModule, MatButtonModule]
 })
 export class DialogContentExampleDialog {}

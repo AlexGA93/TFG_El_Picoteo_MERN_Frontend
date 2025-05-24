@@ -14,22 +14,21 @@ import { RecipesTableComponent } from '../../../components/recipes-table/recipes
 // import { InventoryableComponent } from '../../../components/inventory-table/inventory-table.component';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [
-    JsonPipe,
-    RecipesTableComponent,
-    MoneyPannelComponent,
-    InventoryTableComponent,
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginator,
-    TrimmedPipe,
-  ],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+    selector: 'app-dashboard',
+    imports: [
+        JsonPipe,
+        RecipesTableComponent,
+        MoneyPannelComponent,
+        InventoryTableComponent,
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginator,
+        TrimmedPipe,
+    ],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
   // local variables to implement parent component

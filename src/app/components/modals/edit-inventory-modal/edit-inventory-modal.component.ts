@@ -15,11 +15,10 @@ import { AlmacenService } from '../../../services/almacen.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-edit-inventory-modal',
-  standalone: true,
-  imports: [CommonModule, LoaderComponent, FormsModule, ReactiveFormsModule],
-  templateUrl: './edit-inventory-modal.component.html',
-  styleUrl: './edit-inventory-modal.component.scss',
+    selector: 'app-edit-inventory-modal',
+    imports: [CommonModule, LoaderComponent, FormsModule, ReactiveFormsModule],
+    templateUrl: './edit-inventory-modal.component.html',
+    styleUrl: './edit-inventory-modal.component.scss'
 })
 export class EditInventoryModalComponent {
   modalTitle: string = 'Editar Producto';

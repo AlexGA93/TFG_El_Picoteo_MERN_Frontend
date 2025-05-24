@@ -31,22 +31,21 @@ import { AddInventoryModalComponent } from '../modals/add-inventory-modal/add-in
 import { DeleteInventoryModalComponent } from '../modals/delete-inventory-modal/delete-inventory-modal.component';
 
 @Component({
-  selector: 'app-modular-table',
-  standalone: true,
-  imports: [
-    CommonModule,
-    UpperCasePipe,
-    CurrencyPipe,
-    TrimmedPipe,
-    JsonPipe,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginator,
-    NgbModalModule,
-  ],
-  templateUrl: './modular-table.component.html',
-  styleUrl: './modular-table.component.scss',
+    selector: 'app-modular-table',
+    imports: [
+        CommonModule,
+        UpperCasePipe,
+        CurrencyPipe,
+        TrimmedPipe,
+        JsonPipe,
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginator,
+        NgbModalModule,
+    ],
+    templateUrl: './modular-table.component.html',
+    styleUrl: './modular-table.component.scss'
 })
 export class ModularTableComponent implements OnChanges {
   // local variables

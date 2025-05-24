@@ -7,11 +7,10 @@ import { LoginResponseType } from '../../../types/types';
 import { saveToLocalStorage } from '../../../utils/local-storage';
 
 @Component({
-  selector: 'app-login-form',
-  standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MatButtonModule, RouterLink],
-  templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.scss'
+    selector: 'app-login-form',
+    imports: [FormsModule, ReactiveFormsModule, MatButtonModule, RouterLink],
+    templateUrl: './login-form.component.html',
+    styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent implements OnInit{
 
