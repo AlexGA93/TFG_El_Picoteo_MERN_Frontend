@@ -1,3 +1,5 @@
+// abstracts
+@import "./abstract/colors";
 // pages
 @import "./pages/welcome";
 @import "./pages/login";
@@ -9,9 +11,3 @@
 @import './components/inventory-table';
 @import './components/money-pannel';
 @import './components/modular-table';
-
-html, body {
-    color: white;
-    
-  
-}

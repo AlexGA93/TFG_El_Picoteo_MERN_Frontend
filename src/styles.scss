@@ -1,15 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: light --default, dark --black
+};
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
-@import './sass/main.scss';
+// definimos variables globales
+@import "./sass/main.scss";
 
 html, body {
-    background-image: url('./assets/imgs/vintage-old-rustic-cutlery-dark-rotated.png');
+    background-image: url('./assets/imgs/background.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    font-family:'Domine', serif;
+    
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-green {
+    background-color: $solid-color-green;
+}
+.color-green {
+    color: $solid-color-green;
+}
+.bg-brand-primary-opacity {
+    background-color: rgba(247, 241, 213, 0.1); /* 10% opacidad */
+  }
+.red-container {
+    background-color: $solid-color-red;
+}

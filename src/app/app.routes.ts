@@ -6,7 +6,7 @@ export const routes: Routes = [
     // public routes - Welcome and Login
     {
         path: 'public', 
-        loadChildren: () => import('./pages/public/public.module').then((module) => module.PublicModule)
+        loadChildren: () => import('./pages/public/public.routes').then((module) => module.publicRoutes)
     },
     // private routes
     {
