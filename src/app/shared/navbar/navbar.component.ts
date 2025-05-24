@@ -7,10 +7,11 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-navbar',
-    imports: [CommonModule, MatDialogModule, RouterLink, RouterLinkActive],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss'
+  standalone: true,
+  selector: 'app-navbar',
+  imports: [CommonModule, MatDialogModule, RouterLink, RouterLinkActive],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
 
@@ -39,25 +40,17 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    // const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      console.log(typeof result);
+    // dialogRef.afterClosed().subscribe((result: boolean) => {
+    //   console.log(typeof result);
       
-      if(result === true){
-        // delete user token from LS
-        this.authenticationService.logout();
-        // redirect to main page
-        this.router.navigateByUrl(`public/welcome`);
-      }
-    });
+    //   if(result === true){
+    //     // delete user token from LS
+    //     this.authenticationService.logout();
+    //     // redirect to main page
+    //     this.router.navigateByUrl(`public/welcome`);
+    //   }
+    // });
   }
 }
-
-@Component({
-    selector: 'dialog-content-example-dialog',
-    templateUrl: "/src/app/components/simple-modal/simple-modal.component.html",
-    styleUrl: "/src/app/components/simple-modal/simple-modal.component.scss",
-    imports: [MatDialogModule, MatButtonModule]
-})
-export class DialogContentExampleDialog {}
