@@ -11,11 +11,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
-  selector: 'inventory-table',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginator, TrimmedPipe],
-  templateUrl: './inventory-table.component.html',
-  styleUrl: './inventory-table.component.scss'
+    selector: 'inventory-table',
+    imports: [CommonModule, RouterModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginator, TrimmedPipe],
+    templateUrl: './inventory-table.component.html',
+    styleUrl: './inventory-table.component.scss'
 })
 export class InventoryTableComponent implements OnChanges {
 

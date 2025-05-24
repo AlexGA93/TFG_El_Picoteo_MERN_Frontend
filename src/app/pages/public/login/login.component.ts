@@ -5,11 +5,10 @@ import { LoginFormComponent } from '../../../components/login-form/login-form.co
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [MatCardModule, UpperCasePipe, LoginFormComponent],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    imports: [MatCardModule, UpperCasePipe, LoginFormComponent],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
 

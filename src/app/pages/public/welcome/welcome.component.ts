@@ -3,11 +3,10 @@ import {MatButtonModule} from '@angular/material/button';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-welcome',
-  standalone: true,
-  imports: [MatButtonModule],
-  templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.scss'
+    selector: 'app-welcome',
+    imports: [MatButtonModule],
+    templateUrl: './welcome.component.html',
+    styleUrl: './welcome.component.scss'
 })
 export class WelcomeComponent {
 

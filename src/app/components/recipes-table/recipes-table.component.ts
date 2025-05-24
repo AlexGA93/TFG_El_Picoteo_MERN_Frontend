@@ -10,11 +10,10 @@ import {MatInputModule} from '@angular/material/input';
 import { TrimmedPipe } from '../../pipes/trimmed.pipe';
 
 @Component({
-  selector: 'app-recipes-table',
-  standalone: true,
-  imports: [JsonPipe,CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginator, TrimmedPipe],
-  templateUrl: './recipes-table.component.html',
-  styleUrl: './recipes-table.component.scss',
+    selector: 'app-recipes-table',
+    imports: [JsonPipe, CommonModule, MatFormFieldModule, MatInputModule, MatTableModule, MatPaginator, TrimmedPipe],
+    templateUrl: './recipes-table.component.html',
+    styleUrl: './recipes-table.component.scss'
 })
 export class RecipesTableComponent implements OnChanges {
 

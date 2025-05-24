@@ -8,11 +8,10 @@ import { AlmacenService } from '../../../services/almacen.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-delete-inventory-modal',
-  standalone: true,
-  imports: [LoaderComponent, CommonModule],
-  templateUrl: './delete-inventory-modal.component.html',
-  styleUrl: './delete-inventory-modal.component.scss'
+    selector: 'app-delete-inventory-modal',
+    imports: [LoaderComponent, CommonModule],
+    templateUrl: './delete-inventory-modal.component.html',
+    styleUrl: './delete-inventory-modal.component.scss'
 })
 export class DeleteInventoryModalComponent {
 

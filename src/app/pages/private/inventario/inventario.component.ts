@@ -5,11 +5,10 @@ import { JsonPipe } from '@angular/common';
 import { ModularTableComponent } from "../../../components/modular-table/modular-table.component";
 
 @Component({
-  selector: 'app-inventario',
-  standalone: true,
-  imports: [JsonPipe, ModularTableComponent],
-  templateUrl: './inventario.component.html',
-  styleUrl: './inventario.component.scss'
+    selector: 'app-inventario',
+    imports: [JsonPipe, ModularTableComponent],
+    templateUrl: './inventario.component.html',
+    styleUrl: './inventario.component.scss'
 })
 export class InventarioComponent implements OnInit{
 
