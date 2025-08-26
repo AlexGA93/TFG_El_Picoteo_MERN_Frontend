@@ -3,28 +3,28 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { CommonModule, JsonPipe } from '@angular/common';
 import { AlmacenService } from '../../../services/almacen.service';
 import { Inventory, Recipe, GLobalTableResponseType, Store } from '../../../../types/types';
-import { InventoryTableComponent } from '../../../components/inventory-table/inventory-table.component';
+// import { InventoryTableComponent } from '../../../components/inventory-table/inventory-table.component';
 import { TrimmedPipe } from '../../../pipes/trimmed.pipe';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MoneyPannelComponent } from '../../../components/money-pannel/money-pannel.component';
-import { RecipesTableComponent } from '../../../components/recipes-table/recipes-table.component';
+// import { MatPaginator } from '@angular/material/paginator';
+// import { MatTableModule } from '@angular/material/table';
+// import { MatInputModule } from '@angular/material/input';
+// import { MatFormFieldModule } from '@angular/material/form-field';
+// import { MoneyPannelComponent } from '../../../components/money-pannel/money-pannel.component';
+// import { RecipesTableComponent } from '../../../components/recipes-table/recipes-table.component';
 // import { InventoryableComponent } from '../../../components/inventory-table/inventory-table.component';
 
 @Component({
     selector: 'app-dashboard',
     imports: [
         JsonPipe,
-        RecipesTableComponent,
-        MoneyPannelComponent,
-        InventoryTableComponent,
+        // RecipesTableComponent,
+        // MoneyPannelComponent,
+        // InventoryTableComponent,
         CommonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatPaginator,
+        // MatFormFieldModule,
+        // MatInputModule,
+        // MatTableModule,
+        // MatPaginator,
         TrimmedPipe,
     ],
     templateUrl: './dashboard.component.html',

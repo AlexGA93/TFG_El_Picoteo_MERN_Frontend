@@ -47,10 +47,11 @@ export class AuthenticationService {
   }
 
   login(formValue: LoginFormType): Observable<LoginResponseType> {
-    let loginToken = this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams });
+    // let loginToken = this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams });
     // update observable's state to notify the login process
-    this.isLoggedInSubject.next(true);
-    return loginToken;
+    // this.isLoggedInSubject.next(true);
+    // return loginToken;
+    return this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams });
   }
 
   logout(): void {
