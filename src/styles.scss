@@ -1,14 +1,9 @@
 // definimos variables globales (migrated from @import to @use)
-@use "./sass/main" as *;
+// @use "./sass/main" as *;
 // expose color variables directly so legacy global selectors can use them
-@use "./sass/abstract/colors" as *;
+// @use "./sass/abstract/colors" as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 
 html, body {
     background-image: url('./assets/imgs/background.png');
@@ -22,15 +17,15 @@ html, body {
     height: 100vh;
 }
 
-.btn-green {
-    background-color: $solid-color-green;
-}
-.color-green {
-    color: $solid-color-green;
-}
-.bg-brand-primary-opacity {
-    background-color: rgba(247, 241, 213, 0.1); /* 10% opacidad */
-  }
-.red-container {
-    background-color: $solid-color-red;
-}
+// .btn-green {
+//     background-color: $solid-color-green;
+// }
+// .color-green {
+//     color: $solid-color-green;
+// }
+// .bg-brand-primary-opacity {
+//     background-color: rgba(247, 241, 213, 0.1); /* 10% opacidad */
+//   }
+// .red-container {
+//     background-color: $solid-color-red;
+// }

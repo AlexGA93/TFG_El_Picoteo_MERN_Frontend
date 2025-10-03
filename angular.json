@@ -3,11 +3,14 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TFG_El_Picoteo_MERN_Frontend_ALTERNATIVE": {
+    "TFG_El_Picoteo_MERN_Frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "inlineTemplate": false,
+          "inlineStyle": false,
+          "skipTests": false
         }
       },
       "root": "",
@@ -17,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tfg-el-picoteo-mern-frontend-alternative",
+            "outputPath": "dist/tfg-el-picoteo-mern-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -63,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "TFG_El_Picoteo_MERN_Frontend_ALTERNATIVE:build:production"
+              "buildTarget": "TFG_El_Picoteo_MERN_Frontend:build:production"
             },
             "development": {
-              "buildTarget": "TFG_El_Picoteo_MERN_Frontend_ALTERNATIVE:build:development"
+              "buildTarget": "TFG_El_Picoteo_MERN_Frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "TFG_El_Picoteo_MERN_Frontend_ALTERNATIVE:build"
+            "buildTarget": "TFG_El_Picoteo_MERN_Frontend:build"
           }
         },
         "test": {
