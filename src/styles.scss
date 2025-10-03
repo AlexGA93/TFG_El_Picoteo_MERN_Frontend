@@ -1,11 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
-@import "tailwindcss";
-@plugin "daisyui" {
-    themes: light --default, dark --black
-};
+// definimos variables globales (migrated from @import to @use)
+@use "./sass/main" as *;
+// expose color variables directly so legacy global selectors can use them
+@use "./sass/abstract/colors" as *;
 
-// definimos variables globales
-@import "./sass/main.scss";
+@import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 html, body {
     background-image: url('./assets/imgs/background.png');

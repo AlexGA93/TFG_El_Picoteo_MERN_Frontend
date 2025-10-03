@@ -1,4 +1,4 @@
-@import "../abstract/colors";
+@use "../abstract/colors" as *;
 
 .navbar {
   background-color: $solid-color-black-at;
