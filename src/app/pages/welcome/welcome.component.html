@@ -1,0 +1,29 @@
+<section class="flex flex-col lg:flex-row justify-center lg:justify-around min-h-screen p-4">
+  <div class="welcome__title m-2 flex md:flex-row">
+    <div class="welcome__title-container flex flex-col items-center justify-center w-full">
+      <p class="text-8xl text-center lg:text-[100px] text-white">
+        <span class="flex flex-col flex-nowrap items-center">
+          El Picoteo S.L
+          <img
+            width="71"
+            height="58"
+            class="welcome-icon"
+            src="../../../../assets/icons/icon_big_white.png"
+            alt="icon_image"
+          />
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="welcome__access w-full flex-1 flex lg:items-center">
+    <div class="welcome__access-container p-3 lg:backdrop-blur-md bg-brand-primary-opacity flex-1 lg:h-[70%] lg:m-5 rounded-2xl flex flex-col items-center justify-center w-full">
+      <p class="font-bold text-[25px] lg:text-[30px] text-center text-white">
+        “El punto de encuentro para el buen picoteo.”
+      </p>
+      <div class="flex flex-row flex-wrap items-center justify-center m-5">
+        <button class="btn btn-green m-2 text-white">Soy Cliente</button>
+        <button [routerLink]="['/auth/login']" class="btn btn-green m-2 text-white">Soy Empleado</button>
+      </div>
+    </div>
+  </div>
+</section>

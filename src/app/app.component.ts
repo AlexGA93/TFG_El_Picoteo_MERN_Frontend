@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  standalone: true,
-    selector: 'app-root',
-    imports: [RouterOutlet],
-    templateUrl: './app.component.html',
+  selector: 'app-root',
+  imports: [RouterOutlet, TranslateModule],
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
+  
 }

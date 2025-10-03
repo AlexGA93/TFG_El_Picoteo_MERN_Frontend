@@ -1,44 +1,34 @@
-<section class="login__form">
-  <form
-    class="login__form--form"
-    [formGroup]="myForm"
-    autocomplete="off"
-    (ngSubmit)="submitForm()"
-  >
-    <!-- email -->
-    <fieldset class="fieldset-email">
-      <input
-        type="text"
-        id="email"
-        class="email"
-        placeholder="Type email here..."
-        formControlName="email"
-      />
-    </fieldset>
-    <!-- password -->
-    <fieldset class="fieldset-password">
-      <input
-        type="text"
-        id="password"
-        class="password"
-        formControlName="password"
-        placeholder="Type password here..."
-      />
-    </fieldset>
-    <!-- button -->
-    <button
-      class="button-login"
-      id="login-button"
-      type="submit"
-      [disabled]="myForm.invalid"
-      mat-raised-button
-      color="primary"
-    >
-      @if(isLoading) {
-        <div class="spinner-border spinner-border-sm" role="status">
+<form class="w-full" [formGroup]="myForm" autocomplete="off" (ngSubmit)="submitForm()">
+    <div class="join fieldset m-3 flex items-center justify-center">
+        <div>
+          <label class="input validator join-item w-auto">
+            <input type="email" formControlName="email" class="input w-full" placeholder="Email Here..."/>
+          </label>
+          <div class="validator-hint hidden">Enter valid email address</div>
         </div>
-      } @else { Log In }
-    </button>
-  </form>
-  <p class="login__form--text">No eres un miembro del equipo? <strong><a class="text-link" [routerLink]="['/']">Vuelve</a>.</strong></p>
-</section>
+    </div>
+    <div class="join fieldset m-3 flex flex-col items-center justify-center">
+        <div>
+          <label class="input validator join-item w-[100%]">
+            <input type="{{ passwordVisible() ? 'text' : 'password' }}" formControlName="password" class="input w-full" placeholder="Password Here..."/>
+          </label>
+          <div class="validator-hint hidden">Enter valid email address</div>
+        </div>
+        <div class="my-5 ">
+            <input type="checkbox" class="text-white checkbox border-white" (click)="togglePasswordVisualice()"/>
+            <label class="text-white text-xl mx-3 checkbox-label">Mostrar contraseña</label>
+        </div>
+    </div>
+
+    <div class="lg:m-5 my-3 flex flex-col items-center justify-center">
+        <button type="submit" class="btn btn-green w-[50%] text-white">Iniciar Sesion</button>
+        @if(isLoading()) {
+            <div class="loader m-3">
+                <shared-loader />
+            </div>
+        }
+    </div>
+    <p class="text-center text-white text-[20px]">
+        ¿No tienes cuenta? <a class="color-green" [routerLink]="['/public/welcome']">Volver a Inicio</a>
+    </p>
+</form>

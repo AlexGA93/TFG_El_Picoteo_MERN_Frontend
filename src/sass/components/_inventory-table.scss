@@ -1,4 +1,4 @@
-@import '../abstract/colors';
+@use '../abstract/colors' as *;
 
 .table {
     width: 100%;
