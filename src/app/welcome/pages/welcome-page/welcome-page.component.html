@@ -14,12 +14,17 @@
     <!-- welcome-buttons -->
     <div class="welcome-buttons">
       <div class="welcome-buttons__container flex justify-center p-5">
-        <button 
-        routerLink="auth/login"
-        class="btn btn-green m-2 p-5 text-white">Acceder</button>
-        <button 
-        routerLink="auth/register"
-        class="btn btn-secondary m-2 p-5 text-white">Registro</button>
+        <p-button 
+        class="btn m-2 p-5 text-white"
+        routerLink="auth/login" 
+        label="Acceder" 
+        styleClass="btn-green"/>
+
+        <p-button 
+        class="btn btn-secondary m-2 p-5 text-white"
+        routerLink="auth/register" 
+        label="Registro" 
+        styleClass="btn-green" />
       </div>
     </div>
 </section>
