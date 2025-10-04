@@ -1,13 +1,13 @@
 // abstracts (migrated from @import to @use)
 @use "./abstract/colors" as *;
 // pages
-@use "./pages/welcome" as *;
-@use "./pages/login" as *;
-@use "./pages/dashboard" as *;
-// components
-@use './components/navbar' as *;
-@use './components/login-form' as *;
-@use './components/simple-modal' as *;
-@use './components/inventory-table' as *;
-@use './components/money-pannel' as *;
-@use './components/modular-table' as *;
+// @use "./pages/welcome" as *;
+// @use "./pages/login" as *;
+// @use "./pages/dashboard" as *;
+// // components
+// @use './components/navbar' as *;
+// @use './components/login-form' as *;
+// @use './components/simple-modal' as *;
+// @use './components/inventory-table' as *;
+// @use './components/money-pannel' as *;
+// @use './components/modular-table' as *;

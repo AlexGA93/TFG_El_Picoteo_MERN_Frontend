@@ -2,6 +2,24 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      // main path - commented to avoid issues with IDE
+      // "@/*":["./src/app/*"],
+      // welcome
+      "@welcome/*":["./src/app/welcome/*"],
+      // auth route
+      "@auth/*":["./src/app/auth/*"],
+      // ruta dashboard admin
+      // "@dashboard/*":["./src/app/admin-dashboard/*"],
+      // ruta productos
+      // "@products/*":["./src/app/products/*"],
+      // rutas shared
+      // "@shared/*":["./src/app/shared/*"],
+      // rutas store-front
+      // "@store-front/*":["./src/app/store-front/*"],
+      // utils
+      // "@utils/*": ["./src/app/utils/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
