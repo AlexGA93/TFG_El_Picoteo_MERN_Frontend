@@ -6,9 +6,14 @@ export const routes: Routes = [
     {
         // default path
         path: '',
-        loadChildren: () => import('./welcome/welcome.routes').then((m) => m.storeFrontRoutes),
+        loadChildren: () => import('./welcome/welcome.routes').then((m) => m.welcomeFrontRoutes),
     },
     // authentication parent path
+    {
+        // default path
+        path: 'auth',
+        loadChildren: () => import('./auth/auth.routes').then((m) => m.authRoutes),
+    },
     // private parent path
     // default path
 
