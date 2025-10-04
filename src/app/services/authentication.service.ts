@@ -11,7 +11,7 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import {
   deleteFromLocalStorage,
   getFromLocalStorage,
-} from '../../utils/local-storage';
+} from '../utils/local-storage';
 
 @Injectable({
   providedIn: 'root',

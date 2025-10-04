@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import { Observable } from 'rxjs';
 import { AddNewInventoryResponseType, AddNewInventoryType, GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType, Inventory } from '../../types/types';
-import { getFromLocalStorage } from '../../utils/local-storage';
+import { getFromLocalStorage } from '../utils/local-storage';
 
 @Injectable({
   providedIn: 'root'
