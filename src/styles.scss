@@ -20,7 +20,14 @@ html, body {
 
 .btn-green {
     background-color: colors.$solid-color-green !important;
+    
+}
+.btn-green-dimensions {
     border: none !important;
     color: colors.$solid-color-black !important;
     padding: 13px 15px !important;
+} 
+
+.success-color {
+    color: colors.$solid-color-green;
 }

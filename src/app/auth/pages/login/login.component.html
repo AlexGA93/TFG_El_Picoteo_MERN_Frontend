@@ -1,1 +1,24 @@
-<p>login works!</p>
+<section class="login flex flex-col justify-center min-h-screen lg:p-4">
+  <div
+    class="login__titlew-full m-5 lg:p-5 lg:w-lg flex flex-col rounded-3xl backdrop-blur-md bg-brand-primary-opacity"
+  >
+    <div class="login__title-text p-9">
+      <p class="text-center text-7xl text-white">
+        <span class="flex flex-col flex-nowrap items-center">
+          <img
+            width="71"
+            height="58"
+            class="welcome-icon my-5"
+            src="../../../../assets/icons/icon_big_white.png"
+            alt="icon_image"
+          />
+          <h2 class="text-5xl">Inicio de Sesion</h2>
+        </span>
+      </p>
+      <div class="red-container h-[10px] rounded-2xl"></div>
+    </div>
+    <div class="login__title-form flex justify-center items-center mb-5">
+      <login-form />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+<form
+  class="flex flex-col gap-2"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="loginForm"
+>
+  <!-- email -->
+  <p-inputgroup class="py-1">
+    <p-inputgroup-addon>
+      <i class="pi pi-envelope"></i>
+    </p-inputgroup-addon>
+    <input
+      formControlName="email"
+      class="px-2"
+      pInputText
+      placeholder="Email"
+    />
+  </p-inputgroup>
+  <!-- password -->
+  <p-inputgroup class="py-1">
+    <p-inputgroup-addon>
+      <i class="pi"
+      [class]="showPassword() ? 'pi-lock-open' : 'pi-lock'"
+      ></i>
+    </p-inputgroup-addon>
+    <input
+      [type]="showPassword() ? 'text' : 'password'"
+      formControlName="password"
+      class="px-2"
+      pInputText
+      placeholder="Password"
+    />
+  </p-inputgroup>
+  <!-- checkbox (no login) -->
+  <p-inputgroup class="py-1">
+    <p-checkbox (change)="showHidePassword($event)" value="New York" inputId="ny" />
+    <label for="sp" class="ml-2">Show Password</label>
+  </p-inputgroup>
+  <!-- button -->
+  <p-button
+    type="submit"
+    class="btn text-white w-full text-center py-5"
+    label="Registro"
+    styleClass="btn-green"
+  />
+</form>
+
+<!-- mssg -->
+<p class="my-2">
+  No tienes una cuenta?
+  <strong
+    ><a class="success-color" routerLink="/auth/register"
+      >Registrate aqui</a
+    ></strong
+  >
+</p>
