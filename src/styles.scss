@@ -7,26 +7,35 @@
 
 
 html, body {
-    background-image: url('./assets/imgs/background.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    //background-image: url('./assets/imgs/background.png');
+    //background-repeat: no-repeat;
+    //background-size: cover;
+    //background-attachment: fixed;
     font-family:'Domine', serif;
-    
+
     margin: 0;
     padding: 0;
     height: 100vh;
 }
 
+// Background utility for welcome/auth routes only
+.bg-app-welcome {
+  background-image: url('./assets/imgs/background.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh; /* ensure it covers full height */
+}
+
 .btn-green {
     background-color: colors.$solid-color-green !important;
-    
+
 }
 .btn-green-dimensions {
     border: none !important;
     color: colors.$solid-color-black !important;
     padding: 13px 15px !important;
-} 
+}
 
 .success-color {
     color: colors.$solid-color-green;

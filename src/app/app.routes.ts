@@ -15,6 +15,10 @@ export const routes: Routes = [
         loadChildren: () => import('./auth/auth.routes').then((m) => m.authRoutes),
     },
     // private parent path
+    {
+      path: 'admin',
+      loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
+    },
     // default path
 
 
@@ -42,6 +46,6 @@ export const routes: Routes = [
     // },
     // // invalid default routes
     // { path: '**', redirectTo: 'welcome',pathMatch: 'full'  },
-    
+
     // { path: '', redirectTo: 'welcome', pathMatch: 'full' }
 ];

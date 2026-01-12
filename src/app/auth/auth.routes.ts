@@ -1,11 +1,10 @@
 import { Routes } from "@angular/router";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
 import { LoginComponent } from "./pages/login/login.component";
-import { RegisterComponent } from "./pages/register/register.component";
 
 export const authRoutes: Routes = [
     {
-        // only one route, default 
+        // only one route, default
         path: '',
         // component of layout
         component: AuthLayoutComponent,
@@ -15,11 +14,6 @@ export const authRoutes: Routes = [
                 // default route - login
                 path: 'login',
                 component: LoginComponent
-            },
-            {
-                // auth route - register
-                path: 'register',
-                component: RegisterComponent
             },
             // default page
             {
