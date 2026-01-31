@@ -16,11 +16,11 @@ export const authRoutes: Routes = [
                 path: 'login',
                 component: LoginComponent
             },
-            {
-                // auth route - register
-                path: 'register',
-                component: RegisterComponent
-            },
+            // {
+            //     // auth route - register
+            //     path: 'register',
+            //     component: RegisterComponent
+            // },
             // default page
             {
                 path: '**',

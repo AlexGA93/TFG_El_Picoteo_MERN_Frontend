@@ -39,17 +39,12 @@
   <p-button
     type="submit"
     class="btn text-white w-full text-center py-5"
-    label="Registro"
+    label="Login"
     styleClass="btn-green"
   />
 </form>
 
-<!-- mssg -->
-<p class="my-2">
-  No tienes una cuenta?
-  <strong
-    ><a class="success-color" routerLink="/auth/register"
-      >Registrate aqui</a
-    ></strong
-  >
-</p>
+
+@if(hasError()){
+  <login-alert [loginerrorPayload]="loginErrorsMessages()" />
+}

@@ -80,3 +80,27 @@ export interface AddNewInventoryResponseType {
     status: string;
     message: string;
 }
+
+export interface LocginErrorResponseType {
+    success?: boolean;
+    errors?: ErrorBodyType[];
+    mssg?: string;
+}
+
+export interface ErrorBodyType {
+    location: string;
+    msg: string;
+    path: string;
+    type: string;
+    value: string;
+}
+
+export interface NavbarStructureType {
+    title: string;
+    subtitle: string;
+    icon: string;
+}
+
+export type SectiondNavbarStructureType = {
+    [key: string]: NavbarStructureType;
+}

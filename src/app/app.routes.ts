@@ -15,33 +15,13 @@ export const routes: Routes = [
         loadChildren: () => import('./auth/auth.routes').then((m) => m.authRoutes),
     },
     // private parent path
+    {
+        path: 'private',
+        loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
+    },
     // default path
-
-
-
-
-
-
-
-
-
-    // public welcome path
-    // {
-    //     path: 'welcome',
-    //     component: WelcomeComponent
-    // },
-    // // authentication routes
-    // {
-    //     path: 'auth',
-    //     loadChildren: () => import('./pages/auth/auth.routes').then((module) => module.authRoutes),
-    // },
-    // // private routes
-    // {
-    //     path: 'private',
-    //     loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
-    // },
-    // // invalid default routes
-    // { path: '**', redirectTo: 'welcome',pathMatch: 'full'  },
-    
-    // { path: '', redirectTo: 'welcome', pathMatch: 'full' }
+    {
+        path: '**',
+        redirectTo: '',
+    }
 ];
