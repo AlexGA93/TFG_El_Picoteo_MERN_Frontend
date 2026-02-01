@@ -37,7 +37,6 @@ const mockedSuccessLogin = {
     PasswordModule,
     CheckboxModule,
     ButtonModule,
-    RouterLink,
     ReactiveFormsModule,
     LoginAlert,
   ],

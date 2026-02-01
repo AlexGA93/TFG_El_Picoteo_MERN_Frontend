@@ -8,7 +8,6 @@ import {
   LoginFormType,
   LoginResponseType,
   UserDataType,
-  LoginResult,
 } from '../../types/types';
 import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
 import {
