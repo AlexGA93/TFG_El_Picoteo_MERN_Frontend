@@ -71,10 +71,26 @@ export interface AddNewInventoryResponseType {
     message: string;
 }
 
-// Generic API response wrapper: success with data or failure with error info
-export type ApiResponse<T> =
-    | { ok: true; data: T }
-    | { ok: false; error: { status: number; message: string; raw?: any } };
+export interface LocginErrorResponseType {
+    success?: boolean;
+    errors?: ErrorBodyType[];
+    mssg?: string;
+}
 
-// Specific alias for login calls
-export type LoginResult = ApiResponse<LoginResponseType>;
+export interface ErrorBodyType {
+    location: string;
+    msg: string;
+    path: string;
+    type: string;
+    value: string;
+}
+
+export interface NavbarStructureType {
+    title: string;
+    subtitle: string;
+    icon: string;
+}
+
+export type SectiondNavbarStructureType = {
+    [key: string]: NavbarStructureType;
+}

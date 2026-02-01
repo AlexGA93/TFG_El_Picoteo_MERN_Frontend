@@ -16,36 +16,12 @@ export const routes: Routes = [
     },
     // private parent path
     {
-      path: 'admin',
-      loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
+        path: 'private',
+        loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
     },
     // default path
-
-
-
-
-
-
-
-
-
-    // public welcome path
-    // {
-    //     path: 'welcome',
-    //     component: WelcomeComponent
-    // },
-    // // authentication routes
-    // {
-    //     path: 'auth',
-    //     loadChildren: () => import('./pages/auth/auth.routes').then((module) => module.authRoutes),
-    // },
-    // // private routes
-    // {
-    //     path: 'private',
-    //     loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
-    // },
-    // // invalid default routes
-    // { path: '**', redirectTo: 'welcome',pathMatch: 'full'  },
-
-    // { path: '', redirectTo: 'welcome', pathMatch: 'full' }
+    {
+        path: '**',
+        redirectTo: '',
+    }
 ];

@@ -13,8 +13,22 @@ import {
 } from "@angular/forms";
 import { emailPattern } from "@utils/regular-expressions";
 import { AuthenticationService } from "../../../services/authentication.service";
-import { LoginResult } from "../../../../types/types";
-import { first } from "rxjs/operators";
+import {
+  ErrorBodyType,
+  LocginErrorResponseType,
+} from "../../../../types/types";
+import { LoginAlert } from "../login-alert/login-alert.component";
+
+const mockedErrorLogin = {
+  email: "test1@google.com",
+  password: "Abc123",
+};
+
+const mockedSuccessLogin = {
+  email: "johnDoe@elpicoteo.com",
+  password: "92johnDOE4ever",
+};
+
 @Component({
   selector: "login-form",
   imports: [
@@ -25,6 +39,7 @@ import { first } from "rxjs/operators";
     ButtonModule,
     RouterLink,
     ReactiveFormsModule,
+    LoginAlert,
   ],
   templateUrl: "./login-form.component.html",
   styleUrl: "./login-form.component.scss",
@@ -33,7 +48,7 @@ export class LoginFormComponent {
   // inyectamos el form builder
   private formBuilder = inject(FormBuilder);
   // inyectamos el servicio de autenticacion
-  // private authService = inject(AuthService);
+  private authService = inject(AuthenticationService);
   // inyectamos servicio de router
   private router = inject(Router);
   private authenticationService = inject(AuthenticationService);
@@ -41,67 +56,71 @@ export class LoginFormComponent {
   //signals
   showPassword = signal<boolean>(false);
   hasError = signal<boolean>(false);
-  isLoading = signal<boolean>(false);
+  isPosting = signal<boolean>(false);
+  loginErrorsMessages = signal<LocginErrorResponseType>({});
 
   // declaramos el formulario reactivo
   public loginForm: FormGroup = this.formBuilder.group({
     // email -> requerido, con una validacion custom
     email: [
-      "johnDoe@elpicoteo.com",
+      mockedSuccessLogin.email,
       [Validators.required, Validators.pattern(emailPattern)],
     ],
     // password -> requerida, con una validacion custom
-    password: ["92johnDOE4ever", [Validators.required]],
+    password: [mockedSuccessLogin.password, [Validators.required]],
   });
 
   // funciones
-  showHidePassword() {
-    console.log(this.showPassword());
+  showHidePassword(event: any) {
     this.showPassword.set(!this.showPassword());
-    console.log(this.showPassword());
   }
+
   onSubmit() {
+    // comprobacion de la validez del formulario
     if (this.loginForm.invalid) {
-      // si el formulari oes invalido, seteamos el flag de error a true para mostrar mensaje de error
+      // si el formulario es invalido, seteamos el flag de error a true para mostrar los mensajes de error
       this.hasError.set(true);
       // esperamos dos segundos y hacemos desaparecer el alert
-      setTimeout(() => this.hasError.set(false), 2000);
-      // y salimos sin hacer nada mas
+      this.timeOutErrorModal();
       return;
     }
 
-    const formValue = this.loginForm.value;
+    // desestructuramos el formulario
+    const { email = "", password = "" } = this.loginForm.value;
+    this.isPosting.set(true);
 
-    // loading activo
-    this.isLoading.set(true);
+    // llamamos al servicio de autenticacion
+    this.authService.login({ email, password }).subscribe((response) => {
+      if (!response) {
+        this.router.navigate(["/private/"]);
+      } else {
+        let responseSuccess = (response as LocginErrorResponseType).success;
+        let responseErrors = (response as LocginErrorResponseType).errors;
 
-    // usar wrapper que persiste token y actualiza estado
-    this.authenticationService
-      .loginAndPersist(formValue)
-      .pipe(first())
-      .subscribe({
-        next: (result: LoginResult) => {
-          // desactivar loading
-          this.isLoading.set(false);
-          if (result.ok) {
-            // success -> redirect to dashboard
-            this.router.navigate(["/admin/dashboard"]);
-          } else {
-            // show error to the user
-            this.hasError.set(true);
-            // hide after 2s
-            setTimeout(() => this.hasError.set(false), 2000);
-            console.error("Login failed", result.error);
-          }
-        },
-        error: (err: unknown) => {
-          // This block should rarely run because login() catches errors and returns a value,
-          // but keep defensive handling.
-          this.isLoading.set(false);
+        if (responseSuccess && !response) {
+          //asignamos los mensajes de error a la senal
+          this.loginErrorsMessages.set(response); // Updated to use responseErrors
+
           this.hasError.set(true);
-          setTimeout(() => this.hasError.set(false), 2000);
-          console.error("Unexpected login error", err);
-        },
-      });
+          this.isPosting.set(false);
+          // esperamos dos segundos y hacemos desaparecer el alert
+          this.timeOutErrorModal();
+          return;
+        } else if (response && response.mssg) {
+          console.log(response.mssg);
+          this.loginErrorsMessages.set(response);
+          this.hasError.set(true);
+          this.isPosting.set(false);
+          // esperamos dos segundos y hacemos desaparecer el alert
+          this.timeOutErrorModal();
+        }
+      }
+    });
+  }
+
+  private timeOutErrorModal() {
+    setTimeout(() => {
+      this.hasError.set(false);
+    }, 5000);
   }
 }

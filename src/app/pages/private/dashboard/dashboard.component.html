@@ -1,38 +1,8 @@
 <article class="dashboard-container">
-  <!-- Seccion INventario + Ganancias/Perdidas -->
-  <!-- <section class="first-section">
-    <div class="first-section__container table-container inventory-container">
-      <inventory-table
-        [titleInput]="inventoryTitle"
-        [displayedColumnsInput]="inventoryDisplayedColumns"
-        [dataSourceInput]="inventoryDataSource"
-      />
-    </div>
-    <div class="first-section__container table-container gains-losses-container">
-      <app-money-pannel
-      [flag]="gainsFlag"
-      />
-      <app-money-pannel
-      [flag]="lossesFlag"
-      />
-    </div>
-  </section> -->
+  <!-- Componente barra (Nombre seccion/icono + boton de tema claro/oscuro + logout) -->
+  <private-navbar [section]="'dashboard'"/>
 
-  <!-- Seccion Recetas -->
-  <!-- <section class="second-section">
-    <div class="second-section__container table-container recipes-container">
-      <app-recipes-table 
-      [titleInput]="recipesTitle"
-      [displayedColumnsInput]="recipesDisplayedColumns"
-      [recipes]="recipesDataSource"
-      />
-    </div>
-  </section> -->
-  <!-- Seccion Ventas -->
-  <!-- <section class="third-section">
-    <div class="third-section__container table-container sales-container">
-      <inventory-table/>
-    </div>
-  </section>
-</article> -->
-<h1>dashboard</h1>
+
+  <h1>DASHBOARD</h1>
+</article>
+

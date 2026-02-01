@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {
+  ErrorBodyType,
   JWTValidationResponseType,
+  LocginErrorResponseType,
   LoginFormType,
   LoginResponseType,
   UserDataType,
   LoginResult,
 } from '../../types/types';
-import {BehaviorSubject, map, catchError, of, tap, Observable} from 'rxjs';
+import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
 import {
   deleteFromLocalStorage,
   getFromLocalStorage,
@@ -46,35 +48,25 @@ export class AuthenticationService {
       .set('Access-Control-Allow-Credentials', 'true');
   }
 
-  login(formValue: LoginFormType): Observable<LoginResult> {
-    // Return a discriminated union that callers can pattern-match on
-    return this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams })
-      .pipe(
-        map((res: LoginResponseType) => ({ ok: true as const, data: res })),
-        catchError((error: HttpErrorResponse) => {
-          const err = {
-            ok: false as const,
-            error: {
-              status: error.status || 0,
-              message: (error.error && error.error.message) || error.message || 'Unknown error',
-              raw: error,
-            },
-          };
-          return of(err);
-        })
-      );
-  }
-
-  // Convenience wrapper: calls login and persists token on success
-  loginAndPersist(formValue: LoginFormType): Observable<LoginResult> {
-    return this.login(formValue).pipe(
-      tap(result => {
-        if (result.ok) {
-          // persist token
-          saveToLocalStorage('user', result.data.token);
-          // update state
-          this.isLoggedInSubject.next(true);
-        }
+  login(formValue: LoginFormType): Observable<void | LocginErrorResponseType> {
+    // let loginToken = this.httpService.post<LoginResponseType>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams });
+    // update observable's state to notify the login process
+    // this.isLoggedInSubject.next(true);
+    // return loginToken;
+    return this.httpService.post<any>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams }).pipe(
+      map((res: any) =>  {
+        console.log(res);
+        // store token in local storage
+        localStorage.setItem('user', res.token);
+        // update observable's state to notify the login process
+        this.isLoggedInSubject.next(true);
+        // return true;
+      }),
+      catchError((errorPayload) => {
+        let errorResponse = errorPayload.error as LocginErrorResponseType;
+        console.log({errorResponse});
+        // Return an observable to satisfy the expected return type
+        return of(errorResponse);
       })
     );
   }
