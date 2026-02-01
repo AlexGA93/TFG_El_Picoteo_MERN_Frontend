@@ -8,5 +8,9 @@ import { RouterOutlet } from '@angular/router';
   styles: ``
 })
 export class PrivateLayoutComponent {
+  private router = inject(Router);
 
+  goToInventory(){
+    this.router.navigate(['/admin/inventario']);
+  }
 }

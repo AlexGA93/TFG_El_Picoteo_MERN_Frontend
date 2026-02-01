@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AlmacenService } from '../../../services/almacen.service';
 import { GLobalTableResponseType, Inventory } from '../../../../types/types';
 import { JsonPipe } from '@angular/common';
+import { InventoryCard } from './components/inventory-card/inventory-card';
 // import { ModularTableComponent } from "../../../components/modular-table/modular-table.component";
 
 @Component({
     selector: 'app-inventario',
-    imports: [],
+    imports: [InventoryCard],
     templateUrl: './inventario.component.html',
     styleUrl: './inventario.component.scss'
 })

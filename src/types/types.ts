@@ -18,16 +18,7 @@ export interface JWTValidationResponseType {
     status: boolean;
 }
 
-export interface AlertConfig {
-    title?:             string;
-    icon?:              string;
-    html?:              string;
-    showCloseButton?:   boolean;
-    showCancelButton?:  boolean;
-    focusConfirm?:      boolean;
-    confirmButtonText?: string;
-    cancelButtonText?:  string;
-}
+// (Removed unused AlertConfig to reduce unused-type warnings)
 
 export type GLobalTableResponseType = GlobalAlmacenResponseType | GLobalRecipesResponseType | GlobalStoreResponseType;
 
@@ -67,8 +58,7 @@ export interface Recipe {
     cantidad:    number;
 }
 
-export type BaseType = Inventory | Store;
-
+// (Removed unused BaseType to reduce unused-type warnings)
 
 export interface AddNewInventoryType {
     name:     string;

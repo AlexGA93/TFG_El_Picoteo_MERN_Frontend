@@ -1,10 +1,10 @@
 <form
-  class="flex flex-col gap-2"
+  class="flex flex-col gap-2 items-center"
   (ngSubmit)="onSubmit()"
   [formGroup]="loginForm"
 >
   <!-- email -->
-  <p-inputgroup class="py-1">
+  <p-inputgroup class="py-1 w-full max-w-xs">
     <p-inputgroup-addon>
       <i class="pi pi-envelope"></i>
     </p-inputgroup-addon>
@@ -16,7 +16,7 @@
     />
   </p-inputgroup>
   <!-- password -->
-  <p-inputgroup class="py-1">
+  <p-inputgroup class="py-1 w-full max-w-xs">
     <p-inputgroup-addon>
       <i class="pi"
       [class]="showPassword() ? 'pi-lock-open' : 'pi-lock'"
@@ -31,8 +31,8 @@
     />
   </p-inputgroup>
   <!-- checkbox (no login) -->
-  <p-inputgroup class="py-1">
-    <p-checkbox (change)="showHidePassword($event)" value="New York" inputId="ny" />
+  <p-inputgroup class="py-1 w-full max-w-xs">
+    <p-checkbox (change)="showHidePassword()" value="New York" inputId="ny" />
     <label for="sp" class="ml-2">Show Password</label>
   </p-inputgroup>
   <!-- button -->

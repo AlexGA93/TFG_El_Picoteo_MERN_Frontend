@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {
   ErrorBodyType,
   JWTValidationResponseType,
@@ -8,12 +8,14 @@ import {
   LoginFormType,
   LoginResponseType,
   UserDataType,
+  LoginResult,
 } from '../../types/types';
 import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
 import {
   deleteFromLocalStorage,
   getFromLocalStorage,
-} from '../utils/local-storage';
+  saveToLocalStorage,
+} from '@utils/local-storage';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +23,9 @@ import {
 export class AuthenticationService {
   public _baseUrl: string = environment.baseUrl;
   private _user!: UserDataType;
-  
+
   // boolean behaviour subject to be subscripted to every change
   public isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  // boolean observable to be subscripted
-  public isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
   constructor(private httpService: HttpClient) {
     // check if user is logged (checking local storage for the JWT)
@@ -76,7 +76,7 @@ export class AuthenticationService {
     this.isLoggedInSubject.next(false);
     // delete from LS
     deleteFromLocalStorage('user');
-    
+
   }
 
   verifyToken(): Observable<boolean> {
@@ -99,6 +99,6 @@ export class AuthenticationService {
 
   isAuthenticated(): boolean {
     const token = getFromLocalStorage("user");
-    return !!token; 
+    return !!token;
   }
 }

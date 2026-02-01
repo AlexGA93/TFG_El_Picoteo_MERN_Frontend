@@ -51,6 +51,7 @@ export class LoginFormComponent {
   private authService = inject(AuthenticationService);
   // inyectamos servicio de router
   private router = inject(Router);
+  private authenticationService = inject(AuthenticationService);
 
   //signals
   showPassword = signal<boolean>(false);
