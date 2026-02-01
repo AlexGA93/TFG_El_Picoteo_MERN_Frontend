@@ -1,0 +1,19 @@
+@use "../abstract/colors" as colors;
+
+.sidebar {
+ &-info {
+     background-color: colors.$secondary-color-blue;
+  color: colors.$solid-color-white;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+ }
+
+ &-links {
+  padding: 20px;
+  background-color: colors.$primary-color-blue;
+ }
+}

@@ -1,0 +1,25 @@
+<nav class="sidebar">
+  <!-- topBar -->
+  <div class="sidebar-info flex items-center gap-4">
+    <lucide-icon name="chef-hat" [class]="sectionObject().class"></lucide-icon>
+    <div class="navbar-info__title">
+      <div class="title-container flex flex-row flex-start content-center">
+        <h1 class="text-2xl">{{ sectionObject().title | titlecase }}</h1>
+        <img
+          width="32"
+          height="32"
+          class="welcome-icon mx-2"
+          src="../../../../assets/icons/icon_big_white.png"
+          alt="alex-logo"
+        />
+      </div>
+      <p class="text-xl">{{ sectionObject().subtitle }}</p>
+    </div>
+  </div>
+  <!-- Link List -->
+   <section class="sidebar-links my-5">
+    <ul>
+      <li>patatas</li>
+    </ul>
+   </section>
+</nav>

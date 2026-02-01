@@ -18,6 +18,7 @@ import {
   LocginErrorResponseType,
 } from "../../../../types/types";
 import { LoginAlert } from "../login-alert/login-alert.component";
+import { LoaderComponent } from "../../../shared/loader/loader.component";
 
 const mockedErrorLogin = {
   email: "test1@google.com",
@@ -39,6 +40,7 @@ const mockedSuccessLogin = {
     ButtonModule,
     ReactiveFormsModule,
     LoginAlert,
+    LoaderComponent
   ],
   templateUrl: "./login-form.component.html",
   styleUrl: "./login-form.component.scss",

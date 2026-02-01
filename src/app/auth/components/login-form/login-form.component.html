@@ -18,9 +18,7 @@
   <!-- password -->
   <p-inputgroup class="py-1 w-full max-w-xs">
     <p-inputgroup-addon>
-      <i class="pi"
-      [class]="showPassword() ? 'pi-lock-open' : 'pi-lock'"
-      ></i>
+      <i class="pi" [class]="showPassword() ? 'pi-lock-open' : 'pi-lock'"></i>
     </p-inputgroup-addon>
     <input
       [type]="showPassword() ? 'text' : 'password'"
@@ -32,7 +30,11 @@
   </p-inputgroup>
   <!-- checkbox (no login) -->
   <p-inputgroup class="py-1 w-full max-w-xs">
-    <p-checkbox (change)="showHidePassword($event)" value="New York" inputId="ny" />
+    <p-checkbox
+      (change)="showHidePassword($event)"
+      value="New York"
+      inputId="ny"
+    />
     <label for="sp" class="ml-2">Show Password</label>
   </p-inputgroup>
   <!-- button -->
@@ -41,10 +43,13 @@
     class="btn text-white w-full text-center py-5"
     label="Login"
     styleClass="btn-green"
-  />
+  >
+    @if (isPosting()) {
+      <shared-loader />
+    }
+  </p-button>
 </form>
 
-
-@if(hasError()){
+@if (hasError()) {
   <login-alert [loginerrorPayload]="loginErrorsMessages()" />
 }

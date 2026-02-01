@@ -1,18 +1,11 @@
 // definimos variables globales (migrated from @import to @use)
-// @use "./sass/main" as *;
-// expose color variables directly so legacy global selectors can use them
-@use "./sass/abstract/colors" as colors;
+@use "./sass/main" as main;
 
 @import url('https://fonts.googleapis.com/css2?family=Domine:wght@400;700&display=swap');
 
 
 html, body {
-    //background-image: url('./assets/imgs/background.png');
-    //background-repeat: no-repeat;
-    //background-size: cover;
-    //background-attachment: fixed;
-    font-family:'Domine', serif;
-
+    font-family: main.$font-sans, 'Domine' , serif;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -28,15 +21,15 @@ html, body {
 }
 
 .btn-green {
-    background-color: colors.$solid-color-green !important;
+    background-color: main.$solid-color-green !important;
 
 }
 .btn-green-dimensions {
     border: none !important;
-    color: colors.$solid-color-black !important;
+    color: main.$solid-color-black !important;
     padding: 13px 15px !important;
 }
 
 .success-color {
-    color: colors.$solid-color-green;
+    color: main.$solid-color-green;
 }

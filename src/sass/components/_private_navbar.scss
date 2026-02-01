@@ -1,0 +1,20 @@
+@use "../abstract/colors" as colors;
+
+.navbar {
+  background-color: colors.$secondary-color-blue;
+  color: colors.$solid-color-white;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.dashboard-navar-icon {
+  width: 32px;
+  height: 32px;
+  color: colors.$solid-color-white;
+  border-radius: 5px;
+  background-color: colors.$solid-color-green;
+  padding: 3px;
+}
+
