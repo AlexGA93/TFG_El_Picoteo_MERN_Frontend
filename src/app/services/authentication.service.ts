@@ -70,12 +70,12 @@ export class AuthenticationService {
     );
   }
 
-  logout(): void {
+  logout(): Observable<boolean> {
     // update observable's state to notify the login process
     this.isLoggedInSubject.next(false);
     // delete from LS
     deleteFromLocalStorage('user');
-
+    return of(true);
   }
 
   verifyToken(): Observable<boolean> {

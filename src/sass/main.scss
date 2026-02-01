@@ -1,13 +1,8 @@
 // abstracts (migrated from @import to @use)
-@use "./abstract/colors" as *;
+@forward "./abstract/colors";
+@forward "./abstract/fonts";
 // pages
-// @use "./pages/welcome" as *;
-// @use "./pages/login" as *;
-// @use "./pages/dashboard" as *;
 // // components
-// @use './components/navbar' as *;
-// @use './components/login-form' as *;
-// @use './components/simple-modal' as *;
-// @use './components/inventory-table' as *;
-// @use './components/money-pannel' as *;
-// @use './components/modular-table' as *;
+// include component CSS when `main` is used
+@forward "./components/private_navbar";
+@forward "./components/private_sidebar";

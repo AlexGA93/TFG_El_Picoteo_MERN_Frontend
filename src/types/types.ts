@@ -89,6 +89,7 @@ export interface NavbarStructureType {
   title: string;
   subtitle: string;
   icon: string;
+  class: string;
 }
 
 export type SectiondNavbarStructureType = {

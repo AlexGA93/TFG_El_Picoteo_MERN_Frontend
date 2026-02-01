@@ -7,7 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
-import { ChefHat, LucideAngularModule } from 'lucide-angular';
+import { ChefHat, PanelRightClose, LucideAngularModule } from 'lucide-angular';
 
 
 export const appConfig: ApplicationConfig = {
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     importProvidersFrom(
-        LucideAngularModule.pick({ChefHat})
+        LucideAngularModule.pick({ChefHat, PanelRightClose})
     )
   ]
 };

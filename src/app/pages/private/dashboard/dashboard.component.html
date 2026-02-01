@@ -1,8 +1,14 @@
-<article class="dashboard-container">
-  <!-- Componente barra (Nombre seccion/icono + boton de tema claro/oscuro + logout) -->
-  <private-navbar [section]="'dashboard'"/>
+<article class="dashboard ">
+  <private-navbar [section]="'dashboard'" />
 
-
-  <h1>DASHBOARD</h1>
+  <!-- TABLA DE SECCIONES -->
+  <!-- <h1>DASHBOARD</h1> -->
+  <div class="dashboard-sections m-5 p-5 rounded-xl grid grid-cols-5 grid-rows-5">
+    <div class="col-start-1 col-end-6 row-start-1 row-end-2 dashboard-sections__recetas">
+      <dashboard-recetas />
+    </div>
+    <div class="col-start-1 col-end-6 row-start-1 row-end-2 dashboard-sections__stock"></div>
+    <div class="col-start-1 col-end-6 row-start-1 row-end-2 dashboard-sections__inventario"></div>
+    <div class="col-start-1 col-end-6 row-start-1 row-end-2 dashboard-sections__ventas-gastos"></div>
+  </div>
 </article>
-
