@@ -6,7 +6,6 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-welcome-page',
   imports: [RouterLink, TitleCasePipe, ButtonModule],
   templateUrl: './welcome-page.component.html',
-  styleUrl: './welcome-page.component.scss'
 })
 export class WelcomePageComponent {
 

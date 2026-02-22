@@ -1,28 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, inject, computed, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 import { CommonModule } from '@angular/common';
-import { PrivateNavbar } from '../shared/private-navbar/private-navbar.component';
-import { DashboardRecetas } from '../components/dashboard/dahboard-recetas/dahboard-recetas';
-
-
+import { DashboardRecetas } from '../components/dashboard/dahboard-recetas/dahboard-recetas.component';
+import { DashboardStock } from '../components/dashboard/dashboard-stock/dashboard-stock.component';
+import { DashboardInventory } from '../components/dashboard/dashboard-inventory/dashboard-inventory.component';
+import { DashboardVentas } from '../components/dashboard/dashboard-ventas/dashboard-ventas.component';
+import { DashboardGastos } from '../components/dashboard/dashboard-gastos/dashboard-gastos.component';
+import { DashboardService } from '../../../services/dashboard.service';
+import { DashboardRecipe } from '../../../../types/database.types';
+import { LucideAngularModule } from 'lucide-angular';
 @Component({
     selector: 'app-dashboard',
   imports: [
     CommonModule,
-    PrivateNavbar,
-    DashboardRecetas
+    DashboardRecetas,
+    DashboardStock,
+    DashboardInventory,
+    DashboardVentas,
+    DashboardGastos,
+    LucideAngularModule
   ],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {
   
+  // Inyectar el servicio
+  private dashboardService = inject(DashboardService);
 
-  gainsFlag: number = 0;
-  lossesFlag: number = 1;
+  // 1️⃣ Convertir Observable → Signal (CORREGIDO)
+  dashboardData = toSignal(
+    this.dashboardService.getDashboardData(),
+    { initialValue: null }
+  );
 
-  constructor(
-  ) {
+  // 2️⃣ Crear signals derivadas para cada sección
+  dashboardRecipesData = computed(() => this.dashboardData()?.recipes ?? []);
+  
+  dashboardStockData = computed(() => this.dashboardData()?.stock ?? []);
+  
+  dashboardInventoryData= computed(() => this.dashboardData()?.inventory ?? []);
 
-  }
-
+  // 3️⃣ (Opcional) Signal para loading
+  isLoading = signal(false);
   
 }

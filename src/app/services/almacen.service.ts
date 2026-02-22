@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import { Observable } from 'rxjs';
-import { AddNewInventoryResponseType, AddNewInventoryType, GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType, Inventory } from '../../types/types';
+import { AddNewInventoryResponseType, AddNewInventoryType, GLobalRecipesResponseType, GLobalTableResponseType, GlobalAlmacenResponseType, Inventory } from '../../types/general.types';
 import { getFromLocalStorage } from '../utils/local-storage';
 
 @Injectable({

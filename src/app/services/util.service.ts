@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AddNewInventoryType, Inventory } from '../../types/types';
+import { AddNewInventoryType, Inventory } from '../../types/general.types';
 
 @Injectable({
   providedIn: 'root'

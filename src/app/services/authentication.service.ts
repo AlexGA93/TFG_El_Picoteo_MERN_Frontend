@@ -8,7 +8,7 @@ import {
   LoginFormType,
   LoginResponseType,
   UserDataType,
-} from '../../types/types';
+} from '../../types/general.types';
 import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
 import {
   deleteFromLocalStorage,
