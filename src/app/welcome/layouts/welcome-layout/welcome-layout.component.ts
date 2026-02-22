@@ -5,7 +5,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'welcome-layout',
   imports: [RouterOutlet],
   templateUrl: './welcome-layout.component.html',
-  styleUrl: './welcome-layout.component.scss'
 })
 export class WelcomeLayoutComponent {
 

@@ -95,3 +95,12 @@ export interface NavbarStructureType {
 export type SectiondNavbarStructureType = {
   [key: string]: NavbarStructureType;
 }
+
+export interface GlobalIconsColorsType {
+  icon: string;
+  class: string;
+}
+
+export type GlobalIconsColors = {
+  [key: string]: GlobalIconsColorsType;
+}

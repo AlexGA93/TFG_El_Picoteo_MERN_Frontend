@@ -4,13 +4,13 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
 import { PrivateSidebar } from '../../shared/private-sidebar/private-sidebar.component';
 import { LucideAngularModule } from 'lucide-angular';
+import { PrivateNavbar } from '../../shared/private-navbar/private-navbar.component';
 
 
 @Component({
   selector: 'app-private-layout',
-  imports: [RouterOutlet, SidebarModule, ButtonModule, PrivateSidebar, LucideAngularModule],
+  imports: [RouterOutlet, SidebarModule, ButtonModule, PrivateSidebar, LucideAngularModule, PrivateNavbar],
   templateUrl: './private-layout.component.html',
-  styleUrls: ['./private-layout.component.scss']
 })
 export class PrivateLayoutComponent {
   // injections

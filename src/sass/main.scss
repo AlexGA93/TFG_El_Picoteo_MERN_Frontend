@@ -1,7 +1,9 @@
 // abstracts (migrated from @import to @use)
+@forward "./abstract/mixins";
 @forward "./abstract/colors";
 @forward "./abstract/fonts";
 // pages
+@forward "./pages/dashboard";
 // // components
 // include component CSS when `main` is used
 @forward "./components/private_navbar";

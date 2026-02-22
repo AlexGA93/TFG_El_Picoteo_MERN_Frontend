@@ -1,0 +1,13 @@
+@use "./colors" as c;
+
+@mixin card(
+  $bg: c.$secondary-color-blue,
+  $radius: 12px,
+  $padding: 16px,
+  $shadow: 0 1px 3px rgba(0, 0, 0, 0.1)
+) {
+  background-color: $bg;
+  border-radius: $radius;
+  padding: $padding;
+  box-shadow: $shadow;
+}

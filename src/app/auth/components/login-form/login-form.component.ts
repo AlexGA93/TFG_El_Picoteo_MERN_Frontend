@@ -16,7 +16,7 @@ import { AuthenticationService } from "../../../services/authentication.service"
 import {
   ErrorBodyType,
   LocginErrorResponseType,
-} from "../../../../types/types";
+} from "../../../../types/general.types";
 import { LoginAlert } from "../login-alert/login-alert.component";
 import { LoaderComponent } from "../../../shared/loader/loader.component";
 
@@ -43,7 +43,6 @@ const mockedSuccessLogin = {
     LoaderComponent
   ],
   templateUrl: "./login-form.component.html",
-  styleUrl: "./login-form.component.scss",
 })
 export class LoginFormComponent {
   // inyectamos el form builder

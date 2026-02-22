@@ -1,0 +1,7 @@
+<!-- Seccion de tarjetas de recetas -->
+<p class="text-red-500">dahboard-recetas works!</p>
+<!-- <p class="text-blue-700">{{ recipes() | json }}</p> -->
+<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA -->
+ @for(recipe of recipes(); track $index) {
+   <h1>{{ recipe.nombre_producto }}</h1>
+ }
