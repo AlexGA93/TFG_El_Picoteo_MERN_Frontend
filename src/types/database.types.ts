@@ -10,6 +10,8 @@ export interface DashboardStock {
   id?: number;
   nombre_producto: string;
   precio_producto: number;
+  cantidad: number;
+  unidad: InventoryItemUnits;
 }
 
 export type InventoryItemType = 'Carnes' | 'Pescados' | 'Verduras' | 'Frutas' | 'Especias' | 'Lacteos' | 'Cereales' | 'Aceites' | 'Bebidas';
@@ -34,8 +36,24 @@ export interface DashboardInventory {
   totalPrice: number;
 }
 
+export type DashboardFinancePeriodLabel =
+  | "Hoy"
+  | "Ayer"
+  | "Semana Pasada"
+  | "Mes Pasado"
+  | "Ultimo Trimestre"
+  | "Ultimo Yr";
+
+export interface DashboardFinancePeriodData {
+  periodo: DashboardFinancePeriodLabel;
+  totalDinero: number;
+  numeroOrdenes: number;
+}
+
 export interface DashboardData {
   recipes: DashboardRecipe[],
   stock: DashboardStock[],
   inventory: DashboardInventory[],
+  ventas: DashboardFinancePeriodData[],
+  gastos: DashboardFinancePeriodData[],
 }

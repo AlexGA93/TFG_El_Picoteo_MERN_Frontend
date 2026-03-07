@@ -1,0 +1,22 @@
+@use "../abstract/colors" as c;
+
+.recipe-card {
+    
+    
+    
+}
+
+.difficulty-easy {
+  color: c.$difficulty-easy;
+}
+
+.difficulty-medium {
+  color: c.$difficulty-medium;
+}
+
+.difficulty-hard {
+  color: c.$difficulty-hard;
+}
+span.card__data, .card-icon {
+    color: c.$solid-color-light;
+}

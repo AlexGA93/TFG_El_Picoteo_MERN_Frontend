@@ -1,9 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { DashboardRecipe } from '../../../../../../../../types/database.types';
+import { CommonModule } from '@angular/common';
+import { LucideAngularModule, Clock, DollarSign, Star } from 'lucide-angular';
 
 @Component({
   selector: 'recipe-card',
-  imports: [],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: "./recipe-card.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RecipeCard { }
+export class RecipeCard {
+  @Input() recipe!: DashboardRecipe;
+
+  // Iconos
+  readonly Clock = Clock;
+  readonly DollarSign = DollarSign;
+  readonly Star = Star;
+}

@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 import { CommonModule } from '@angular/common';
@@ -8,8 +8,8 @@ import { DashboardInventory } from '../components/dashboard/dashboard-inventory/
 import { DashboardVentas } from '../components/dashboard/dashboard-ventas/dashboard-ventas.component';
 import { DashboardGastos } from '../components/dashboard/dashboard-gastos/dashboard-gastos.component';
 import { DashboardService } from '../../../services/dashboard.service';
-import { DashboardRecipe } from '../../../../types/database.types';
 import { LucideAngularModule } from 'lucide-angular';
+import { LoaderComponent } from '../../../shared/loader/loader.component';
 @Component({
     selector: 'app-dashboard',
   imports: [
@@ -19,7 +19,8 @@ import { LucideAngularModule } from 'lucide-angular';
     DashboardInventory,
     DashboardVentas,
     DashboardGastos,
-    LucideAngularModule
+    LucideAngularModule,
+    LoaderComponent
   ],
   templateUrl: './dashboard.component.html',
 })
@@ -41,7 +42,10 @@ export class DashboardComponent {
   
   dashboardInventoryData= computed(() => this.dashboardData()?.inventory ?? []);
 
-  // 3️⃣ (Opcional) Signal para loading
-  isLoading = signal(false);
+  dashboardVentasData = computed(() => this.dashboardData()?.ventas ?? []);
+
+  dashboardGastosData = computed(() => this.dashboardData()?.gastos ?? []);
+
+  isLoading = computed(() => this.dashboardData() === null);
   
 }

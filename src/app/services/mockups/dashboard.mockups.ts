@@ -3,7 +3,12 @@
  * Basados en las tablas: Ingredientes, Stock, Inventario
  */
 
-import { DashboardInventory, DashboardRecipe, DashboardStock } from "../../../types/database.types";
+import {
+  DashboardFinancePeriodData,
+  DashboardInventory,
+  DashboardRecipe,
+  DashboardStock,
+} from "../../../types/database.types";
 
 // ============ MOCKUP DE RECETAS (Información básica) ============
 export const mockRecipesData: DashboardRecipe[] = [
@@ -73,23 +78,45 @@ export const mockRecipesData: DashboardRecipe[] = [
 export const mockStockData: DashboardStock[] = [
   {
     id: 1,
-    nombre_producto: "Pan casero",
+    nombre_producto: "Tomates",
     precio_producto: 1.5,
+    cantidad: 30, 
+    unidad: "kg",
   },
   {
     id: 2,
-    nombre_producto: "Bizcocho de vainilla",
+    nombre_producto: "Aceite de Oliva",
     precio_producto: 8,
+    cantidad: 1, 
+    unidad: "litros",
   },
   {
     id: 3,
-    nombre_producto: "Tarta de chocolate",
+    nombre_producto: "Arroz Bomba",
     precio_producto: 15,
+    cantidad: 1, 
+    unidad: "kg",
   },
   {
     id: 4,
-    nombre_producto: "Empanada de pollo",
+    nombre_producto: "Garbanzos",
     precio_producto: 3.5,
+    cantidad: 1, 
+    unidad: "gramos",
+  },
+  {
+    id: 5,
+    nombre_producto: "Lechuga",
+    precio_producto: 2.75,
+    cantidad: 11, 
+    unidad: "kg",
+  },
+  {
+    id: 6,
+    nombre_producto: "Naranjas",
+    precio_producto: 3.2,
+    cantidad: 108,
+    unidad: "kg",
   },
 ];
 
@@ -243,6 +270,100 @@ export const mockInventarioGrouped: DashboardInventory[] = [
     totalItems: 270,
     totalPrice: 207,
   },
+  {
+    tipo: "Carnes",
+    items: [
+      {
+        id: 11,
+        nombre: "Pollo",
+        tipo: "Carnes",
+        unidades: "kg",
+        n_unidades: 95,
+        proveedor: "Carnicas del Norte",
+        precio_unidad: 4.2,
+        fecha_registro: "2025-01-24 08:00:00",
+      },
+      {
+        id: 12,
+        nombre: "Ternera",
+        tipo: "Carnes",
+        unidades: "kg",
+        n_unidades: 55,
+        proveedor: "Carnicas Premium",
+        precio_unidad: 8.5,
+        fecha_registro: "2025-01-24 08:30:00",
+      },
+      {
+        id: 13,
+        nombre: "Cerdo",
+        tipo: "Carnes",
+        unidades: "kg",
+        n_unidades: 70,
+        proveedor: "Granja Iberica",
+        precio_unidad: 5.8,
+        fecha_registro: "2025-01-24 09:00:00",
+      },
+    ],
+    totalItems: 220,
+    totalPrice: 1272.5,
+  },
+  {
+    tipo: "Frutas",
+    items: [
+      {
+        id: 14,
+        nombre: "Manzana",
+        tipo: "Frutas",
+        unidades: "kg",
+        n_unidades: 140,
+        proveedor: "Frutas del Valle",
+        precio_unidad: 1.2,
+        fecha_registro: "2025-01-25 09:15:00",
+      },
+      {
+        id: 15,
+        nombre: "Platano",
+        tipo: "Frutas",
+        unidades: "kg",
+        n_unidades: 95,
+        proveedor: "Frutas Tropic",
+        precio_unidad: 1.1,
+        fecha_registro: "2025-01-25 09:45:00",
+      },
+      {
+        id: 16,
+        nombre: "Naranja",
+        tipo: "Frutas",
+        unidades: "kg",
+        n_unidades: 60,
+        proveedor: "Citricos Iberia",
+        precio_unidad: 1.4,
+        fecha_registro: "2025-01-25 10:20:00",
+      },
+    ],
+    totalItems: 295,
+    totalPrice: 356.5,
+  },
+];
+
+// ============ MOCKUP DE VENTAS (Resumen por periodos) ============
+export const mockVentasData: DashboardFinancePeriodData[] = [
+  { periodo: "Hoy", totalDinero: 1240.5, numeroOrdenes: 42 },
+  { periodo: "Ayer", totalDinero: 1098.3, numeroOrdenes: 37 },
+  { periodo: "Semana Pasada", totalDinero: 7310.9, numeroOrdenes: 248 },
+  { periodo: "Mes Pasado", totalDinero: 31240.75, numeroOrdenes: 1032 },
+  { periodo: "Ultimo Trimestre", totalDinero: 94680.4, numeroOrdenes: 3157 },
+  { periodo: "Ultimo Yr", totalDinero: 378920.6, numeroOrdenes: 12684 },
+];
+
+// ============ MOCKUP DE GASTOS (Resumen por periodos) ============
+export const mockGastosData: DashboardFinancePeriodData[] = [
+  { periodo: "Hoy", totalDinero: 580.2, numeroOrdenes: 19 },
+  { periodo: "Ayer", totalDinero: 612.9, numeroOrdenes: 21 },
+  { periodo: "Semana Pasada", totalDinero: 4018.7, numeroOrdenes: 136 },
+  { periodo: "Mes Pasado", totalDinero: 17295.45, numeroOrdenes: 579 },
+  { periodo: "Ultimo Trimestre", totalDinero: 51842.2, numeroOrdenes: 1731 },
+  { periodo: "Ultimo Yr", totalDinero: 207355.9, numeroOrdenes: 6910 },
 ];
 
 // ============ MOCKUP UNIFICADO DE DASHBOARD ============
@@ -250,4 +371,6 @@ export const mockDashboardData = {
   recipes: mockRecipesData,
   stock: mockStockData,
   inventory: mockInventarioGrouped,
+  ventas: mockVentasData,
+  gastos: mockGastosData,
 };

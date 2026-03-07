@@ -1,0 +1,5 @@
+@use "../abstract/colors" as c;
+
+.general-card {
+    background-color: c.$solid-color-black-at;
+}

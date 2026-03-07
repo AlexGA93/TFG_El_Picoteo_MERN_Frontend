@@ -15,5 +15,29 @@
  &-links {
   padding: 20px;
   background-color: colors.$primary-color-blue;
+  border-radius: 5px;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  a {
+    display: block;
+    padding: 8px 10px;
+    color: colors.$solid-color-light;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(colors.$solid-color-white, 0.08);
+    }
+  }
+
+  .is-active {
+    background-color: rgba(colors.$solid-color-white, 0.14);
+    color: colors.$solid-color-white;
+  }
  }
 }

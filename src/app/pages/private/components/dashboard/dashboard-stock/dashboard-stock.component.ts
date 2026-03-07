@@ -1,12 +1,16 @@
-import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { LucideAngularModule, Package } from 'lucide-angular';
+import { StockCard } from './components/stock-card/stock-card.component';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'dashboard-stock',
-  imports: [JsonPipe],
+  imports: [LucideAngularModule, StockCard, RouterLink],
   templateUrl: './dashboard-stock.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardStock {
   stock = input<any[]>([]);
+     // Iconos
+  readonly Package = Package;
 }

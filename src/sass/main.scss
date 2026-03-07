@@ -8,3 +8,11 @@
 // include component CSS when `main` is used
 @forward "./components/private_navbar";
 @forward "./components/private_sidebar";
+@forward "./components/dashboard_section_card_element";
+@forward "./components/dashboard_recetas";
+@forward "./components/dashboard_stock";
+@forward "./components/dashboard_inventory";
+@forward "./components/dashboard_ventas";
+@forward "./components/dashboard_gastos";
+// general
+@forward "./base/general-card";

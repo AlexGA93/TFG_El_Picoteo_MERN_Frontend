@@ -1,0 +1,62 @@
+@use "../abstract/colors" as c;
+
+.top-bar-card-i {
+  &__title {
+    &--icon {
+      color: c.$solid-color-inventory;
+      width: 24px;
+      height: 24px;
+    }
+  }
+  &__button {
+    padding: 0 5px;
+    margin: 3px 0;
+    border-radius: 10px;
+    background-color: c.$solid-color-inventory;
+    color: c.$solid-color-white;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(c.$solid-color-inventory, 0.8);
+    }
+  }
+}
+
+td.price {
+  color: c.$difficulty-easy;
+}
+.food-color-cereal {
+  color: c.$food-color-cereal;
+}  
+.food-color-beef {
+  color: c.$food-color-beef;
+}          
+.food-color-fish {
+  color: c.$food-color-fish;
+}         
+.food-color-milk {
+  color: c.$food-color-milk;
+}           
+.food-color-vegetables {
+  color: c.$food-color-vegetables;
+}     
+.food-color-fruits {
+  color: c.$food-color-fruits;
+}         
+.food-color-spices {
+  color: c.$food-color-spices;
+}         
+.food-color-oils {
+  color: c.$food-color-oils;
+}          
+.food-color-drinks {
+  color: c.$food-color-drinks;
+}         
+.food-color-default {
+  color: c.$solid-color-black-at;
+}   
+.title__icon {
+  width: 24px;
+      height: 24px;
+}

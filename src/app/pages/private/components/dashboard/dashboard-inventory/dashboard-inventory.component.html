@@ -1,4 +1,20 @@
 <!-- Seccion de tarjetas de recetas -->
-<p class="text-red-500">dahboard-Inventario works!</p>,
-<p class="text-blue-700">{{ inventory() | json }}</p>
-<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA -->
+<div class="top-bar-card-i flex flex-row justify-between">
+  <div class="top-bar-card-i__title flex flex-row my-3 p-0">
+    <!-- icono -->
+    <lucide-icon
+      [img]="Eye"
+      class="w-4 h-4 mr-2 title__icon top-bar-card-i__title--icon"
+    ></lucide-icon>
+    <!-- titulo -->
+    <h1 class="title__text text-2xl flex text-center font-bold">Inventario</h1>
+  </div>
+  <button class="top-bar-card-i__button" [routerLink]="['/private/inventario']">Ver Todas</button>
+</div>
+<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA (LIMITADO A 5 ELEMENTOS) -->
+<div class="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto md:grid-flow-row md:grid-cols-2 xl:grid-cols-6 place-items-center">
+  @for (inventoryElement of inventory().slice(0, 6); track $index) {
+    <inventory-card [inventoryElement]="inventoryElement" />
+}
+  
+</div>

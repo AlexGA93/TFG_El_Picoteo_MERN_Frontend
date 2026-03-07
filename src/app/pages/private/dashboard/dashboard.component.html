@@ -1,41 +1,34 @@
 <article class="dashboard-parent">
-  <!-- navbar -->
-  <!-- <div class="dashboard-navbar">
-    <private-navbar [section]="'dashboard'" />
-  </div> -->
+  @if (isLoading()) {
+    <section class="flex min-h-[60vh] items-center justify-center">
+      <shared-loader />
+    </section>
+  } @else {
+    <section class="dashboard-grid animate__animated animate__fadeIn">
+      <!-- seccion recetas -->
+      <div class="dashboard-div1">
+        <dashboard-recetas [recipes]="dashboardRecipesData()" />
+      </div>
 
-  <section class="dashboard-grid">
-    <!-- seccion recetas -->
-    <div class="section-title m-0 flex flex-row align-center gap-2">
-      <lucide-icon name="chef-hat" class=""></lucide-icon>
-      <h1 class="text-2xl m-0 p-0">Recetas</h1>
-    </div>
-    <div class="dashboard-div1">
-      <dashboard-recetas [recipes]="dashboardRecipesData()" />
-    </div>
+      <!-- seccion stock -->
+      <div class="dashboard-div2">
+        <dashboard-stock [stock]="dashboardStockData()" />
+      </div>
 
-    <!-- seccion stock -->
-    <h1>Stock</h1>
-    <div class="dashboard-div2">
-      <dashboard-stock [stock]="dashboardStockData()" />
-    </div>
+      <!-- seccion inventario -->
+      <div class="dashboard-div3">
+        <dashboard-inventory [inventory]="dashboardInventoryData()" />
+      </div>
 
-    <!-- seccion inventario -->
-    <h1>Inventario</h1>
-    <div class="dashboard-div3">
-      <dashboard-inventory [inventory]="dashboardInventoryData()" />
-    </div>
+      <!-- seccion ventas -->
+      <div class="dashboard-div4">
+        <dashboard-ventas [ventas]="dashboardVentasData()" />
+      </div>
 
-    <!-- seccion ventas -->
-    <h1>Ventas</h1>
-    <div class="dashboard-div4">
-      <dashboard-ventas />
-    </div>
-
-    <!-- seccion gastos -->
-    <h1>Gastos</h1>
-    <div class="dashboard-div5">
-      <dashboard-gastos />
-    </div>
-  </section>
+      <!-- seccion gastos -->
+      <div class="dashboard-div5">
+        <dashboard-gastos [gastos]="dashboardGastosData()" />
+      </div>
+    </section>
+  }
 </article>

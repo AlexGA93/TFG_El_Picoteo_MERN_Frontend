@@ -1,0 +1,26 @@
+<div
+  class="general-card m-2 w-80 h-50 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow"
+>
+  <div class="recipe-card__title flex flex-row flex-nowrap justify-between">
+    <h3 class="text-2xl font-bold mb-3">{{ stockElement.nombre_producto }}</h3>
+    <span
+      class="font-bold m-0 p-0"
+      [ngClass]="{
+        'difficulty-easy': qtyLevel() === 'Ok',
+        'difficulty-medium': qtyLevel() === 'bajo',
+        'difficulty-hard': qtyLevel() === 'critico',
+      }"
+      >{{ qtyLevel() }}</span
+    >
+  </div>
+
+  <table class="w-full text-sm">
+    <tbody>
+      <div class="item-qty p-3">
+        <h1 class="text-center text-4xl font-bold">
+          {{ stockElement.cantidad }} {{ stockElement.unidad }}
+        </h1>
+      </div>
+    </tbody>
+  </table>
+</div>

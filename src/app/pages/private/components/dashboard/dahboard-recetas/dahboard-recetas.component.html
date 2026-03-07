@@ -1,7 +1,19 @@
 <!-- Seccion de tarjetas de recetas -->
-<p class="text-red-500">dahboard-recetas works!</p>
-<!-- <p class="text-blue-700">{{ recipes() | json }}</p> -->
-<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA -->
- @for(recipe of recipes(); track $index) {
-   <h1>{{ recipe.nombre_producto }}</h1>
- }
+<div class="top-bar-card-r flex flex-row justify-between">
+  <div class="top-bar-card-r__title flex flex-row my-3 p-0">
+    <!-- icono -->
+    <lucide-icon
+      [img]="ChefHat"
+      class="w-4 h-4 mr-2 title__icon top-bar-card-r__title--icon"
+    ></lucide-icon>
+    <!-- titulo -->
+    <h1 class="title__text text-2xl flex text-center font-bold">Recetas</h1>
+  </div>
+  <button class="top-bar-card-r__button" [routerLink]="['/private/recetas']">Ver Todas</button>
+</div>
+<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA (LIMITADO A 5 ELEMENTOS) -->
+<div class="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto md:grid-flow-row md:grid-cols-2 xl:grid-cols-6 place-items-center">
+  @for (recipe of recipes().slice(0, 6); track $index) {
+    <recipe-card [recipe]="recipe" />
+  }
+</div>

@@ -1,0 +1,30 @@
+<div
+  class="general-card m-2 w-80 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow"
+>
+  <table class="w-full table-fixed overflow-hidden">
+    <tbody>
+      <tr class="border-b">
+        <th class="text-left font-bold text-xl px-3 py-2 w-1/2">
+          {{ inventoryElement.tipo }}
+        </th>
+        <td class="text-right px-3 py-2 flex flex-row justify-end">
+          <lucide-icon
+            [img]="typeIcon()"
+            class="w-4 h-4 title__icon"
+            [ngClass]="assignClass(inventoryElement.tipo)"
+          ></lucide-icon>
+        </td>
+      </tr>
+      <tr class="">
+        <th class="text-left font-bold text-xl px-3 py-2">Total Items</th>
+        <td class="text-right px-3 py-2">{{ inventoryElement.totalItems }}</td>
+      </tr>
+      <tr>
+        <th class="text-left font-bold text-xl px-3 py-2">Total Price</th>
+        <td class="text-right price font-bold px-3 py-2">
+          {{ inventoryElement.totalPrice }} €
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

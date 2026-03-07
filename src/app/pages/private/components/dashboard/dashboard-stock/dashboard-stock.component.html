@@ -1,4 +1,19 @@
 <!-- Seccion de tarjetas de recetas -->
-<p class="text-red-500">dahboard-recetas works!</p>
-<p class="text-blue-700">{{ stock() | json }}</p>
-<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA -->
+<div class="top-bar-card-s flex flex-row justify-between">
+  <div class="top-bar-card-s__title flex flex-row my-3 p-0">
+    <!-- icono -->
+    <lucide-icon
+      [img]="Package"
+      class="w-4 h-4 mr-2 title__icon top-bar-card-s__title--icon"
+    ></lucide-icon>
+    <!-- titulo -->
+    <h1 class="title__text text-2xl flex text-center font-bold">Stock</h1>
+  </div>
+  <button class="top-bar-card-s__button" [routerLink]="['/private/stock']">Ver Todas</button>
+</div>
+<!-- ITERAMOS Y LLAMAMOS AL COMPONENTE CARTA (LIMITADO A 5 ELEMENTOS) -->
+<div class="grid grid-flow-col auto-cols-max gap-4 overflow-x-auto md:grid-flow-row md:grid-cols-2 xl:grid-cols-6 place-items-center">
+  @for (stockElement of stock().slice(0, 6); track $index) {
+    <stock-card [stockElement]="stockElement" />
+  }
+</div>
