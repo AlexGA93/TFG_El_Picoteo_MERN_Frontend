@@ -1,7 +1,13 @@
 <article class="dashboard-parent">
-  @if (isLoading()) {
-    <section class="flex min-h-[60vh] items-center justify-center">
-      <shared-loader />
+  <p-toast />
+
+  @if (dashboardError()) {
+    <section class="flex rounded-xl min-h-[60vh] items-center justify-center">
+      <p class="text-red-600 font-medium">{{ dashboardError() }}</p>
+    </section>
+  } @else if (isLoading()) {
+    <section class="flex rounded-xl min-h-[60vh] items-center justify-center">
+      <shared-loader class="animate__animated animate__fadeIn" />
     </section>
   } @else {
     <section class="dashboard-grid animate__animated animate__fadeIn">

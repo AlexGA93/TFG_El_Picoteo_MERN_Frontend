@@ -20,11 +20,6 @@ import {
 import { LoginAlert } from "../login-alert/login-alert.component";
 import { LoaderComponent } from "../../../shared/loader/loader.component";
 
-const mockedErrorLogin = {
-  email: "test1@google.com",
-  password: "Abc123",
-};
-
 const mockedSuccessLogin = {
   email: "johnDoe@elpicoteo.com",
   password: "92johnDOE4ever",

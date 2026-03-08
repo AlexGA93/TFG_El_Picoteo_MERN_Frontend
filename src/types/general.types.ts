@@ -76,7 +76,13 @@ export interface LocginErrorResponseType {
   errors?: ErrorBodyType[];
   mssg?: string;
 }
-
+export interface LoginSuccessResponse {
+  data: {
+    token: string;
+  }
+  message: string;
+  success: boolean;
+}
 export interface ErrorBodyType {
   location: string;
   msg: string;

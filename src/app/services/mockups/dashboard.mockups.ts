@@ -4,6 +4,7 @@
  */
 
 import {
+  DashboardData,
   DashboardFinancePeriodData,
   DashboardInventory,
   DashboardRecipe,
@@ -367,7 +368,7 @@ export const mockGastosData: DashboardFinancePeriodData[] = [
 ];
 
 // ============ MOCKUP UNIFICADO DE DASHBOARD ============
-export const mockDashboardData = {
+export const mockDashboardData: DashboardData = {
   recipes: mockRecipesData,
   stock: mockStockData,
   inventory: mockInventarioGrouped,

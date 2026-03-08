@@ -7,6 +7,7 @@ import {
   LocginErrorResponseType,
   LoginFormType,
   LoginResponseType,
+  LoginSuccessResponse,
   UserDataType,
 } from '../../types/general.types';
 import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
@@ -53,17 +54,16 @@ export class AuthenticationService {
     // this.isLoggedInSubject.next(true);
     // return loginToken;
     return this.httpService.post<any>(`${this._baseUrl}/auth/login`, formValue, { params: this.httpParams }).pipe(
-      map((res: any) =>  {
-        console.log(res);
+      map((res: LoginSuccessResponse) =>  {
         // store token in local storage
-        localStorage.setItem('user', res.token);
+        localStorage.setItem('user', res.data.token);
         // update observable's state to notify the login process
         this.isLoggedInSubject.next(true);
         // return true;
       }),
       catchError((errorPayload) => {
+        console.log({errorPayload});
         let errorResponse = errorPayload.error as LocginErrorResponseType;
-        console.log({errorResponse});
         // Return an observable to satisfy the expected return type
         return of(errorResponse);
       })

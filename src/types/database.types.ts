@@ -57,3 +57,9 @@ export interface DashboardData {
   ventas: DashboardFinancePeriodData[],
   gastos: DashboardFinancePeriodData[],
 }
+
+export interface DashboardResponse {
+  success: boolean;
+  message: string;
+  data: DashboardData;
+}
