@@ -1,0 +1,147 @@
+@use "../abstract/colors" as c;
+
+.recipes-page {
+  &__header {
+    padding: 1.25rem;
+  }
+
+  &__title {
+    color: c.$solid-color-light;
+  }
+
+  &__back-link {
+    color: rgba(c.$solid-color-light, 0.78);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: c.$solid-color-light;
+    }
+  }
+
+  &__subtitle {
+    color: rgba(c.$solid-color-light, 0.82);
+  }
+
+  &__badge {
+    background-color: rgba(c.$solid-color-green, 0.24);
+    color: c.$solid-color-light;
+    border: 1px solid rgba(c.$solid-color-green, 0.45);
+    box-shadow: 0 0 0 1px rgba(c.$solid-color-light, 0.04);
+  }
+
+  &__panel {
+    margin: 1.25rem;
+    border: 1px solid rgba(c.$solid-color-gray, 0.15);
+    background-color: c.$secondary-color-blue;
+    box-shadow: 0 10px 25px rgba(c.$solid-color-black, 0.06);
+  }
+
+  &__state {
+    border: 1px solid rgba(c.$solid-color-gray, 0.15);
+    background-color: c.$secondary-color-blue;
+    color: rgba(c.$solid-color-light, 0.82);
+  }
+
+  &__state--error {
+    border-color: rgba(c.$solid-color-red, 0.3);
+    background-color: rgba(c.$solid-color-red, 0.08);
+    color: c.$solid-color-red;
+  }
+
+  &__table-head {
+    background-color: rgba(c.$secondary-color-blue, 0.6);
+  }
+
+  &__table-heading {
+    color: rgba(c.$solid-color-light, 0.8);
+  }
+
+  &__row {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(c.$solid-color-black-at, 0.5);
+    }
+  }
+
+  &__name {
+    color: c.$solid-color-light;
+  }
+
+  &__meta,
+  &__cell {
+    color: rgba(c.$solid-color-light, 0.84);
+  }
+
+  &__difficulty {
+    padding: 0.45rem 0.95rem;
+    font-size: 0.82rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background-color: rgba(c.$solid-color-light, 0.14);
+    color: c.$solid-color-light;
+    border: 1px solid rgba(c.$solid-color-light, 0.2);
+    box-shadow: inset 0 1px 0 rgba(c.$solid-color-light, 0.06);
+  }
+
+  &__difficulty--facil {
+    background-color: rgba(c.$difficulty-easy, 0.26);
+    color: c.$solid-color-light;
+    border-color: rgba(c.$difficulty-easy, 0.48);
+  }
+
+  &__difficulty--media {
+    background-color: rgba(c.$difficulty-medium, 0.28);
+    color: c.$solid-color-light;
+    border-color: rgba(c.$difficulty-medium, 0.5);
+  }
+
+  &__difficulty--dificil {
+    background-color: rgba(c.$difficulty-hard, 0.28);
+    color: c.$solid-color-light;
+    border-color: rgba(c.$difficulty-hard, 0.5);
+  }
+
+  &__ingredient {
+    background-color: rgba(c.$solid-color-light, 0.7);
+    color: c.$solid-color-black-at;
+    border: 1px solid rgba(c.$solid-color-brown, 0.08);
+  }
+
+  &__ingredient-meta {
+    color: rgba(c.$solid-color-black-at, 0.78);
+  }
+
+  &__empty-text {
+    color: rgba(c.$solid-color-light, 0.6);
+  }
+
+  &__button {
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    font-weight: 600;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  &__button--edit {
+    border-color: rgba(c.$solid-color-green-dark, 0.35);
+    color: c.$solid-color-green-dark;
+
+    &:hover {
+      background-color: rgba(c.$solid-color-green, 0.1);
+    }
+  }
+
+  &__button--delete {
+    border-color: rgba(c.$solid-color-red, 0.35);
+    color: c.$solid-color-red;
+
+    &:hover {
+      background-color: rgba(c.$solid-color-red, 0.08);
+    }
+  }
+}

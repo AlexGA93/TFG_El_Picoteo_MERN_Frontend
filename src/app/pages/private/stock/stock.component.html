@@ -1,1 +1,138 @@
-<p class="animate__animated animate__fadeIn">stock works!</p>
+<section class="recipes-page space-y-6">
+  <div
+    class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between"
+  >
+    <div>
+      <a
+        class="recipes-page__back-link inline-flex items-center gap-2 text-sm font-medium mb-3"
+        [routerLink]="['/private/dashboard']"
+      >
+      <lucide-icon [img]="ArrowBigLeftDash" />
+        Volver al dashboard
+      </a>
+      <h1 class="recipes-page__title text-2xl font-bold">Stock</h1>
+      <p class="recipes-page__subtitle text-sm">
+        Consulta todos los productos de stock y gestiona sus acciones desde una sola tabla.
+      </p>
+      @if (stockList().length) {
+        <span
+          class="recipes-page__badge inline-flex w-fit items-center rounded-full px-3 py-1 text-sm font-medium my-3"
+        >
+          {{ stockList().length }} productos
+        </span>
+      }
+    </div>
+
+    <button type="button" class="p-ripple p-button p-component p-button-success">
+      <lucide-icon [img]="Plus" class="mr-2 h-4 w-4"></lucide-icon>
+      Nuevo
+    </button>
+  </div>
+
+  @if (isLoading()) {
+    <div
+      class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm p-5"
+    >
+      <shared-loader />
+    </div>
+  } @else if (stockError()) {
+    <div
+      class="recipes-page__state recipes-page__state--error rounded-2xl px-6 py-4 text-sm shadow-sm"
+    >
+      {{ stockError() }}
+    </div>
+  } @else if (!stockList().length) {
+    <div
+      class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm"
+    >
+      No hay productos de stock disponibles.
+    </div>
+  } @else {
+    <div class="recipes-page__panel overflow-hidden rounded-2xl">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200">
+          <thead class="recipes-page__table-head">
+            <tr>
+              <th
+                class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide"
+              >
+                Nombre
+              </th>
+              <th
+                class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide"
+              >
+                Precio
+              </th>
+              <th
+                class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide"
+              >
+                Tiempo
+              </th>
+              <th
+                class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide"
+              >
+                Dificultad
+              </th>
+              <th
+                class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide"
+              >
+                Acciones
+              </th>
+            </tr>
+          </thead>
+
+          <tbody class="divide-y divide-slate-100">
+            @for (item of stockList(); track item.id ?? $index) {
+              <tr class="recipes-page__row">
+                <td class="px-4 py-4 text-center align-middle">
+                  <div class="min-w-[160px]">
+                    <p class="recipes-page__name font-semibold">{{ item.nombre_producto }}</p>
+                    <p class="recipes-page__meta mt-1 text-xs">ID: {{ item.id }}</p>
+                  </div>
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center align-middle text-sm">
+                  {{ item.precio_producto | currency:'EUR':'symbol':'1.2-2':'es-ES' }}
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center align-middle text-sm">
+                  {{ item.tiempo_produccion_min }} min
+                </td>
+
+                <td class="px-4 py-4 text-center align-middle">
+                  <span
+                    class="recipes-page__difficulty inline-flex rounded-full px-3 py-1 text-xs font-medium capitalize"
+                    [class.recipes-page__difficulty--facil]="item.dificultad === 'facil'"
+                    [class.recipes-page__difficulty--media]="item.dificultad === 'media'"
+                    [class.recipes-page__difficulty--dificil]="item.dificultad === 'dificil'"
+                  >
+                    {{ item.dificultad }}
+                  </span>
+                </td>
+
+                <td class="px-4 py-4 text-center align-middle">
+                  <div class="flex min-w-[160px] flex-col items-center justify-center gap-2 sm:flex-row">
+                    <button
+                      type="button"
+                      class="p-ripple p-button p-component p-button-info"
+                    >
+                      <lucide-icon [img]="PencilLine" class="mr-2 h-4 w-4"></lucide-icon>
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      class="p-ripple p-button p-component p-button-danger"
+                    >
+                      <lucide-icon [img]="Eraser" class="mr-2 h-4 w-4"></lucide-icon>
+                      Borrar
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</section>

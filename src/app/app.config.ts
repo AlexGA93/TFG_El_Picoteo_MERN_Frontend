@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { LOCALE_ID, ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -12,6 +12,7 @@ import { ChefHat, PanelRightClose, LucideAngularModule,Package,Eye,BanknoteArrow
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: LOCALE_ID, useValue: 'es-ES' },
     provideRouter(routes),
     provideAnimationsAsync(),
     provideHttpClient(),

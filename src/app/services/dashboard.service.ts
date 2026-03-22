@@ -10,7 +10,6 @@ import { getFromLocalStorage } from "@utils/local-storage";
 export class DashboardService {
     // inyectamos el servicio http
     private http = inject(HttpClient);
-
     public _baseUrl: string = environment.baseUrl;
     public _isProd: boolean = environment.production;
     
