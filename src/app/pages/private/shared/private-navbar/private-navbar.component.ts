@@ -31,4 +31,9 @@ export class PrivateNavbar {
       this.router.navigate(["/"]);
     });
   }
+
+  navigateToDR() {
+    // redirigimos a la pagina de comedor
+    this.router.navigate(["/dinning-room"]);
+  }
 }

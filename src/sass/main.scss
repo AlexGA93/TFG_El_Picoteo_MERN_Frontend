@@ -17,3 +17,10 @@
 @forward "./components/recetas";
 // general
 @forward "./base/general-card";
+
+
+.elipsis-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
