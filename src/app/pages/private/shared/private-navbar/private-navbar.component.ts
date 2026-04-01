@@ -34,6 +34,6 @@ export class PrivateNavbar {
 
   navigateToDR() {
     // redirigimos a la pagina de comedor
-    this.router.navigate(["/dinning-room"]);
+    this.router.navigate(["/private/dinning-room"]);
   }
 }
