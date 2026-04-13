@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, input, output } from '@angular/core';
-import { LocginErrorResponseType } from "../../../../types/general.types";
+import { LocginErrorResponseType } from "../../../../../../types/general.types";
 
 @Component({
   selector: 'login-alert',

@@ -1,5 +1,5 @@
 import { Routes } from "@angular/router";
-import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
+import { AuthLayoutComponent } from "../layouts/auth-layout/auth-layout.component";
 import { LoginComponent } from "./pages/login/login.component";
 
 export const authRoutes: Routes = [

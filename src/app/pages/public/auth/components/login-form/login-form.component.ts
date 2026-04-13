@@ -12,13 +12,13 @@ import {
   Validators,
 } from "@angular/forms";
 import { emailPattern } from "@utils/regular-expressions";
-import { AuthenticationService } from "../../../services/authentication.service";
+import { AuthenticationService } from "../../../../../services/authentication.service";
 import {
   ErrorBodyType,
   LocginErrorResponseType,
-} from "../../../../types/general.types";
+} from "../../../../../../types/general.types";
 import { LoginAlert } from "../login-alert/login-alert.component";
-import { LoaderComponent } from "../../../shared/loader/loader.component";
+import { LoaderComponent } from "../../../../../shared/loader/loader.component";
 
 const mockedSuccessLogin = {
   email: "johnDoe@elpicoteo.com",
@@ -113,6 +113,9 @@ export class LoginFormComponent {
     });
   }
 
+  redirectToWelcome() {
+    this.router.navigate(['/public/welcome']);
+  }
   private timeOutErrorModal() {
     setTimeout(() => {
       this.hasError.set(false);
