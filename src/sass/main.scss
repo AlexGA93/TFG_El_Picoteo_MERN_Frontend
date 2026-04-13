@@ -15,5 +15,15 @@
 @forward "./components/dashboard_ventas";
 @forward "./components/dashboard_gastos";
 @forward "./components/recetas";
+@forward "./components/_dinning-room";
+@forward "./components/dinning-room-modal";
+
 // general
 @forward "./base/general-card";
+
+
+.elipsis-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

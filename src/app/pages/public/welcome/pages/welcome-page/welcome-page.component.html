@@ -1,4 +1,4 @@
-<section class="welcome flex flex-col justify-center min-h-screen p-4">
+<section class="welcome flex flex-col justify-center min-h-screen p-4 animate__animated animate__fadeIn">
     <!-- welcome-logo -->
      <div class="welcome-logo">
         <!-- welcome-logo__image-->
@@ -16,7 +16,13 @@
       <div class="welcome-buttons__container flex justify-center p-5">
         <p-button 
         class="btn m-2 p-5 text-white"
-        routerLink="auth/login" 
+        routerLink="/public/menu" 
+        label="Ver menu" 
+        styleClass="btn-green btn-green-dimensions"/>
+
+        <p-button 
+        class="btn m-2 p-5 text-white"
+        routerLink="/public/auth/login" 
         label="Acceder" 
         styleClass="btn-green btn-green-dimensions"/>
 

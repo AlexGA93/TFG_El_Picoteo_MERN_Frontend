@@ -1,0 +1,26 @@
+@use "../abstract/colors" as c;
+
+.menu-float {
+  width: 200px;
+  height: auto;
+  background-color: c.$solid-color-black-at;
+
+  &__list {
+    &--element {
+      padding: 10px;
+      color: c.$solid-color-white;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      button {
+        width: 100%;
+        text-align: left;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.25rem;
+      }
+      button:hover {
+        background-color: rgba(c.$solid-color-white, 0.1);
+      }
+    }
+  }
+}

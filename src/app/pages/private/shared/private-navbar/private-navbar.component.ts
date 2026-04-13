@@ -1,10 +1,13 @@
 import { JsonPipe, TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
 import { navbarStructures } from '@utils/object-structures';
 import { LucideAngularModule } from 'lucide-angular';
 import { ButtonModule } from 'primeng/button';
 import { AuthenticationService } from '../../../../services/authentication.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map, startWith } from 'rxjs';
+import { start } from '@popperjs/core';
 
 
 @Component({
@@ -14,13 +17,39 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PrivateNavbar {
+
   // injections
   authenticacionService = inject(AuthenticationService);
   router = inject(Router);
+
   // inputs
   section = input<string>('');
+  
   // signals
   sectionObject = computed(() => navbarStructures[this.section()]);
+  
+  //convertimos en signal el router para reaccionar a cada cambiode esta
+  currentRoute = toSignal(this.router.events.pipe(
+    // filtramos el evento
+    filter(event => event instanceof NavigationEnd),
+    // mapeamos la url
+    map(() => this.router.url),
+    // emitimos el valor inicial del router al convertirlo en signal para que el navbar se actualice correctamente al cargar la pagina
+    startWith(this.router.url)
+  ),
+  {
+    initialValue: this.router.url
+  });
+
+  currentSection = computed(() => {
+    // sacamos la url actual
+    const url = this.currentRoute();
+
+    if(url.includes('dinning-room')) return 'dashboard';
+    if(url.includes('dashboard')) return 'dinning-room';
+    return "/";
+  });
+
   // functions
   logOut() {
     // llamamos a la funcion del logout del servicio para eliminar el token y redirigir al login
@@ -28,7 +57,14 @@ export class PrivateNavbar {
       console.log("redirigimos");
       
       // redirigimos a la pagina de login
-      this.router.navigate(["/"]);
+      this.router.navigate(["/public/welcome"]);
     });
+  }
+
+  navigateToDR() {
+    console.log(`/private/${this.currentSection()}`);
+    
+    // redirigimos a la pagina de comedor
+    this.router.navigate([`/private/${this.currentSection()}`]);
   }
 }

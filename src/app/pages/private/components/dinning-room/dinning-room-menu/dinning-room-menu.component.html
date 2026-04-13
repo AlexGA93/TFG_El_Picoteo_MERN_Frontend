@@ -1,0 +1,76 @@
+<div
+  class="menu-float absolute top-4 right-4 rounded-lg shadow-lg p-4 z-10 flex flex-col"
+>
+  <p-toast />
+  <h2 class="text-lg font-bold mb-2">Menu de Opciones</h2>
+  <hr class="mb-4" />
+
+  <form
+    [formGroup]="menuForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-3"
+  >
+    <!-- SELECTOR DE TIPO DE NODO: MESA O SILLA -->
+    <div class="flex flex-col gap-1">
+      <label for="nodeType" class="font-semibold">Tipo de nodo</label>
+      <select
+        id="nodeType"
+        formControlName="nodeType"
+        class="border rounded-md p-2"
+      >
+        <option value="">Selecciona una opcion</option>
+        <option value="mesa">Mesa</option>
+        <option value="silla">Silla</option>
+      </select>
+    </div>
+
+    <!-- SI EL USUARIO ESCOGE UNA MESA UNICAMENTE MOSTRAMOS EL LABEL A ASIGNAR -->
+    @if (menuForm.controls.nodeType.value === "mesa") {
+      <div class="flex flex-col gap-1">
+        <label for="nodeLabel" class="font-semibold">Label de la mesa</label>
+        <input
+          id="nodeLabel"
+          type="text"
+          formControlName="nodeLabel"
+          class="border rounded-md p-2"
+          placeholder="Introduce el nombre de la mesa"
+        />
+      </div>
+    }
+
+    <!-- SI EL USUARIO ESCOGE LA OPCION SILLA ESPECIFICARA EL NUMERO DE SILLAS Y LA MESA A LA QUE PERTENECE -->
+    @if (menuForm.controls.nodeType.value === "silla") {
+      <div class="flex flex-col gap-1">
+        <label for="parentTable" class="font-semibold">Mesa asignada</label>
+        <select
+          id="parentTable"
+          formControlName="parentTable"
+          class="border rounded-md p-2"
+        >
+          <option value="">Selecciona una mesa</option>
+          @for (table of tables(); track table.id) {
+            <option [value]="table.id">{{ table.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label for="numberOfChairsByTable" class="font-semibold"
+          >Numero de sillas</label
+        >
+        <input
+          id="numberOfChairsByTable"
+          type="number"
+          formControlName="numberOfChairsByTable"
+          class="border rounded-md p-2"
+          min="1"
+          max="10"
+        />
+      </div>
+    }
+    <!-- EJECUCION DE PROCESO -->
+    <button type="submit" class="w-full rounded-md bg-black text-white p-2">
+      Agregar nodo
+    </button>
+  </form>
+</div>

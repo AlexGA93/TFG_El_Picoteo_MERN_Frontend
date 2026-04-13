@@ -1,0 +1,38 @@
+<section class="min-h-screen px-4 py-8 md:px-8 animate__animated animate__fadeIn">
+    <div class="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-black/30 p-4 shadow-2xl backdrop-blur-md md:p-6">
+        <div class="flex flex-col gap-8">
+        <header class="rounded-3xl border border-white/10 bg-black/25 p-6 text-white backdrop-blur-sm">
+            <p class="text-sm uppercase tracking-[0.35em] text-green-300">Carta publica</p>
+            <h1 class="mt-3 text-4xl font-bold md:text-6xl">Sabores para compartir</h1>
+            <p class="mt-4 max-w-2xl text-lg text-white/80">
+                Explora una seleccion destacada de El Picoteo y prepara tu pedido antes de entrar al local.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+                <p-button routerLink="/public/cart" label="Ver carrito" styleClass="btn-green btn-green-dimensions" />
+                <p-button routerLink="/public/welcome" label="Volver al inicio" severity="secondary" />
+            </div>
+        </header>
+
+        <div class="grid gap-6 md:grid-cols-3">
+            <article
+                *ngFor="let category of categories"
+                class="rounded-3xl border border-white/10 bg-white/12 p-6 text-white shadow-lg backdrop-blur-sm"
+            >
+                <h2 class="text-2xl font-semibold">{{ category.title }}</h2>
+
+                <div class="mt-5 flex flex-col gap-4">
+                    <div *ngFor="let item of category.items" class="rounded-2xl bg-black/20 p-4">
+                        <div class="flex items-start justify-between gap-4">
+                            <h3 class="text-xl font-medium">{{ item.name }}</h3>
+                            <span class="whitespace-nowrap text-green-300">{{ item.price | currency:'EUR' }}</span>
+                        </div>
+
+                        <p class="mt-2 text-sm text-white/75">{{ item.description }}</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+        </div>
+    </div>
+</section>

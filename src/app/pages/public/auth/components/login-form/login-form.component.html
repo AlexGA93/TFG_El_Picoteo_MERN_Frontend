@@ -48,8 +48,18 @@
       <shared-loader />
     }
   </p-button>
+  
 </form>
-
+<div class="w-full max-w-xs">
+  <p-button
+    type="button"
+    class="btn block w-full text-center py-5 text-white"
+    label="Bienvenida"
+    (click)="redirectToWelcome()"
+    styleClass="btn-green w-full"
+  >
+  </p-button>
+</div>
 @if (hasError()) {
   <login-alert [loginerrorPayload]="loginErrorsMessages()" />
 }

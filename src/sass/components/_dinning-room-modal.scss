@@ -1,0 +1,153 @@
+@use "../abstract/colors" as c;
+
+:host ::ng-deep .dinning-room-dialog-mask {
+  backdrop-filter: blur(3px);
+  background: rgba(c.$solid-color-black, 0.45) !important;
+}
+
+:host ::ng-deep .dinning-room-dialog {
+  min-width: 500px;
+  border-radius: 24px !important;
+  overflow: hidden;
+  border: 1px solid rgba(c.$solid-color-brown, 0.35);
+  background: linear-gradient(
+    180deg,
+    rgba(c.$solid-color-white, 0.98) 0%,
+    c.$solid-color-light 100%
+  ) !important;
+  box-shadow: 0 24px 80px rgba(c.$solid-color-black, 0.28);
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(c.$solid-color-brown, 0.2);
+  padding: 1.25rem 1.5rem 0.75rem;
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-content {
+  background: transparent !important;
+  padding: 1rem 1.5rem;
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-footer {
+  background: transparent !important;
+  border-top: 1px solid rgba(c.$solid-color-brown, 0.2);
+  padding: 0.75rem 1.5rem 1.25rem;
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-header-icon {
+  color: c.$solid-color-black-at !important;
+}
+
+.dinning-room-dialog {
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__badge {
+    border-radius: 999px;
+    background-color: rgba(c.$solid-color-green, 0.18);
+    color: c.$solid-color-green-dark;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    color: c.$solid-color-black-at;
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    color: c.$solid-color-black-at;
+  }
+
+  &__card {
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+
+    &--highlight {
+      background-color: c.$solid-color-light;
+      border: 1px solid rgba(c.$solid-color-brown, 0.12);
+    }
+
+    &--default {
+      background-color: rgba(c.$solid-color-white, 0.82);
+      border: 1px solid rgba(c.$solid-color-brown, 0.18);
+    }
+  }
+
+  &__label {
+    color: rgba(c.$solid-color-gray, 0.85);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    color: c.$solid-color-black-at;
+    font-weight: 600;
+
+    &--capitalize {
+      text-transform: capitalize;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  &__button {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.6rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      opacity: 0.96;
+    }
+
+    &--danger {
+      background-color: c.$solid-color-red;
+      color: c.$solid-color-white;
+      box-shadow: 0 10px 24px rgba(c.$solid-color-red, 0.22);
+    }
+
+    &--primary {
+      background-color: c.$solid-color-black-at;
+      color: c.$solid-color-light;
+      box-shadow: 0 10px 24px rgba(c.$solid-color-black, 0.2);
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  :host ::ng-deep .dinning-room-dialog {
+    min-width: min(500px, calc(100vw - 2rem));
+  }
+
+  .dinning-room-dialog__footer {
+    flex-direction: column;
+  }
+
+  .dinning-room-dialog__button {
+    width: 100%;
+  }
+}

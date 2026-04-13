@@ -1,0 +1,60 @@
+<p-dialog
+  [visible]="visible()"
+  (visibleChange)="close.emit()"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="true"
+  [dismissableMask]="true"
+  styleClass="dinning-room-dialog"
+  maskStyleClass="dinning-room-dialog-mask"
+>
+  @if (selectedNode(); as node) {
+    <ng-template pTemplate="header">
+      <div class="dinning-room-dialog__header">
+        <div class="dinning-room-dialog__badge">
+          {{ node.type }}
+        </div>
+        <span class="dinning-room-dialog__title">{{ node.label }}</span>
+      </div>
+    </ng-template>
+
+    <div class="dinning-room-dialog__content">
+      <div class="dinning-room-dialog__card dinning-room-dialog__card--highlight">
+        <p class="dinning-room-dialog__label">Identificador</p>
+        <p class="dinning-room-dialog__value">{{ node.id }}</p>
+      </div>
+
+      <div class="dinning-room-dialog__card dinning-room-dialog__card--default">
+        <p class="dinning-room-dialog__label">Tipo de nodo</p>
+        <p class="dinning-room-dialog__value dinning-room-dialog__value--capitalize">{{ node.type }}</p>
+      </div>
+
+      @if (node.parentTable) {
+        <div class="dinning-room-dialog__card dinning-room-dialog__card--default">
+          <p class="dinning-room-dialog__label">Mesa asociada</p>
+          <p class="dinning-room-dialog__value">{{ node.parentTable }}</p>
+        </div>
+      }
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="dinning-room-dialog__footer">
+        <button
+          type="button"
+          class="dinning-room-dialog__button dinning-room-dialog__button--primary"
+          (click)="close.emit()"
+        >
+          Cerrar
+        </button>
+        <button
+          type="button"
+          class="dinning-room-dialog__button dinning-room-dialog__button--danger"
+          (click)="delete.emit()"
+        >
+          Eliminar
+        </button>
+      </div>
+    </ng-template>
+  }
+</p-dialog>

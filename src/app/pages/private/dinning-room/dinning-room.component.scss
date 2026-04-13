@@ -1,0 +1,124 @@
+:host ::ng-deep .dinning-room-dialog-mask {
+  backdrop-filter: blur(3px);
+  background: rgba(34, 27, 18, 0.35) !important;
+}
+
+:host ::ng-deep .dinning-room-dialog {
+  min-width: 500px;
+  border-radius: 24px !important;
+  overflow: hidden;
+  border: 1px solid rgba(173, 150, 111, 0.4);
+  background: linear-gradient(180deg, #fffdf5 0%, #f7f1d5 100%) !important;
+  box-shadow: 0 24px 80px rgba(53, 38, 18, 0.25);
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-header {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(173, 150, 111, 0.25);
+  padding: 1.25rem 1.5rem 0.75rem;
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-content {
+  background: transparent !important;
+  padding: 1rem 1.5rem;
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-footer {
+  background: transparent !important;
+  border-top: 1px solid rgba(173, 150, 111, 0.25);
+  padding: 0.75rem 1.5rem 1.25rem;
+}
+
+:host ::ng-deep .dinning-room-dialog .p-dialog-header-icon {
+  color: #2c2418 !important;
+}
+
+.dinning-room-dialog__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.dinning-room-dialog__badge {
+  border-radius: 999px;
+  background: #d8cfaa;
+  padding: 0.25rem 0.75rem;
+  color: #30261b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.dinning-room-dialog__title {
+  color: #2c2418;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.dinning-room-dialog__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  color: #2c2418;
+}
+
+.dinning-room-dialog__card {
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.dinning-room-dialog__card--highlight {
+  background: #f7f1d5;
+}
+
+.dinning-room-dialog__card--default {
+  border: 1px solid #e5d9af;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.dinning-room-dialog__label {
+  color: #7a6b52;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.dinning-room-dialog__value {
+  font-weight: 600;
+}
+
+.dinning-room-dialog__value--capitalize {
+  text-transform: capitalize;
+}
+
+.dinning-room-dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.dinning-room-dialog__button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dinning-room-dialog__button--danger {
+  background: #b4432c;
+  color: #fff8ed;
+}
+
+.dinning-room-dialog__button--primary {
+  background: #2c2418;
+  color: #f7f1d5;
+}
+
+@media (max-width: 640px) {
+  :host ::ng-deep .dinning-room-dialog {
+    min-width: min(500px, calc(100vw - 2rem));
+  }
+}

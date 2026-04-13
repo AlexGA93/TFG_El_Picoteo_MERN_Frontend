@@ -4,7 +4,7 @@
   <table class="w-full table-fixed overflow-hidden">
     <tbody>
       <tr class="border-b">
-        <th class="text-left font-bold text-xl px-3 py-2 w-1/2">
+        <th class="text-left font-bold text-xl px-3 py-2 w-1/2 elipsis-text">
           {{ inventoryElement.tipo }}
         </th>
         <td class="text-right px-3 py-2 flex flex-row justify-end">
@@ -16,11 +16,11 @@
         </td>
       </tr>
       <tr class="">
-        <th class="text-left font-bold text-xl px-3 py-2">Total Items</th>
+        <th class="text-left font-bold text-xl px-3 py-2">Articulos</th>
         <td class="text-right px-3 py-2">{{ inventoryElement.totalItems }}</td>
       </tr>
       <tr>
-        <th class="text-left font-bold text-xl px-3 py-2">Total Price</th>
+        <th class="text-left font-bold text-xl px-3 py-2">Precio Total</th>
         <td class="text-right price font-bold px-3 py-2">
           {{ inventoryElement.totalPrice }} €
         </td>

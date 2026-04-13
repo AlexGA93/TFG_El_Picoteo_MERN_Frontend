@@ -7,6 +7,7 @@ import { StockComponent } from "./stock/stock.component";
 import { InventarioComponent } from "./inventario/inventario.component";
 import { VentasComponent } from "./ventas/ventas.component";
 import { GastosComponent } from "./gastos/gastos.component";
+import { DinningRoom } from "./dinning-room/dinning-room.component";
 // import {InventarioComponent} from "./inventario/inventario.component";
 
 export const privateRoutes: Routes = [
@@ -33,6 +34,9 @@ export const privateRoutes: Routes = [
 
             // gastos
             { path: 'gastos', component: GastosComponent },
+
+            // Dinning Room
+            { path: 'dinning-room', component: DinningRoom },
 
             // default
             { path: '**', redirectTo: 'dashboard' }

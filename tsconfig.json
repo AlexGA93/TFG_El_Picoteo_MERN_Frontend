@@ -6,9 +6,9 @@
       // main path - commented to avoid issues with IDE
       // "@/*":["./src/app/*"],
       // welcome
-      "@welcome/*":["./src/app/welcome/*"],
+      "@welcome/*":["./src/app/pages/public/welcome/*"],
       // auth route
-      "@auth/*":["./src/app/auth/*"],
+      "@auth/*":["./src/app/pages/public/auth/*"],
       // ruta dashboard admin
       // "@dashboard/*":["./src/app/admin-dashboard/*"],
       // ruta productos
