@@ -1,38 +1,142 @@
 <section class="min-h-screen px-4 py-8 md:px-8 animate__animated animate__fadeIn">
-    <div class="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-black/30 p-4 shadow-2xl backdrop-blur-md md:p-6">
-        <div class="flex flex-col gap-8">
-        <header class="rounded-3xl border border-white/10 bg-black/25 p-6 text-white backdrop-blur-sm">
-            <p class="text-sm uppercase tracking-[0.35em] text-green-300">Carta publica</p>
-            <h1 class="mt-3 text-4xl font-bold md:text-6xl">Sabores para compartir</h1>
-            <p class="mt-4 max-w-2xl text-lg text-white/80">
-                Explora una seleccion destacada de El Picoteo y prepara tu pedido antes de entrar al local.
-            </p>
+  <div
+    class="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-black/30 p-4 shadow-2xl backdrop-blur-md md:p-6"
+  >
+    <div class="flex flex-col gap-8">
+      <header
+        class="rounded-3xl border border-white/10 bg-black/25 p-6 text-white backdrop-blur-sm"
+      >
+        <p class="text-sm uppercase tracking-[0.35em] text-green-300">
+          Carta publica
+        </p>
+        <h1 class="mt-3 text-4xl font-bold md:text-6xl">
+          Sabores para compartir
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg text-white/80">
+          Explora una seleccion destacada de El Picoteo y prepara tu pedido
+          antes de entrar al local.
+        </p>
 
-            <div class="mt-6 flex flex-wrap gap-3">
-                <p-button routerLink="/public/cart" label="Ver carrito" styleClass="btn-green btn-green-dimensions" />
-                <p-button routerLink="/public/welcome" label="Volver al inicio" severity="secondary" />
-            </div>
-        </header>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <p-button
+            routerLink="/public/cart"
+            label="Ver carrito"
+            styleClass="btn-green btn-green-dimensions"
+          />
+          <p-button
+            routerLink="/public/welcome"
+            label="Volver al inicio"
+            severity="secondary"
+          />
+        </div>
+      </header>
 
-        <div class="grid gap-6 md:grid-cols-3">
-            <article
-                *ngFor="let category of categories"
-                class="rounded-3xl border border-white/10 bg-white/12 p-6 text-white shadow-lg backdrop-blur-sm"
+      @if (menuError()) {
+        <section
+          class="flex min-h-[40vh] items-center justify-center rounded-3xl border border-red-400/20 bg-red-500/10 p-8 text-center text-red-100"
+        >
+          <div class="max-w-xl">
+            <h2 class="text-2xl font-semibold text-red-200">
+              No hemos podido cargar la carta
+            </h2>
+            <p class="mt-3 text-sm md:text-base">{{ menuError() }}</p>
+          </div>
+        </section>
+      } @else if (isLoading()) {
+        <section
+          class="flex min-h-[40vh] items-center justify-center rounded-3xl border border-white/10 bg-black/20"
+        >
+          <shared-loader class="animate__animated animate__fadeIn" />
+        </section>
+      } @else {
+        <section class="flex flex-col gap-4">
+          @if (menuMessage()) {
+            <div
+              class="rounded-2xl border border-emerald-400/20 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-100"
             >
-                <h2 class="text-2xl font-semibold">{{ category.title }}</h2>
+              {{ menuMessage() }}
+            </div>
+          }
 
-                <div class="mt-5 flex flex-col gap-4">
-                    <div *ngFor="let item of category.items" class="rounded-2xl bg-black/20 p-4">
-                        <div class="flex items-start justify-between gap-4">
-                            <h3 class="text-xl font-medium">{{ item.name }}</h3>
-                            <span class="whitespace-nowrap text-green-300">{{ item.price | currency:'EUR' }}</span>
-                        </div>
+          @if (menuData(); as products) {
+            @if (products.length) {
+              <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                @for (menuProduct of products; track menuProduct.id ?? $index) {
+                  <article
+                    class="rounded-3xl border border-white/10 bg-white/12 p-6 text-white shadow-lg backdrop-blur-sm"
+                  >
+                    @if (menuProduct.imagen) {
+                      <div class="mb-5 overflow-hidden rounded-2xl bg-black/20">
+                        <img
+                          [src]="menuProduct.imagen"
+                          [alt]="menuProduct.nombre_producto"
+                          class="h-56 w-full object-cover"
+                        />
+                      </div>
+                    } @else {
+                      <div
+                        class="mb-5 flex h-56 items-center justify-center rounded-2xl bg-black/20 text-sm text-white/50"
+                      >
+                        Imagen no disponible
+                      </div>
+                    }
 
-                        <p class="mt-2 text-sm text-white/75">{{ item.description }}</p>
+                    <div class="flex items-start justify-between gap-4">
+                      <h2 class="text-2xl font-semibold">
+                        {{ menuProduct.nombre_producto }}
+                      </h2>
+                      <span class="whitespace-nowrap text-lg text-green-300">
+                        {{ menuProduct.precio_producto | currency: "EUR" }}
+                      </span>
                     </div>
+
+                    <div class="mt-5 grid gap-4 md:grid-cols-2">
+                      <div class="rounded-2xl bg-black/20 p-4 text-sm text-white/75">
+                        <p class="font-medium text-white/90">Dificultad</p>
+                        <p class="mt-1">{{ menuProduct.dificultad }}</p>
+                      </div>
+
+                      <div class="rounded-2xl bg-black/20 p-4 text-sm text-white/75">
+                        <p class="font-medium text-white/90">Tiempo estimado</p>
+                        <p class="mt-1">
+                          {{ menuProduct.tiempo_produccion_min }} min
+                        </p>
+                      </div>
+                    </div>
+
+                  </article>
+                }
+              </div>
+            } @else {
+              <section
+                class="flex min-h-[30vh] items-center justify-center rounded-3xl border border-white/10 bg-black/20 p-8 text-center text-white/75"
+              >
+                <div>
+                  <h2 class="text-2xl font-semibold text-white">
+                    La carta esta vacia
+                  </h2>
+                  <p class="mt-3">
+                    Todavia no hay productos disponibles para mostrar.
+                  </p>
                 </div>
-            </article>
-        </div>
-        </div>
+              </section>
+            }
+          } @else {
+            <section
+              class="flex min-h-[30vh] items-center justify-center rounded-3xl border border-white/10 bg-black/20 p-8 text-center text-white/75"
+            >
+              <div>
+                <h2 class="text-2xl font-semibold text-white">
+                  La carta esta vacia
+                </h2>
+                <p class="mt-3">
+                  Todavia no hay productos disponibles para mostrar.
+                </p>
+              </div>
+            </section>
+          }
+        </section>
+      }
     </div>
+  </div>
 </section>

@@ -1,35 +1,58 @@
-import { CurrencyPipe, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
+import { CurrencyPipe, NgFor } from "@angular/common";
+import { Component, computed, inject } from "@angular/core";
+import { RouterLink } from "@angular/router";
+import { ButtonModule } from "primeng/button";
+import { StockService } from "../../../../../services/stock.service";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { catchError, map, of, startWith } from "rxjs";
+import { StockResponse } from "../../../../../../types/stock.types";
+import { MenuService } from "../../../../../services/menu.service";
+import { MenuProduct, MenuViewState } from "../../../../../../types/menu.types";
+import { LoaderComponent } from "../../../../../shared/loader/loader.component";
+
+const INITIAL_MENU_STATE: MenuViewState = {
+  loading: true,
+  message: "",
+  data: null,
+  error: null,
+};
 
 @Component({
-  selector: 'app-public-menu-page',
-  imports: [NgFor, RouterLink, CurrencyPipe, ButtonModule],
-  templateUrl: './public-menu-page.component.html',
+  selector: "app-public-menu-page",
+  imports: [RouterLink, CurrencyPipe, ButtonModule, LoaderComponent],
+  templateUrl: "./public-menu-page.component.html",
 })
 export class PublicMenuPageComponent {
-  readonly categories = [
-    {
-      title: 'Entrantes',
-      items: [
-        { name: 'Patatas Bravas', description: 'Crujientes, con salsa brava casera y alioli suave.', price: 6.5 },
-        { name: 'Croquetas del Chef', description: 'Cremosas y doradas, con sabor tradicional.', price: 8 },
-      ],
-    },
-    {
-      title: 'Principales',
-      items: [
-        { name: 'Hamburguesa Picoteo', description: 'Carne jugosa, queso curado, cebolla caramelizada y salsa de la casa.', price: 12.5 },
-        { name: 'Tosta Iberica', description: 'Pan rustico, jamon iberico, tomate y aceite de oliva.', price: 9.5 },
-      ],
-    },
-    {
-      title: 'Bebidas',
-      items: [
-        { name: 'Tinto de Verano', description: 'Refrescante, servido muy frio con rodaja de limon.', price: 3.5 },
-        { name: 'Limonada Casera', description: 'Con hierbabuena fresca y un toque de azucar moreno.', price: 3 },
-      ],
-    },
-  ];
+  // inyectamos el servicio
+  private stockService = inject(MenuService);
+
+  // creamos una señal para almacenar los datos del stock
+  stockData = toSignal(
+    this.stockService.getMenuData().pipe(
+      map((response) => ({
+        loading: false,
+        message: response.message,
+        data: response.data,
+        error: response ? null : "No se han encontrado datos del menu.",
+      })),
+      catchError(() =>
+        of({
+          loading: false,
+          message: "Error al cargar el menu",
+          data: null,
+          error:
+            "No se han podido cargar los datos del menu. Por favor, inténtalo de nuevo más tarde.",
+        }),
+      ),
+      startWith(INITIAL_MENU_STATE),
+    ),
+    { initialValue: INITIAL_MENU_STATE },
+  );
+
+  menuData = computed(() => this.stockData().data);
+  menuMessage = computed(() => this.stockData().message);
+  menuError = computed(() => this.stockData().error);
+
+  // loader
+  isLoading = computed(() => this.stockData().loading);
 }
