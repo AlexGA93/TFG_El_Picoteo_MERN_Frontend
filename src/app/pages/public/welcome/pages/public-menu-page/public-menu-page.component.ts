@@ -7,7 +7,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { catchError, map, of, startWith } from "rxjs";
 import { StockResponse } from "../../../../../../types/stock.types";
 import { MenuService } from "../../../../../services/menu.service";
-import { MenuProduct, MenuViewState } from "../../../../../../types/menu.types";
+import { MenuProduct, MenuResponse, MenuViewState } from "../../../../../../types/menu.types";
 import { LoaderComponent } from "../../../../../shared/loader/loader.component";
 
 const INITIAL_MENU_STATE: MenuViewState = {
@@ -29,7 +29,7 @@ export class PublicMenuPageComponent {
   // creamos una señal para almacenar los datos del stock
   stockData = toSignal(
     this.stockService.getMenuData().pipe(
-      map((response) => ({
+      map((response: MenuResponse) => ({
         loading: false,
         message: response.message,
         data: response.data,
@@ -49,10 +49,40 @@ export class PublicMenuPageComponent {
     { initialValue: INITIAL_MENU_STATE },
   );
 
-  menuData = computed(() => this.stockData().data);
+  menuData    = computed(() => this.stockData().data);
   menuMessage = computed(() => this.stockData().message);
-  menuError = computed(() => this.stockData().error);
-
+  menuError   = computed(() => this.stockData().error);
   // loader
-  isLoading = computed(() => this.stockData().loading);
+  isLoading   = computed(() => this.stockData().loading);
+
+  // funciones
+  addOne(productName: string) {
+    
+    // actualizamos la cifra de la signal de menuData
+    const product = this.menuData()?.find(p => p.nombre_producto === productName);
+    if (product) {
+      if (!product.cantidad) {
+        product.cantidad = 1;
+      } else {
+        product.cantidad++;
+      }
+    }
+    
+    // llamamos a la función del servicio para actualizar el carrito
+    this.stockService.addToCart(product as MenuProduct);
+    
+  }
+
+  removeOne(productName: string) {
+    const product = this.menuData()?.find(p => p.nombre_producto === productName);
+    
+    if (product && product.cantidad && product.cantidad > 0) {
+      product.cantidad--;
+    }
+
+    // llamamos a la función del servicio para actualizar el carrito
+    if (product && product.id) {
+      this.stockService.removeFromCart(product.id);
+    }
+  }
 }

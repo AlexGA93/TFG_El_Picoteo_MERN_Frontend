@@ -5,6 +5,7 @@ export interface MenuProduct {
     tiempo_produccion_min: number;
     dificultad: string;
     imagen: string;
+    cantidad?: number;
 }
 
 export interface MenuResponse {

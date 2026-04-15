@@ -102,6 +102,17 @@
                           {{ menuProduct.tiempo_produccion_min }} min
                         </p>
                       </div>
+
+                      <!-- Botones de cantidad -->
+                       <div class="flex items-center gap-4">
+                        <button (click)="addOne(menuProduct.nombre_producto)" class="rounded-full bg-white/20 p-5 text-white hover:bg-white/30">
+                          +
+                        </button>
+                        <span class="text-lg">{{ menuProduct.cantidad || 0 }}</span>
+                        <button (click)="removeOne(menuProduct.nombre_producto)"   class="rounded-full bg-white/20 p-5 text-white hover:bg-white/30">
+                          -
+                        </button>
+                      </div>
                     </div>
 
                   </article>
