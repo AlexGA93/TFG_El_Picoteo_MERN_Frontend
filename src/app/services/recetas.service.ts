@@ -16,6 +16,6 @@ export class RecetasService {
     getRecipesData(): Observable<RecetasResponse> {
         const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
 
-        return this.http.get<RecetasResponse>(`${this._baseUrl}/databases/recetas`, {headers}).pipe(shareReplay(1));
+        return this.http.get<RecetasResponse>(`${this._baseUrl}/databases/recipes`, {headers}).pipe(shareReplay(1));
     }
 }

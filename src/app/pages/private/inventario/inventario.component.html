@@ -97,7 +97,6 @@
                 <td class="px-4 py-4 text-center align-middle">
                   <div class="min-w-[160px]">
                     <p class="recipes-page__name font-semibold">{{ item.nombre }}</p>
-                    <p class="recipes-page__meta mt-1 text-xs">ID: {{ item.id }}</p>
                   </div>
                 </td>
 
@@ -106,7 +105,7 @@
                 </td>
 
                 <td class="recipes-page__cell px-4 py-4 text-center align-middle text-sm">
-                  {{ item.n_unidades }} {{ item.unidades }}
+                  {{ item.n_unidades }} {{ item.unidades | unitFormat }}
                 </td>
 
                 <td class="recipes-page__cell px-4 py-4 text-center align-middle text-sm">
@@ -118,7 +117,7 @@
                 </td>
 
                 <td class="recipes-page__cell px-4 py-4 text-center align-middle text-sm">
-                  {{ item.fecha_registro }}
+                  {{ item.fecha_registro | dateFormat:'long' }}
                 </td>
 
                 <td class="px-4 py-4 text-center align-middle">

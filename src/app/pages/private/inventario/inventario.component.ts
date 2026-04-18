@@ -8,6 +8,8 @@ import { Eraser, LucideAngularModule, PencilLine, Plus, ArrowBigLeftDash } from 
 import { InventoryViewState } from '../../../../types/inventario.types';
 import { InventoryService } from '../../../services/inventario.service';
 import { LoaderComponent } from '../../../shared/loader/loader.component';
+import { UnitFormatPipe } from '@pipes/unit-format.pipe';
+import { DateFormatPipe } from '@pipes/date-format.pipe';
 
 const INITIAL_INVENTORY_STATE: InventoryViewState = {
   loading: true,
@@ -18,7 +20,7 @@ const INITIAL_INVENTORY_STATE: InventoryViewState = {
 
 @Component({
   selector: 'app-inventario',
-  imports: [CommonModule, CurrencyPipe, RouterLink, LucideAngularModule, LoaderComponent],
+  imports: [CommonModule, CurrencyPipe, RouterLink, LucideAngularModule, LoaderComponent, UnitFormatPipe, DateFormatPipe],
   templateUrl: './inventario.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

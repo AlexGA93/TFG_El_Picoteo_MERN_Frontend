@@ -14,7 +14,13 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 20px;
+}
+
+@media (max-width: 639px) {
+  .dashboard-grid {
+    gap: 24px;
+  }
 }
 
 .dashboard-div1,

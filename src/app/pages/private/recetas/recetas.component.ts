@@ -8,6 +8,7 @@ import { catchError, map, of, startWith } from 'rxjs';
 import { RecetasViewState } from '../../../../types/recetas.types';
 import { LoaderComponent } from '../../../shared/loader/loader.component';
 import { Eraser, LucideAngularModule, PencilLine, Plus, ArrowBigLeftDash } from 'lucide-angular';
+import { UnitFormatPipe } from '@pipes/unit-format.pipe';
 
 const INITIAL_RECETAS_STATE: RecetasViewState = {
   loading: true,
@@ -18,7 +19,7 @@ const INITIAL_RECETAS_STATE: RecetasViewState = {
 
 @Component({
   selector: 'app-recetas',
-  imports: [CommonModule, CurrencyPipe, LoaderComponent, LucideAngularModule, RouterLink],
+  imports: [CommonModule, CurrencyPipe, LoaderComponent, LucideAngularModule, RouterLink, UnitFormatPipe],
   templateUrl: './recetas.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -21,13 +21,17 @@
           <p-button
             routerLink="/public/cart"
             label="Ver carrito"
-            styleClass="btn-green btn-green-dimensions"
-          />
+            styleClass="btn-green btn-green-dimensions flex-1"
+          >
+            <lucide-icon [img]="ShoppingCart" class="mr-2 w-4 h-4"></lucide-icon>
+          </p-button>
           <p-button
             routerLink="/public/welcome"
             label="Volver al inicio"
-            severity="secondary"
-          />
+            styleClass="btn-green btn-green-dimensions flex-1"
+          >
+            <lucide-icon [img]="Home" class="mr-2 w-4 h-4"></lucide-icon>
+          </p-button>
         </div>
       </header>
 
@@ -97,7 +101,7 @@
                       </div>
 
                       <div class="rounded-2xl bg-black/20 p-4 text-sm text-white/75">
-                        <p class="font-medium text-white/90">Tiempo estimado</p>
+                        <p class="font-medium text-white/90">T.Estimado</p>
                         <p class="mt-1">
                           {{ menuProduct.tiempo_produccion_min }} min
                         </p>
@@ -105,12 +109,14 @@
 
                       <!-- Botones de cantidad -->
                        <div class="flex items-center gap-4">
-                        <button (click)="addOne(menuProduct.nombre_producto)" class="rounded-full bg-white/20 p-5 text-white hover:bg-white/30">
-                          +
+                        <button (click)="addOne(menuProduct.nombre_producto)" class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2">
+                          <lucide-icon [img]="Plus" class="w-4 h-4"></lucide-icon>
+                          Agregar
                         </button>
-                        <span class="text-lg">{{ menuProduct.cantidad || 0 }}</span>
-                        <button (click)="removeOne(menuProduct.nombre_producto)"   class="rounded-full bg-white/20 p-5 text-white hover:bg-white/30">
-                          -
+                        <span class="text-lg font-semibold px-3 py-1 bg-white/10 rounded-md">{{ menuProduct.cantidad || 0 }}</span>
+                        <button (click)="removeOne(menuProduct.nombre_producto)" class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2">
+                          <lucide-icon [img]="Minus" class="w-4 h-4"></lucide-icon>
+                          Quitar
                         </button>
                       </div>
                     </div>

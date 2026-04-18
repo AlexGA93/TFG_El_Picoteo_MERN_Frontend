@@ -95,9 +95,6 @@
                     <p class="recipes-page__name font-semibold">
                       {{ recipe.nombre }}
                     </p>
-                    <p class="recipes-page__meta mt-1 text-xs">
-                      ID: {{ recipe.id }}
-                    </p>
                   </div>
                 </td>
 
@@ -145,7 +142,7 @@
                           }}</span>
                           <span class="recipes-page__ingredient-meta">
                             · {{ ingredient.cantidad }}
-                            {{ ingredient.unidad }} · {{ ingredient.tipo }}
+                            {{ ingredient.unidad | unitFormat }} · {{ ingredient.tipo }}
                           </span>
                         </div>
                       }

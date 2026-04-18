@@ -20,17 +20,17 @@ export class AlmacenService {
 
   getGlobalInventoryData():Observable<GLobalTableResponseType> {
     const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
-    return this.httpService.get<GLobalTableResponseType>(`${this._baseUrl}/databases/inventory`,{headers});
+    return this.httpService.get<GLobalTableResponseType>(`${this._baseUrl}/databases/inventario`,{headers});
   }
 
-  getGlobalStoreData(): Observable<GLobalTableResponseType> {
-    const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
-    return this.httpService.get<GLobalTableResponseType>(`${this._baseUrl}/databases/store`,{headers});
-  }
+  // getGlobalStoreData(): Observable<GLobalTableResponseType> {
+  //   const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
+  //   return this.httpService.get<GLobalTableResponseType>(`${this._baseUrl}/databases/store`,{headers});
+  // }
 
   getGLobalRecipesData() {}
   
-
+  // TODO: implementar esta función en el backend y luego en el servicio
   addNewInventory(data: Inventory): Observable<AddNewInventoryResponseType> {
     const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
     return this.httpService.post<AddNewInventoryResponseType>(`${this._baseUrl}/databases/add-product-inventory`, data, {headers});

@@ -9,6 +9,7 @@ import { StockResponse } from "../../../../../../types/stock.types";
 import { MenuService } from "../../../../../services/menu.service";
 import { MenuProduct, MenuResponse, MenuViewState } from "../../../../../../types/menu.types";
 import { LoaderComponent } from "../../../../../shared/loader/loader.component";
+import { LucideAngularModule, Plus, Minus, ShoppingCart, Home } from "lucide-angular";
 
 const INITIAL_MENU_STATE: MenuViewState = {
   loading: true,
@@ -19,12 +20,18 @@ const INITIAL_MENU_STATE: MenuViewState = {
 
 @Component({
   selector: "app-public-menu-page",
-  imports: [RouterLink, CurrencyPipe, ButtonModule, LoaderComponent],
+  imports: [RouterLink, CurrencyPipe, ButtonModule, LoaderComponent, LucideAngularModule],
   templateUrl: "./public-menu-page.component.html",
 })
 export class PublicMenuPageComponent {
   // inyectamos el servicio
   private stockService = inject(MenuService);
+
+  // iconos lucide
+  readonly Plus = Plus;
+  readonly Minus = Minus;
+  readonly ShoppingCart = ShoppingCart;
+  readonly Home = Home;
 
   // creamos una señal para almacenar los datos del stock
   stockData = toSignal(

@@ -11,9 +11,9 @@
   </div>
   <button class="top-bar-card-g__button" [routerLink]="['/private/gastos']">Ver Todas</button>
 </div>
-<div class="flex flex-col gap-2">
+<div class="flex flex-col gap-4 sm:gap-5">
   @for (item of gastos(); track item.periodo) {
-    <div class="flex items-center justify-between rounded-md border border-slate-700/40 bg-slate-800/30 px-3 py-2">
+    <div class="flex items-center justify-between rounded-md border border-slate-700/40 bg-slate-800/30 px-3 py-3">
       <p class="text-sm font-medium">{{ item.periodo }}</p>
       <div class="text-right leading-tight">
         <p class="text-lg font-bold text-rose-400">{{ item.totalDinero }} €</p>
