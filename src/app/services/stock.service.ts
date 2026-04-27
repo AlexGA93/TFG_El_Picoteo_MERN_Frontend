@@ -16,6 +16,8 @@ export class StockService {
     getStockData(): Observable<StockResponse> {
         const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
 
-        return this.http.get<StockResponse>(`${this._baseUrl}/databases/stock`, {headers}).pipe(shareReplay(1));
+        const result =  this.http.get<StockResponse>(`${this._baseUrl}/databases/stock`, {headers}).pipe(shareReplay(1));
+
+        return result;
     }
 }

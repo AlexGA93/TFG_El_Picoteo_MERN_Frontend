@@ -1,58 +1,121 @@
-<section class="min-h-screen px-4 py-8 md:px-8 animate__animated animate__fadeIn">
-    <div class="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-black/30 p-4 shadow-2xl backdrop-blur-md md:p-6">
-        <div class="grid gap-6 lg:grid-cols-[1.7fr_1fr]">
-        <div class="rounded-3xl border border-white/10 bg-black/25 p-6 text-white backdrop-blur-sm">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <p class="text-sm uppercase tracking-[0.35em] text-green-300">Carrito</p>
-                    <h1 class="mt-2 text-4xl font-bold">Tu pedido</h1>
-                </div>
+<section
+  class="min-h-screen px-4 py-8 md:px-8 animate__animated animate__fadeIn"
+>
+  <div
+    class="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-black/30 p-4 shadow-2xl backdrop-blur-md md:p-6"
+  >
+    <div class="grid gap-6 lg:grid-cols-[1.7fr_1fr]">
+      <div
+        class="rounded-3xl border border-white/10 bg-black/25 p-6 text-white backdrop-blur-sm"
+      >
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p class="text-sm uppercase tracking-[0.35em] text-green-300">
+              Carrito
+            </p>
+            <h1 class="mt-2 text-4xl font-bold">Tu pedido</h1>
+          </div>
 
-                <p-button routerLink="/public/menu" label="Seguir pidiendo" severity="secondary" />
-            </div>
-
-            <div class="mt-8 flex flex-col gap-4">
-                <article
-                    *ngFor="let item of items"
-                    class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/10 p-4"
-                >
-                    <div>
-                        <h2 class="text-xl font-medium">{{ item.name }}</h2>
-                        <p class="text-sm text-white/70">Cantidad: {{ item.quantity }}</p>
-                    </div>
-
-                    <span class="text-lg font-semibold text-green-300">
-                        {{ item.quantity * item.price | currency:'EUR' }}
-                    </span>
-                </article>
-            </div>
+          <p-button
+            routerLink="/public/menu"
+            label="Seguir pidiendo"
+            severity="secondary"
+          />
         </div>
 
-        <aside class="rounded-3xl border border-white/10 bg-white/12 p-6 text-white shadow-lg backdrop-blur-sm">
-            <h2 class="text-2xl font-semibold">Resumen</h2>
+        <div class="mt-8 flex flex-col gap-4">
+          <article
+            *ngIf="!cartItems().length"
+            class="rounded-2xl border border-dashed border-white/10 bg-white/5 p-6 text-center text-white/70"
+          >
+            Tu carrito esta vacio. Anade algunos productos desde el menu para
+            continuar con tu pedido.
+          </article>
 
-            <div class="mt-6 flex flex-col gap-3 text-lg">
-                <div class="flex items-center justify-between">
-                    <span>Subtotal</span>
-                    <span>{{ subtotal | currency:'EUR' }}</span>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <span>Gastos de gestion</span>
-                    <span>{{ 1.5 | currency:'EUR' }}</span>
-                </div>
-
-                <div class="flex items-center justify-between border-t border-white/10 pt-4 text-xl font-semibold">
-                    <span>Total</span>
-                    <span class="text-green-300">{{ subtotal + 1.5 | currency:'EUR' }}</span>
-                </div>
+          <article
+            *ngFor="let item of cartItems()"
+            class="flex h-[7.5rem] items-stretch justify-between gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4"
+          >
+            <div class="flex min-w-0 flex-1 flex-col justify-between">
+              <h2 class="truncate text-xl font-medium leading-7">
+                {{ item.nombre_producto }}
+              </h2>
+              <p class="text-sm text-white/70">
+                Cantidad: {{ item.cantidad || 0 }}
+              </p>
             </div>
 
-            <div class="mt-8 flex flex-col gap-3">
-                <p-button label="Continuar pedido" styleClass="btn-green btn-green-dimensions w-full" />
-                <p-button routerLink="/public/welcome" label="Volver al inicio" severity="secondary" />
+            <div class="flex min-w-[7.5rem] flex-col items-end justify-between gap-3">
+              <span class="text-right text-lg font-semibold text-green-300">
+                {{
+                  (item.cantidad || 0) * item.precio_producto | currency: "EUR"
+                }}
+              </span>
+
+              <p-button
+                icon="pi pi-trash"
+                severity="danger"
+                [text]="true"
+                (onClick)="removeItem(item.id!)"
+              />
             </div>
-        </aside>
+          </article>
         </div>
+      </div>
+
+      <aside
+        class="rounded-3xl border border-white/10 bg-white/12 p-6 text-white shadow-lg backdrop-blur-sm"
+      >
+        <h2 class="text-2xl font-semibold">Resumen</h2>
+
+        <div class="mt-6 flex flex-col gap-3 text-lg">
+          <div class="flex items-center justify-between">
+            <span>Subtotal</span>
+            <span>{{ subtotal() | currency: "EUR" }}</span>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <span>Gastos de gestion</span>
+            <span>{{ managementFee() | currency: "EUR" }}</span>
+          </div>
+
+          <div
+            class="flex items-center justify-between border-t border-white/10 pt-4 text-xl font-semibold"
+          >
+            <span>Total</span>
+            <span class="text-green-300">{{ total() | currency: "EUR" }}</span>
+          </div>
+        </div>
+        <div class="flex flex-row mx-0 my-2 p-0 justify-between">
+            <label for="takeaway" class="takeaway">Para comer en Mesa</label>
+        <p-checkbox id="takeaway" [(ngModel)]="checked" [binary]="true" />
+        </div>
+
+        @if (checked()) {
+          <p-select
+            [options]="cytoscapeTables()"
+            [ngModel]="selectedTable()"
+            (ngModelChange)="selectedTable.set($event)"
+            optionLabel="name"
+            placeholder="Seleccione una mesa"
+            class="w-full md:w-56 my-3"
+          />
+        }        
+
+        <div class="mt-8 flex flex-col gap-3">
+          <p-button
+            label="Continuar pedido"
+            styleClass="btn-green btn-green-dimensions w-full"
+            [disabled]="!cartItems().length"
+            (onClick)="continueWithOrder()"
+          />
+          <p-button
+            routerLink="/public/welcome"
+            label="Volver al inicio"
+            severity="secondary"
+          />
+        </div>
+      </aside>
     </div>
+  </div>
 </section>

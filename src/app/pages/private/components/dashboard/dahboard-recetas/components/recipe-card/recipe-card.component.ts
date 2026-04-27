@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DashboardRecipe } from '../../../../../../../../types/database.types';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Clock, DollarSign, Star } from 'lucide-angular';
+import { UnitFormatPipe } from '@pipes/unit-format.pipe';
 
 @Component({
   selector: 'recipe-card',

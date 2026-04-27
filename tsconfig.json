@@ -18,7 +18,9 @@
       // rutas store-front
       // "@store-front/*":["./src/app/store-front/*"],
       // utils
-      "@utils/*": ["./src/app/utils/*"]
+      "@utils/*": ["./src/app/utils/*"],
+      // pipes
+      "@pipes/*": ["./src/app/pipes/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

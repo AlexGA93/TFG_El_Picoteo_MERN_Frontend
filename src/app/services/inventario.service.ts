@@ -16,6 +16,6 @@ export class InventoryService {
     getInventariokData(): Observable<InventoryResponse> {
         const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
 
-        return this.http.get<InventoryResponse>(`${this._baseUrl}/databases/inventario`, {headers}).pipe(shareReplay(1));
+        return this.http.get<InventoryResponse>(`${this._baseUrl}/databases/inventory`, {headers}).pipe(shareReplay(1));
     }
 }

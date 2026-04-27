@@ -38,17 +38,20 @@
     <label for="sp" class="ml-2">Show Password</label>
   </p-inputgroup>
   <!-- button -->
-  <p-button
-    type="submit"
-    class="btn text-white w-full text-center py-5"
-    label="Login"
-    styleClass="btn-green"
-  >
+  <div class="flex flex-row justify-between items-center w-full">
+    <p-button
+      type="submit"
+      class="btn text-white w-full text-center py-5"
+      label="Login"
+      styleClass="btn-green"
+    >
+    </p-button>
     @if (isPosting()) {
-      <shared-loader />
+      <div class="m-0 p-0">
+        <shared-loader />
+      </div>
     }
-  </p-button>
-  
+  </div>
 </form>
 <div class="w-full max-w-xs">
   <p-button

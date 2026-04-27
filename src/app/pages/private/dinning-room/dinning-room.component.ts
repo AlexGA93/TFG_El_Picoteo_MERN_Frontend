@@ -19,6 +19,7 @@ import {
 import { DinningRoomStateService } from "../../../services/dinning-room-state.service";
 import { DinningRoomSelectedNode } from "../../../../types/dinning-room.types";
 import { DinnerRoomModal } from "../components/dinning-room/dinner-room-modal/dinner-room-modal.component";
+import { MenuService } from "../../../services/menu.service";
 
 
 @Component({
@@ -31,6 +32,9 @@ import { DinnerRoomModal } from "../components/dinning-room/dinner-room-modal/di
 export class DinningRoom implements AfterViewInit, OnDestroy {
   @ViewChild("cyContainer", { static: false })
   cyContainer!: ElementRef<HTMLDivElement>;
+
+  // inyectamos el servicio de estado de cart para actualizar el grafo con los cambios de comanda asociados a la mesa y silla pertinente
+  private menuService = inject(MenuService);
 
   private dinningRoomStateService = inject(DinningRoomStateService);
   private cy?: Core;

@@ -14,8 +14,44 @@
 
   
 
-  <div class="action-buttons flex gap-2">
-    <p-button type="button" (click)="navigateToDR()" [label]="currentSection()" severity="info" />
-    <p-button type="button" (click)="logOut()" label="Log out" severity="danger" />
+  <div class="action-buttons flex gap-2 items-center">
+    <p-button 
+      type="button" 
+      (click)="navigateToMenu()" 
+      [pTooltip]="'Menú'" 
+      tooltipPosition="bottom"
+      severity="info" 
+      [rounded]="true"
+      [text]="true"
+      class="p-2"
+    >
+      <lucide-icon [img]="UtensilsCrossed" class="w-5 h-5"></lucide-icon>
+    </p-button>
+    
+    <p-button 
+      type="button" 
+      (click)="navigateToDR()" 
+      [pTooltip]="currentSection() | titlecase" 
+      tooltipPosition="bottom"
+      severity="info" 
+      [rounded]="true"
+      [text]="true"
+      class="p-2"
+    >
+      <lucide-icon [img]="LayoutDashboard" class="w-5 h-5"></lucide-icon>
+    </p-button>
+    
+    <p-button 
+      type="button" 
+      (click)="logOut()" 
+      pTooltip="Cerrar sesión" 
+      tooltipPosition="bottom"
+      severity="danger" 
+      [rounded]="true"
+      [text]="true"
+      class="p-2"
+    >
+      <lucide-icon [img]="LogOut" class="w-5 h-5"></lucide-icon>
+    </p-button>
   </div>
 </nav>
