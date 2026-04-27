@@ -34,17 +34,19 @@
 
           <article
             *ngFor="let item of cartItems()"
-            class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/10 p-4"
+            class="flex h-[7.5rem] items-stretch justify-between gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/10 p-4"
           >
-            <div>
-              <h2 class="text-xl font-medium">{{ item.nombre_producto }}</h2>
+            <div class="flex min-w-0 flex-1 flex-col justify-between">
+              <h2 class="truncate text-xl font-medium leading-7">
+                {{ item.nombre_producto }}
+              </h2>
               <p class="text-sm text-white/70">
                 Cantidad: {{ item.cantidad || 0 }}
               </p>
             </div>
 
-            <div class="flex items-center gap-4">
-              <span class="text-lg font-semibold text-green-300">
+            <div class="flex min-w-[7.5rem] flex-col items-end justify-between gap-3">
+              <span class="text-right text-lg font-semibold text-green-300">
                 {{
                   (item.cantidad || 0) * item.precio_producto | currency: "EUR"
                 }}

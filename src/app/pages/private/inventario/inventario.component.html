@@ -1,4 +1,9 @@
 <section class="recipes-page space-y-6">
+  <inventory-create-modal 
+    [visible]="isCreateInventoryDialogVisible()"
+    (close)="closeCreateRecipeDialog()"
+    (save)="onInventoryCreated($event)"
+  />
   <div
     class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between"
   >
@@ -23,7 +28,7 @@
       }
     </div>
 
-    <button type="button" class="p-ripple p-button p-component p-button-success">
+    <button type="button" class="p-ripple p-button p-component p-button-success" (click)="createRecipe()">
       <lucide-icon [img]="Plus" class="mr-2 h-4 w-4"></lucide-icon>
       Nuevo
     </button>

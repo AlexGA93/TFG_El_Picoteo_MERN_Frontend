@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
@@ -10,6 +10,7 @@ import { InventoryService } from '../../../services/inventario.service';
 import { LoaderComponent } from '../../../shared/loader/loader.component';
 import { UnitFormatPipe } from '@pipes/unit-format.pipe';
 import { DateFormatPipe } from '@pipes/date-format.pipe';
+import { InventoryCreateModal } from '../components/inventory/inventory-create-modal/inventory-create-modal.component';
 
 const INITIAL_INVENTORY_STATE: InventoryViewState = {
   loading: true,
@@ -20,7 +21,7 @@ const INITIAL_INVENTORY_STATE: InventoryViewState = {
 
 @Component({
   selector: 'app-inventario',
-  imports: [CommonModule, CurrencyPipe, RouterLink, LucideAngularModule, LoaderComponent, UnitFormatPipe, DateFormatPipe],
+  imports: [CommonModule, CurrencyPipe, RouterLink, LucideAngularModule, LoaderComponent, UnitFormatPipe, DateFormatPipe, InventoryCreateModal],
   templateUrl: './inventario.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -67,4 +68,49 @@ export class InventarioComponent {
   inventoryMessage = computed(() => this.inventoryState().message);
   inventoryError = computed(() => this.inventoryState().error);
   isLoading = computed(() => this.inventoryState().loading);
+
+  isCreateInventoryDialogVisible = signal(false);
+
+   /**
+   * @description Función para crear una nueva receta
+   * @params none
+   * @returns void
+   */
+  createRecipe() {
+    this.isCreateInventoryDialogVisible.set(true);
+  }
+
+  closeCreateRecipeDialog(): void {
+    this.isCreateInventoryDialogVisible.set(false);
+  }
+
+    onInventoryCreated(formData: FormData): void {
+      console.log("datos del modal ", {formData});
+      
+      // const nombre = String(formData.get("nombre") ?? "");
+      // const precio = Number(formData.get("precio") ?? 0);
+      // const tiempoProduccion = Number(formData.get("tiempo_produccion_min") ?? 0);
+      // const dificultad = String(formData.get("dificultad") ?? "");
+  
+      // const recipeToInsert: RecipesData = {
+      //   id: Date.now(),
+      //   nombre,
+      //   precio,
+      //   tiempo_produccion_min: tiempoProduccion,
+      //   dificultad,
+      //   ingredients: [],
+      // };
+  
+      // this.recipesState.update((state) => ({
+      //   ...state,
+      //   data: [recipeToInsert, ...(state.data ?? [])],
+      // }));
+  
+      // this.closeCreateRecipeDialog();
+  
+      // Cuando tengas el endpoint de creacion, aqui puedes hacer el POST
+      // y despues volver a ejecutar this.loadRecipes() para sincronizar con backend.
+    }
+
+    
 }
