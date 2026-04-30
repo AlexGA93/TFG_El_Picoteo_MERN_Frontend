@@ -20,11 +20,12 @@ import { DinningRoomStateService } from "../../../services/dinning-room-state.se
 import { DinningRoomSelectedNode } from "../../../../types/dinning-room.types";
 import { DinnerRoomModal } from "../components/dinning-room/dinner-room-modal/dinner-room-modal.component";
 import { MenuService } from "../../../services/menu.service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 
 @Component({
   selector: "app-dinning-room",
-  imports: [DinningRoomMenu, DinnerRoomModal],
+  imports: [DinningRoomMenu, DinnerRoomModal, TranslatePipe],
   templateUrl: "./dinning-room.component.html",
   styleUrl: "./dinning-room.component.scss",
   changeDetection: ChangeDetectionStrategy.OnPush,

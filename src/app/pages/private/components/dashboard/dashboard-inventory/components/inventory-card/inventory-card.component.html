@@ -3,6 +3,8 @@
 >
   <table class="w-full table-fixed overflow-hidden">
     <tbody>
+
+      <!-- TIPO -->
       <tr class="border-b">
         <th class="text-left font-bold text-xl px-3 py-2 w-1/2 elipsis-text">
           {{ inventoryElement.tipo }}
@@ -15,16 +17,27 @@
           ></lucide-icon>
         </td>
       </tr>
-      <tr class="">
-        <th class="text-left font-bold text-xl px-3 py-2">Articulos</th>
-        <td class="text-right px-3 py-2">{{ inventoryElement.totalItems }}</td>
-      </tr>
+
+      <!-- ARTÍCULOS -->
       <tr>
-        <th class="text-left font-bold text-xl px-3 py-2">Precio Total</th>
+        <th class="text-left font-bold text-xl px-3 py-2">
+          {{ 'inventory.items' | translate }}
+        </th>
+        <td class="text-right px-3 py-2">
+          {{ inventoryElement.totalItems }}
+        </td>
+      </tr>
+
+      <!-- PRECIO TOTAL -->
+      <tr>
+        <th class="text-left font-bold text-xl px-3 py-2">
+          {{ 'inventory.total_price' | translate }}
+        </th>
         <td class="text-right price font-bold px-3 py-2">
           {{ inventoryElement.totalPrice }} €
         </td>
       </tr>
+
     </tbody>
   </table>
 </div>

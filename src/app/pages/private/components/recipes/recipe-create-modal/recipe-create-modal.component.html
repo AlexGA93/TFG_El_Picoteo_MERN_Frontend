@@ -1,0 +1,216 @@
+<p-dialog
+  [visible]="visible()"
+  (visibleChange)="onDialogVisibleChange($event)"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  [closable]="true"
+  [dismissableMask]="true"
+  [header]="'recipes.form.title' | translate"
+  [style]="{ width: '32rem', maxWidth: '95vw' }"
+>
+  <p-toast />
+
+  <form class="flex flex-col gap-4 pt-2" [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+
+    <!-- Nombre -->
+    <div class="flex flex-col gap-2">
+      <label for="nombre" class="text-sm font-semibold">
+        {{ 'recipes.form.name' | translate }}
+      </label>
+      <input
+        id="nombre"
+        type="text"
+        formControlName="nombre"
+        class="w-full rounded-lg border border-slate-300 px-3 py-2"
+        [placeholder]="'recipes.form.placeholders.name' | translate"
+      />
+    </div>
+
+    <!-- Precio + Tiempo -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+      <div class="flex flex-col gap-2">
+        <label for="precio" class="text-sm font-semibold">
+          {{ 'recipes.form.price' | translate }}
+        </label>
+        <input
+          id="precio"
+          type="number"
+          min="0"
+          step="0.01"
+          formControlName="precio"
+          class="w-full rounded-lg border border-slate-300 px-3 py-2"
+          [placeholder]="'recipes.form.placeholders.price' | translate"
+        />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label for="tiempo" class="text-sm font-semibold">
+          {{ 'recipes.form.time' | translate }}
+        </label>
+        <input
+          id="tiempo"
+          type="number"
+          min="1"
+          formControlName="tiempo_produccion_min"
+          class="w-full rounded-lg border border-slate-300 px-3 py-2"
+          [placeholder]="'recipes.form.placeholders.time' | translate"
+        />
+      </div>
+    </div>
+
+    <!-- Dificultad -->
+    <div class="flex flex-col gap-2">
+      <label for="dificultad" class="text-sm font-semibold">
+        {{ 'recipes.form.difficulty' | translate }}
+      </label>
+
+      <select
+        id="dificultad"
+        formControlName="dificultad"
+        class="w-full rounded-lg border border-slate-300 px-3 py-2"
+      >
+        <option value="">
+          {{ 'recipes.form.placeholders.select_option' | translate }}
+        </option>
+        <option value="facil">
+          {{ 'recipes.difficulty.facil' | translate }}
+        </option>
+        <option value="media">
+          {{ 'recipes.difficulty.media' | translate }}
+        </option>
+        <option value="dificil">
+          {{ 'recipes.difficulty.dificil' | translate }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Ingredientes -->
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-semibold">
+        {{ 'recipes.form.ingredients' | translate }}
+      </label>
+
+      <div class="max-h-44 overflow-y-auto rounded-lg border border-slate-300 px-3 py-2">
+
+        @if (ingredients().data?.length) {
+          <div class="flex flex-col gap-2">
+            @for (item of (ingredients().data ?? []); track item.id) {
+              <label class="flex items-center gap-2 text-sm cursor-pointer">
+                <input
+                  type="checkbox"
+                  class="h-4 w-4"
+                  [checked]="isIngredientSelected(item.id)"
+                  (change)="toggleIngredient(item, $any($event.target).checked)"
+                />
+                <span>
+                  {{ item.nombre }} ({{ item.n_unidades }} {{ item.unidades }})
+                </span>
+              </label>
+            }
+          </div>
+        } @else {
+          <p class="text-sm text-slate-500">
+            {{ 'recipes.form.empty.ingredients' | translate }}
+          </p>
+        }
+      </div>
+
+      @if (recipeForm.controls.ingredients.touched && recipeForm.controls.ingredients.invalid) {
+        <small class="text-red-500">
+          {{ 'recipes.form.validation.ingredients_required' | translate }}
+        </small>
+      }
+
+      @if (ingredientsArray.length) {
+        <div formArrayName="ingredients" class="space-y-2 rounded-lg border border-slate-200 p-3">
+
+          <p class="text-xs font-semibold uppercase text-slate-500">
+            {{ 'recipes.form.detail.selected_ingredients' | translate }}
+          </p>
+
+          @for (ingredientControl of ingredientsArray.controls; track ingredientControl.controls.id_inventory.value; let i = $index) {
+            <div
+              [formGroupName]="i"
+              class="grid grid-cols-1 gap-2 rounded-md border border-slate-200 p-2 sm:grid-cols-[1fr_120px_120px_auto] sm:items-end"
+            >
+
+              <div class="text-sm font-medium">
+                {{ getIngredientLabel(ingredientControl.controls.id_inventory.value) }}
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label class="text-xs text-slate-500">
+                  {{ 'recipes.form.quantity' | translate }}
+                </label>
+                <input
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                  formControlName="cantidad"
+                  class="w-full rounded-md border border-slate-300 px-2 py-1 text-sm"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1">
+                <label class="text-xs text-slate-500">
+                  {{ 'recipes.form.unit' | translate }}
+                </label>
+                <input
+                  type="text"
+                  formControlName="unidad"
+                  class="w-full rounded-md border border-slate-300 px-2 py-1 text-sm"
+                />
+              </div>
+
+              <button
+                type="button"
+                class="p-ripple p-button p-component p-button-danger p-button-sm"
+                (click)="removeIngredientAt(i)"
+              >
+                X
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <!-- Imagen -->
+    <div class="flex flex-col gap-2">
+      <label for="imagen" class="text-sm font-semibold">
+        {{ 'recipes.form.image' | translate }}
+      </label>
+
+      <input
+        #fileInput
+        id="imagen"
+        type="file"
+        class="w-full rounded-lg border border-slate-300 px-3 py-2"
+        (change)="onFileChange($event)"
+        accept="image/png,image/jpeg,image/webp"
+      />
+    </div>
+
+    <!-- Botones -->
+    <div class="flex justify-end gap-3 pt-2">
+      <button
+        type="button"
+        class="p-ripple p-button p-component"
+        (click)="onClose()"
+      >
+        {{ 'common.cancel' | translate }}
+      </button>
+
+      <button
+        type="submit"
+        class="p-ripple p-button p-component p-button-success"
+      >
+        {{ 'recipes.form.buttons.save' | translate }}
+      </button>
+    </div>
+  </form>
+
+  <pre>{{ recipeForm.value | json }}</pre>
+</p-dialog>

@@ -6,11 +6,13 @@
   [resizable]="false"
   [closable]="true"
   [dismissableMask]="true"
-  [header]="'inventory.modal.title' | translate"
+  [header]="'inventory.modal.edit_title' | translate"
   [style]="{ width: '32rem', maxWidth: '95vw' }"
 >
 
   <p-toast />
+
+  <pre>{{ inventoryItem() }}</pre>
 
   <form
     class="flex flex-col gap-4 pt-2"
@@ -51,9 +53,24 @@
       </select>
     </div>
 
-    <!-- UNIDADES -->
+    <!-- CANTIDAD -->
     <div class="flex flex-col gap-2">
-      <label for="unidades" class="text-sm font-semibold">
+      <label for="cantidad" class="text-sm font-semibold">
+        {{ 'inventory.form.quantity' | translate }}
+      </label>
+
+      <input
+        id="cantidad"
+        type="number"
+        formControlName="n_unidades"
+        class="w-full rounded-lg border border-slate-300 px-3 py-2"
+        [placeholder]="'inventory.form.quantity_placeholder' | translate"
+      />
+    </div>
+
+    <!-- UNIDAD -->
+    <div class="flex flex-col gap-2">
+      <label for="unidad" class="text-sm font-semibold">
         {{ 'inventory.form.units' | translate }}
       </label>
 
@@ -67,21 +84,6 @@
           </option>
         }
       </select>
-    </div>
-
-    <!-- CANTIDAD -->
-    <div class="flex flex-col gap-2">
-      <label for="n_unidades" class="text-sm font-semibold">
-        {{ 'inventory.form.quantity' | translate }}
-      </label>
-
-      <input
-        id="n_unidades"
-        type="number"
-        formControlName="n_unidades"
-        class="w-full rounded-lg border border-slate-300 px-3 py-2"
-        [placeholder]="'inventory.form.quantity_placeholder' | translate"
-      />
     </div>
 
     <!-- PROVEEDOR -->
@@ -101,12 +103,12 @@
 
     <!-- PRECIO -->
     <div class="flex flex-col gap-2">
-      <label for="precio_unidad" class="text-sm font-semibold">
+      <label for="precio" class="text-sm font-semibold">
         {{ 'inventory.form.unit_price' | translate }}
       </label>
 
       <input
-        id="precio_unidad"
+        id="precio"
         type="number"
         formControlName="precio_unidad"
         class="w-full rounded-lg border border-slate-300 px-3 py-2"
@@ -129,11 +131,17 @@
         type="submit"
         class="p-ripple p-button p-component p-button-info"
       >
-        {{ 'inventory.form.save' | translate }}
+        {{ 'inventory.form.save_edit' | translate }}
       </button>
 
     </div>
 
   </form>
+
+  <pre>{{ inventoryForm.value | json }}</pre>
+  <pre>{{ inventoryForm.valid | json }}</pre>
+  <pre>{{ inventoryForm.pristine | json }}</pre>
+  <pre>{{ inventoryForm.touched | json }}</pre>
+  <pre>{{ inventoryForm.errors | json }}</pre>
 
 </p-dialog>

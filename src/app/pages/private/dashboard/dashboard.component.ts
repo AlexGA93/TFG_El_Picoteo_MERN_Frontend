@@ -3,11 +3,10 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 import { CommonModule } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { DashboardRecetas } from "../components/dashboard/dahboard-recetas/dahboard-recetas.component";
 import { DashboardStock } from "../components/dashboard/dashboard-stock/dashboard-stock.component";
 import { DashboardInventory } from "../components/dashboard/dashboard-inventory/dashboard-inventory.component";
-import { DashboardVentas } from "../components/dashboard/dashboard-ventas/dashboard-ventas.component";
-import { DashboardGastos } from "../components/dashboard/dashboard-gastos/dashboard-gastos.component";
+import { DashboardSales } from "../components/dashboard/dashboard-sales/dashboard-sales.component";
+import { DashboardExpenses } from "../components/dashboard/dashboard-expenses/dashboard-expenses.component";
 import { DashboardService } from "../../../services/dashboard.service";
 import { LucideAngularModule } from "lucide-angular";
 import { LoaderComponent } from "../../../shared/loader/loader.component";
@@ -16,6 +15,8 @@ import { DashboardData } from "../../../../types/database.types";
 
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
+import { DashboardRecipes } from "../components/dashboard/dahboard-recipes/dahboard-recipes.component";
+import { TranslatePipe } from "@ngx-translate/core";
 
 interface DashboardViewState {
   loading: boolean;
@@ -34,14 +35,15 @@ const INITIAL_DASHBOARD_STATE: DashboardViewState = {
   selector: "app-dashboard",
   imports: [
     CommonModule,
-    DashboardRecetas,
     DashboardStock,
     DashboardInventory,
-    DashboardVentas,
-    DashboardGastos,
+    DashboardSales,
     LucideAngularModule,
     LoaderComponent,
     ToastModule,
+    DashboardRecipes,
+    DashboardExpenses,
+    TranslatePipe
   ],
   providers: [MessageService],
   templateUrl: "./dashboard.component.html",

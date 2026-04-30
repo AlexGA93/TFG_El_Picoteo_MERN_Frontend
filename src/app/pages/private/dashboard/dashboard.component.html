@@ -1,6 +1,5 @@
 <article class="dashboard-parent">
   <p-toast />
-
   @if (dashboardError()) {
     <section class="flex rounded-xl min-h-[60vh] items-center justify-center">
       <p class="text-red-600 font-medium">{{ dashboardError() }}</p>
@@ -13,7 +12,7 @@
     <section class="dashboard-grid animate__animated animate__fadeIn">
       <!-- seccion recetas -->
       <div class="dashboard-div1">
-        <dashboard-recetas [recipes]="dashboardRecipesData()" />
+        <dashboard-recipes [recipes]="dashboardRecipesData()" />
       </div>
 
       <!-- seccion stock -->
@@ -28,12 +27,12 @@
 
       <!-- seccion ventas -->
       <div class="dashboard-div4">
-        <dashboard-ventas [ventas]="dashboardVentasData()" />
+        <dashboard-sales [ventas]="dashboardVentasData()" />
       </div>
 
       <!-- seccion gastos -->
       <div class="dashboard-div5">
-        <dashboard-gastos [gastos]="dashboardGastosData()" />
+        <dashboard-expenses [gastos]="dashboardGastosData()" />
       </div>
     </section>
   }

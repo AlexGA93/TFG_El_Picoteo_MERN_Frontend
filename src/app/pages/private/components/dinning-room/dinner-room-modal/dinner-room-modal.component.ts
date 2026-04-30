@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { DinningRoomSelectedNode } from '../../../../../../types/dinning-room.types';
 import { DialogModule } from "primeng/dialog";
+import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'dinner-room-modal',
-  imports: [DialogModule],
+  imports: [DialogModule, TranslatePipe],
   templateUrl: './dinner-room-modal.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

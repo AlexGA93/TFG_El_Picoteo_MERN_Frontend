@@ -9,52 +9,85 @@
   styleClass="dinning-room-dialog"
   maskStyleClass="dinning-room-dialog-mask"
 >
+
   @if (selectedNode(); as node) {
+
     <ng-template pTemplate="header">
+
       <div class="dinning-room-dialog__header">
+
         <div class="dinning-room-dialog__badge">
           {{ node.type }}
         </div>
-        <span class="dinning-room-dialog__title">{{ node.label }}</span>
+
+        <span class="dinning-room-dialog__title">
+          {{ node.label }}
+        </span>
+
       </div>
+
     </ng-template>
 
     <div class="dinning-room-dialog__content">
+
+      <!-- ID -->
       <div class="dinning-room-dialog__card dinning-room-dialog__card--highlight">
-        <p class="dinning-room-dialog__label">Identificador</p>
-        <p class="dinning-room-dialog__value">{{ node.id }}</p>
+        <p class="dinning-room-dialog__label">
+          {{ 'dinning_room.modal.id' | translate }}
+        </p>
+        <p class="dinning-room-dialog__value">
+          {{ node.id }}
+        </p>
       </div>
 
+      <!-- TYPE -->
       <div class="dinning-room-dialog__card dinning-room-dialog__card--default">
-        <p class="dinning-room-dialog__label">Tipo de nodo</p>
-        <p class="dinning-room-dialog__value dinning-room-dialog__value--capitalize">{{ node.type }}</p>
+        <p class="dinning-room-dialog__label">
+          {{ 'dinning_room.modal.type' | translate }}
+        </p>
+        <p class="dinning-room-dialog__value dinning-room-dialog__value--capitalize">
+          {{ node.type }}
+        </p>
       </div>
 
+      <!-- TABLE -->
       @if (node.parentTable) {
         <div class="dinning-room-dialog__card dinning-room-dialog__card--default">
-          <p class="dinning-room-dialog__label">Mesa asociada</p>
-          <p class="dinning-room-dialog__value">{{ node.parentTable }}</p>
+          <p class="dinning-room-dialog__label">
+            {{ 'dinning_room.modal.table' | translate }}
+          </p>
+          <p class="dinning-room-dialog__value">
+            {{ node.parentTable }}
+          </p>
         </div>
       }
+
     </div>
 
     <ng-template pTemplate="footer">
+
       <div class="dinning-room-dialog__footer">
+
         <button
           type="button"
           class="dinning-room-dialog__button dinning-room-dialog__button--primary"
           (click)="close.emit()"
         >
-          Cerrar
+          {{ 'common.close' | translate }}
         </button>
+
         <button
           type="button"
           class="dinning-room-dialog__button dinning-room-dialog__button--danger"
           (click)="delete.emit()"
         >
-          Eliminar
+          {{ 'common.delete' | translate }}
         </button>
+
       </div>
+
     </ng-template>
+
   }
+
 </p-dialog>

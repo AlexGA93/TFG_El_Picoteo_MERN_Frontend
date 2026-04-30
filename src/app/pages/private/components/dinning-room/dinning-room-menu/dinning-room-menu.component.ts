@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, input, output, sign
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { TranslatePipe } from '@ngx-translate/core';
 
 export type DinningRoomNodeType = 'mesa' | 'silla';
 
@@ -19,7 +20,7 @@ export interface DinningRoomMenuFormValue {
 
 @Component({
   selector: 'dinning-room-menu',
-  imports: [ReactiveFormsModule, ToastModule],
+  imports: [ReactiveFormsModule, ToastModule, TranslatePipe],
   providers: [MessageService],
   templateUrl: './dinning-room-menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

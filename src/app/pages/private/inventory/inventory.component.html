@@ -1,0 +1,193 @@
+<section class="recipes-page space-y-6">
+
+  <inventory-create-modal
+    [visible]="isCreateInventoryDialogVisible()"
+    (close)="closeCreateRecipeDialog()"
+    (save)="onInventoryCreated($event)"
+  />
+
+  <inventory-edit-modal
+    [visible]="isEditItemDialogVisible()"
+    [inventoryItem]="selectedInventoryItem()"
+    (close)="closeEditItemDialog()"
+    (save)="onItemUpdated()"
+  />
+
+  <p-toast />
+
+  <!-- HEADER -->
+  <div class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between">
+
+    <div>
+
+      <a
+        class="recipes-page__back-link inline-flex items-center gap-2 text-sm font-medium mb-3"
+        [routerLink]="['/private/dashboard']"
+      >
+        <lucide-icon [img]="ArrowBigLeftDash" />
+        {{ 'common.back_to_dashboard' | translate }}
+      </a>
+
+      <h1 class="recipes-page__title text-2xl font-bold">
+        {{ 'inventory.title' | translate }}
+      </h1>
+
+      <p class="recipes-page__subtitle text-sm">
+        {{ 'inventory.subtitle' | translate }}
+      </p>
+
+      @if (inventoryList().length) {
+        <span
+          class="recipes-page__badge inline-flex w-fit items-center rounded-full px-3 py-1 text-sm font-medium my-3"
+        >
+          {{ 'inventory.items_count' | translate:{ count: inventoryList().length } }}
+        </span>
+      }
+
+    </div>
+
+    <button
+      type="button"
+      class="p-ripple p-button p-component p-button-success"
+      (click)="createRecipe()"
+    >
+      <lucide-icon [img]="Plus" class="mr-2 h-4 w-4"></lucide-icon>
+      {{ 'inventory.new' | translate }}
+    </button>
+
+  </div>
+
+  <!-- STATES -->
+
+  @if (isLoading()) {
+
+    <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm p-5">
+      <shared-loader />
+    </div>
+
+  } @else if (inventoryError()) {
+
+    <div class="recipes-page__state recipes-page__state--error rounded-2xl px-6 py-4 text-sm shadow-sm">
+      {{ inventoryError() }}
+    </div>
+
+  } @else if (!inventoryList().length) {
+
+    <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm">
+      {{ 'inventory.empty' | translate }}
+    </div>
+
+  } @else {
+
+    <!-- TABLE -->
+    <div class="recipes-page__panel overflow-hidden rounded-2xl">
+      <div class="overflow-x-auto">
+
+        <table class="min-w-full divide-y divide-slate-200">
+
+          <thead class="recipes-page__table-head">
+            <tr>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.name' | translate }}
+              </th>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.type' | translate }}
+              </th>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.units' | translate }}
+              </th>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.supplier' | translate }}
+              </th>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.price' | translate }}
+              </th>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.date' | translate }}
+              </th>
+
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">
+                {{ 'inventory.table.actions' | translate }}
+              </th>
+
+            </tr>
+          </thead>
+
+          <tbody class="divide-y divide-slate-100">
+
+            @for (item of inventoryList(); track item.id ?? $index) {
+
+              <tr class="recipes-page__row">
+
+                <td class="px-4 py-4 text-center align-middle">
+                  <p class="recipes-page__name font-semibold">
+                    {{ item.nombre }}
+                  </p>
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">
+                  {{ item.tipo }}
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">
+                  {{ item.n_unidades }} {{ item.unidades | unitFormat }}
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">
+                  {{ item.proveedor }}
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">
+                  {{ item.precio_unidad | currency:'EUR':'symbol':'1.2-2':'es-ES' }}
+                </td>
+
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">
+                  {{ item.fecha_registro | dateFormat:'long' }}
+                </td>
+
+                <td class="px-4 py-4 text-center">
+
+                  <div class="flex min-w-[160px] flex-col items-center justify-center gap-2 sm:flex-row">
+
+                    <button
+                      type="button"
+                      class="p-ripple p-button p-component p-button-info"
+                      (click)="editItem(item)"
+                    >
+                      <lucide-icon [img]="PencilLine" class="mr-2 h-4 w-4"></lucide-icon>
+                      {{ 'inventory.actions.edit' | translate }}
+                    </button>
+
+                    <button
+                      type="button"
+                      class="p-ripple p-button p-component p-button-danger"
+                      (click)="deleteItem(item.id)"
+                    >
+                      <lucide-icon [img]="Eraser" class="mr-2 h-4 w-4"></lucide-icon>
+                      {{ 'inventory.actions.delete' | translate }}
+                    </button>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+    </div>
+
+  }
+
+</section>

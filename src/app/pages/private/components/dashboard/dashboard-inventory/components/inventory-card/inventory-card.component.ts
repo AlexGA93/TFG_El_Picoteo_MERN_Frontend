@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, Input } from '@angular/co
 import { DashboardInventory } from '../../../../../../../../types/database.types';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Wheat, Fish, Beef, Milk, Salad, Info, Apple, Popcorn, Amphora, GlassWater} from 'lucide-angular';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'inventory-card',
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, TranslatePipe],
   templateUrl: "./inventory-card.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
