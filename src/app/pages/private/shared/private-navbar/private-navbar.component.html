@@ -15,6 +15,18 @@
   
 
   <div class="action-buttons flex gap-2 items-center">
+    <p-button
+    type="button" 
+      (click)="changeLanguage()" 
+      pTooltip="cambiar idioma" 
+      tooltipPosition="bottom"
+      severity="info" 
+      [rounded]="true"
+      [text]="true"
+      class="p-2"
+    >
+      <lucide-icon [img]="Languages" class="w-5 h-5"></lucide-icon>
+    </p-button>
     <p-button 
       type="button" 
       (click)="navigateToMenu()" 

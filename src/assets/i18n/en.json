@@ -1,5 +1,199 @@
 {
-    "HELLO": "Hello",
-    "WELCOME": "Welcome {{name}}"
+  "common": {
+    "view_all": "View all",
+    "loading": "Loading...",
+    "error": "An error has occurred",
+    "close": "Close",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "new": "New",
+    "back_to_dashboard": "Back to dashboard"
+  },
+
+  "navbar": {
+    "logout": "Log out",
+    "dashboard": "Dashboard"
+  },
+
+  "dashboard": {
+    "title": "Dashboard",
+    "loading": "Loading dashboard data...",
+    "error": {
+      "default": "An error occurred while loading the dashboard"
+    },
+    "sections": {
+      "recipes": "Recipes",
+      "stock": "Stock",
+      "inventory": "Inventory",
+      "sales": "Sales",
+      "expenses": "Expenses"
+    }
+  },
+
+  "recipes": {
+    "title": "Recipes",
+    "view_all": "View all",
+    "subtitle": "View all recipes and manage their actions from a single table.",
+    "empty": "No recipes available.",
+    "count": "{{count}} recipes",
+    "new": "New",
+    "min": "min",
+
+    "table": {
+      "image": "Image",
+      "name": "Name",
+      "price": "Price",
+      "time": "Time",
+      "difficulty": "Difficulty",
+      "ingredients": "Ingredients",
+      "actions": "Actions"
+    },
+
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+
+    "card": {
+      "time": "Time",
+      "cost": "Cost",
+      "difficulty": "Difficulty"
+    },
+
+    "difficulty": {
+      "facil": "Easy",
+      "media": "Medium",
+      "dificil": "Hard"
+    },
+
+    "form": {
+      "title": "New recipe",
+      "edit_title": "Edit recipe",
+
+      "name": "Name",
+      "price": "Price",
+      "time": "Cooking time",
+      "difficulty": "Difficulty",
+      "ingredients": "Ingredients",
+      "image": "Image",
+      "quantity":"Quantity",
+      "unit":"Units",
+
+      "placeholders": {
+        "name": "e.g. Ham croquette",
+        "price": "0.00",
+        "time": "Minutes",
+        "select_option": "Select an option"
+      },
+
+      "buttons": {
+        "cancel": "Cancel",
+        "save": "Save recipe",
+        "save_changes": "Save changes"
+      },
+
+      "validation": {
+        "ingredients_required": "Select at least one ingredient"
+      },
+
+      "empty": {
+        "ingredients": "No ingredients available"
+      },
+
+      "detail": {
+        "selected_ingredients": "Selected ingredients details"
+      }
+    }
+  },
+
+  "inventory": {
+    "title": "Inventory",
+    "subtitle": "View all inventory items and manage their actions from a single table.",
+    "empty": "No inventory items available.",
+    "items_count": "{{count}} items",
+    "new": "New",
+
+    "modal": {
+      "title": "New inventory item",
+      "edit_title": "Edit inventory item"
+    },
+
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Salt",
+      "type": "Type",
+      "units": "Units",
+      "quantity": "Quantity",
+      "quantity_placeholder": "e.g. 10",
+      "supplier": "Supplier",
+      "supplier_placeholder": "e.g. Supermarket XYZ",
+      "unit_price": "Unit price",
+      "unit_price_placeholder": "e.g. 1.50",
+      "save": "Save product",
+      "save_edit": "Save changes"
+    },
+
+    "table": {
+      "name": "Name",
+      "type": "Type",
+      "units": "Units",
+      "supplier": "Supplier",
+      "price": "Price",
+      "date": "Date",
+      "actions": "Actions"
+    },
+
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete"
+    }
+  },
+
+  "stock": {
+    "title": "Stock",
+    "quantity_label": "Available quantity",
+    "levels": {
+      "ok": "OK",
+      "low": "Low",
+      "critical": "Critical"
+    }
+  },
+
+  "sales": {
+    "title": "Sales",
+    "orders": "{{count}} orders"
+  },
+
+  "expenses": {
+    "title": "Expenses",
+    "orders": "{{count}} orders"
+  },
+
+  "dinning_room": {
+    "title": "Dining room",
+
+    "modal": {
+      "header": "Dining room",
+      "id": "Identifier",
+      "type": "Node type",
+      "table": "Associated table",
+      "close": "Close",
+      "delete": "Delete"
+    },
+
+    "menu": {
+      "title": "Options menu",
+      "node_type": "Node type",
+      "select_option": "Select an option",
+      "table": "Table",
+      "chair": "Chair",
+      "table_label": "Table name",
+      "table_placeholder": "Enter table name",
+      "assigned_table": "Assigned table",
+      "select_table": "Select a table",
+      "chairs_number": "Number of chairs",
+      "submit": "Add node"
+    }
   }
-  
+}

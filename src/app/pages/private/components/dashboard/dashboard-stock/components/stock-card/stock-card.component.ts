@@ -3,10 +3,11 @@ import { DashboardStock } from '../../../../../../../../types/database.types';
 import { CommonModule } from '@angular/common';
 import { LucideAngularModule, Clock, DollarSign, Star } from 'lucide-angular';
 import { UnitFormatPipe } from '@pipes/unit-format.pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'stock-card',
-  imports: [CommonModule, LucideAngularModule, UnitFormatPipe],
+  imports: [CommonModule, LucideAngularModule, UnitFormatPipe, TranslatePipe],
   templateUrl: "./stock-card.component.html",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

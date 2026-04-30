@@ -1,5 +1,199 @@
 {
-    "HELLO": "Hola",
-    "WELCOME": "Bienvenido {{name}}"
+  "common": {
+    "view_all": "Ver todas",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "new": "Nuevo",
+    "back_to_dashboard": "Volver al dashboard"
+  },
+
+  "navbar": {
+    "logout": "Cerrar sesión",
+    "dashboard": "Panel de control"
+  },
+
+  "dashboard": {
+    "title": "Panel de control",
+    "loading": "Cargando datos del dashboard...",
+    "error": {
+      "default": "Ha ocurrido un error al cargar el dashboard"
+    },
+    "sections": {
+      "recipes": "Recetas",
+      "stock": "Stock",
+      "inventory": "Inventario",
+      "sales": "Ventas",
+      "expenses": "Gastos"
+    }
+  },
+
+  "recipes": {
+    "title": "Recetas",
+    "view_all": "Ver todas",
+    "subtitle": "Consulta todas las recetas y gestiona sus acciones desde una sola tabla.",
+    "empty": "No hay recetas disponibles.",
+    "count": "{{count}} recetas",
+    "new": "Nueva",
+    "min": "min",
+
+    "table": {
+      "image": "Imagen",
+      "name": "Nombre",
+      "price": "Precio",
+      "time": "Tiempo",
+      "difficulty": "Dificultad",
+      "ingredients": "Ingredientes",
+      "actions": "Acciones"
+    },
+
+    "actions": {
+      "edit": "Editar",
+      "delete": "Borrar"
+    },
+
+    "card": {
+      "time": "Tiempo",
+      "cost": "Coste",
+      "difficulty": "Dificultad"
+    },
+
+    "difficulty": {
+      "facil": "Fácil",
+      "media": "Media",
+      "dificil": "Difícil"
+    },
+
+    "form": {
+      "title": "Nueva receta",
+      "edit_title": "Editar receta",
+
+      "name": "Nombre",
+      "price": "Precio",
+      "time": "Tiempo de producción",
+      "difficulty": "Dificultad",
+      "ingredients": "Ingredientes",
+      "image": "Imagen",
+      "quantity":"Cantidad",
+      "unit":"Unidades",
+
+      "placeholders": {
+        "name": "Ej. Croqueta de jamón",
+        "price": "0.00",
+        "time": "Minutos",
+        "select_option": "Selecciona una opción"
+      },
+
+      "buttons": {
+        "cancel": "Cancelar",
+        "save": "Guardar receta",
+        "save_changes": "Guardar cambios"
+      },
+
+      "validation": {
+        "ingredients_required": "Selecciona al menos un ingrediente"
+      },
+
+      "empty": {
+        "ingredients": "No hay ingredientes disponibles"
+      },
+
+      "detail": {
+        "selected_ingredients": "Detalle de ingredientes seleccionados"
+      }
+    }
+  },
+
+  "inventory": {
+    "title": "Inventario",
+    "subtitle": "Consulta todos los elementos del inventario y gestiona sus acciones desde una sola tabla.",
+    "empty": "No hay elementos de inventario disponibles.",
+    "items_count": "{{count}} elementos",
+    "new": "Nuevo",
+
+    "modal": {
+      "title": "Nuevo elemento de inventario",
+      "edit_title": "Editar elemento de inventario"
+    },
+
+    "form": {
+      "name": "Nombre",
+      "name_placeholder": "Sal Gorda",
+      "type": "Tipo",
+      "units": "Unidades",
+      "quantity": "Cantidad",
+      "quantity_placeholder": "Ej. 10",
+      "supplier": "Proveedor",
+      "supplier_placeholder": "Ej. Supermercado XYZ",
+      "unit_price": "Precio por unidad",
+      "unit_price_placeholder": "Ej. 1.50",
+      "save": "Guardar producto",
+      "save_edit": "Guardar cambios"
+    },
+
+    "table": {
+      "name": "Nombre",
+      "type": "Tipo",
+      "units": "Unidades",
+      "supplier": "Proveedor",
+      "price": "Precio",
+      "date": "Fecha",
+      "actions": "Acciones"
+    },
+
+    "actions": {
+      "edit": "Editar",
+      "delete": "Borrar"
+    }
+  },
+
+  "stock": {
+    "title": "Stock",
+    "quantity_label": "Cantidad disponible",
+    "levels": {
+      "ok": "OK",
+      "low": "Bajo",
+      "critical": "Crítico"
+    }
+  },
+
+  "sales": {
+    "title": "Ventas",
+    "orders": "{{count}} órdenes"
+  },
+
+  "expenses": {
+    "title": "Gastos",
+    "orders": "{{count}} órdenes"
+  },
+
+  "dinning_room": {
+    "title": "Comedor",
+
+    "modal": {
+      "header": "Comedor",
+      "id": "Identificador",
+      "type": "Tipo de nodo",
+      "table": "Mesa asociada",
+      "close": "Cerrar",
+      "delete": "Eliminar"
+    },
+
+    "menu": {
+      "title": "Menú de opciones",
+      "node_type": "Tipo de nodo",
+      "select_option": "Selecciona una opción",
+      "table": "Mesa",
+      "chair": "Silla",
+      "table_label": "Nombre de la mesa",
+      "table_placeholder": "Introduce el nombre de la mesa",
+      "assigned_table": "Mesa asignada",
+      "select_table": "Selecciona una mesa",
+      "chairs_number": "Número de sillas",
+      "submit": "Agregar nodo"
+    }
   }
-  
+}

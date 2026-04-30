@@ -1,0 +1,54 @@
+<div class="top-bar-card-v flex flex-row justify-between">
+
+  <div class="top-bar-card-v__title flex flex-row my-3 p-0">
+
+    <!-- icono -->
+    <lucide-icon
+      [img]="BanknoteArrowUp"
+      class="w-4 h-4 mr-2 title__icon top-bar-card-v__title--icon"
+    ></lucide-icon>
+
+    <!-- titulo -->
+    <h1 class="title__text text-2xl flex text-center font-bold">
+      {{ 'sales.title' | translate }}
+    </h1>
+
+  </div>
+
+  <button
+    class="top-bar-card-v__button"
+    [routerLink]="['/private/ventas']"
+  >
+    {{ 'common.view_all' | translate }}
+  </button>
+
+</div>
+
+<!-- LISTADO -->
+<div class="flex flex-col gap-4 sm:gap-5">
+
+  @for (item of ventas(); track item.periodo) {
+
+    <div class="flex items-center justify-between rounded-md border border-slate-700/40 bg-slate-800/30 px-3 py-3">
+
+      <p class="text-sm font-medium">
+        {{ item.periodo }}
+      </p>
+
+      <div class="text-right leading-tight">
+
+        <p class="text-lg font-bold text-emerald-400">
+          {{ item.totalDinero }} €
+        </p>
+
+        <p class="text-xs text-slate-300">
+          {{ 'sales.orders' | translate:{ count: item.numeroOrdenes } }}
+        </p>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

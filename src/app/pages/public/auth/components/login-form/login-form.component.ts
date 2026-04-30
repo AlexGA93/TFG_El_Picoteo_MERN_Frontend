@@ -38,6 +38,7 @@ const mockedSuccessLogin = {
     LoaderComponent
   ],
   templateUrl: "./login-form.component.html",
+  
 })
 export class LoginFormComponent {
   // inyectamos el form builder
@@ -46,7 +47,6 @@ export class LoginFormComponent {
   private authService = inject(AuthenticationService);
   // inyectamos servicio de router
   private router = inject(Router);
-  private authenticationService = inject(AuthenticationService);
 
   //signals
   showPassword = signal<boolean>(false);
@@ -66,7 +66,7 @@ export class LoginFormComponent {
   });
 
   // funciones
-  showHidePassword(event: any) {
+  showHidePassword() {
     this.showPassword.set(!this.showPassword());
   }
 
