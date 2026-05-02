@@ -8,7 +8,8 @@
     "edit": "Edit",
     "delete": "Delete",
     "new": "New",
-    "back_to_dashboard": "Back to dashboard"
+    "back_to_dashboard": "Back to dashboard",
+    "change_language": "Change language"
   },
 
   "navbar": {
@@ -113,6 +114,8 @@
     "empty": "No inventory items available.",
     "items_count": "{{count}} items",
     "new": "New",
+    "items": "Items",
+  "total_price": "Total Price",
 
     "modal": {
       "title": "New inventory item",
@@ -150,6 +153,44 @@
     }
   },
 
+  "ingredients": {
+    "title": "Ingredients",
+    "subtitle": "Check availability, filter by category, and review how each ingredient is used across your recipes.",
+    "error_loading": "Ingredients could not be loaded.",
+    "empty_filtered": "No ingredients match the selected filters.",
+    "actions": {
+      "manage": "Manage"
+    },
+    "view": {
+      "summary": "Summary",
+      "detail": "Detail"
+    },
+    "kpis": {
+      "unique": "Unique ingredients",
+      "records": "Filtered records",
+      "categories": "Active categories"
+    },
+    "filters": {
+      "search": "Search",
+      "search_placeholder": "Ingredient or recipe",
+      "type": "Type",
+      "unit": "Unit",
+      "all_types": "All",
+      "all_units": "All",
+      "clear": "Clear filters"
+    },
+    "table": {
+      "ingredient": "Ingredient",
+      "recipe": "Recipe",
+      "category": "Category",
+      "quantity": "Quantity",
+      "total_quantity": "Total quantity",
+      "affected_recipes": "Affected recipes",
+      "uses": "Uses",
+      "date": "Date"
+    }
+  },
+
   "stock": {
     "title": "Stock",
     "quantity_label": "Available quantity",
@@ -162,7 +203,33 @@
 
   "sales": {
     "title": "Sales",
-    "orders": "{{count}} orders"
+    "subtitle": "Analyze revenue, expenses, and profit by period to make better decisions.",
+    "orders": "{{count}} orders",
+    "error_loading": "Sales data could not be loaded.",
+    "filters": {
+      "all_periods": "All periods"
+    },
+    "kpis": {
+      "revenue": "Revenue",
+      "expenses": "Expenses",
+      "profit": "Net profit",
+      "orders": "Orders",
+      "margin": "Global margin"
+    },
+    "charts": {
+      "profit_trend": "Profit trend",
+      "margin": "Margin distribution",
+      "margin_caption": "Percentage of revenue converted into net profit.",
+      "revenue_vs_expenses": "Revenue vs expenses by period"
+    },
+    "table": {
+      "period": "Period",
+      "revenue": "Revenue",
+      "expenses": "Expenses",
+      "profit": "Profit",
+      "orders": "Orders",
+      "margin": "Margin"
+    }
   },
 
   "expenses": {
@@ -195,5 +262,42 @@
       "chairs_number": "Number of chairs",
       "submit": "Add node"
     }
-  }
+  },
+  "cart": {
+  "title": "Cart",
+  "order_title": "Your order",
+  "continue_shopping": "Continue ordering",
+  "empty": "Your cart is empty. Add some products from the menu to continue with your order.",
+  "quantity": "Quantity",
+  "summary": {
+    "title": "Summary",
+    "subtotal": "Subtotal",
+    "fees": "Service fees",
+    "total": "Total"
+  },
+  "dine_in": "Dine in at table",
+  "select_table": "Select a table",
+  "continue_order": "Continue order",
+  "back_home": "Back to home"
+},
+"menu": {
+  "title": "Public Menu",
+  "subtitle": "Flavors to share",
+  "description": "Explore a curated selection from El Picoteo and prepare your order before entering the restaurant.",
+
+  "cart": "View cart",
+  "home": "Back to home",
+
+  "error": "We couldn't load the menu",
+  "empty_title": "The menu is empty",
+  "empty_text": "There are no products available to display yet.",
+
+  "image_not_available": "Image not available",
+
+  "difficulty": "Difficulty",
+  "estimated_time": "Estimated time",
+
+  "add": "Add",
+  "remove": "Remove"
+}
 }

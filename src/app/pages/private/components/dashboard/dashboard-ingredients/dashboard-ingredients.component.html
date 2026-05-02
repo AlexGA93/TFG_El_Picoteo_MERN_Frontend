@@ -1,0 +1,62 @@
+<div class="top-bar-card-s flex flex-row justify-between">
+  <div class="top-bar-card-s__title flex flex-row my-3 p-0">
+    <lucide-icon
+      [img]="Apple"
+      class="w-4 h-4 mr-2 title__icon top-bar-card-s__title--icon"
+    ></lucide-icon>
+
+    <h1 class="title__text text-2xl flex text-center font-bold">
+      {{ 'ingredients.title' | translate }}
+    </h1>
+  </div>
+
+  <button
+    class="top-bar-card-s__button"
+    [routerLink]="['/private/ingredientes']"
+  >
+    {{ 'ingredients.actions.manage' | translate }}
+  </button>
+</div>
+
+<div class="grid grid-flow-col auto-cols-max gap-6 sm:gap-8 overflow-x-auto md:grid-flow-row md:grid-cols-2 xl:grid-cols-6 place-items-center">
+  @for (ingredient of ingredientsSummary().slice(0, 6); track ingredient.ingrediente + ingredient.tipo + ingredient.unidad) {
+    <div class="general-card m-2 w-60 h-50 shadow-md rounded-lg p-4 hover:shadow-lg transition-shadow">
+      <div class="flex flex-row justify-between items-start gap-2 mb-3">
+        <h3 class="text-2xl font-bold elipsis-text">
+          {{ ingredient.ingrediente }}
+        </h3>
+        <span class="difficulty-medium font-medium text-sm px-2 py-1 rounded-lg whitespace-nowrap">
+          {{ ingredient.tipo }}
+        </span>
+      </div>
+
+      <table class="w-full text-sm">
+        <tbody>
+          <tr>
+            <td class="flex items-center py-1">
+              <lucide-icon [img]="Sandwich" class="w-4 h-4 mr-2 crad__icon"></lucide-icon>
+              <span class="card__data">{{ 'ingredients.table.category' | translate }}:</span>
+            </td>
+            <td class="py-1 text-right elipsis-text">{{ ingredient.tipo }}</td>
+          </tr>
+
+          <tr>
+            <td class="flex items-center py-1">
+              <lucide-icon [img]="Scale" class="w-4 h-4 mr-2 crad__icon"></lucide-icon>
+              <span class="card__data">{{ 'ingredients.table.total_quantity' | translate }}:</span>
+            </td>
+            <td class="py-1 text-right">{{ ingredient.total }} {{ ingredient.unidad | unitFormat }}</td>
+          </tr>
+
+          <tr>
+            <td class="flex items-center py-1">
+              <lucide-icon [img]="Tag" class="w-4 h-4 mr-2 crad__icon"></lucide-icon>
+              <span class="card__data">{{ 'ingredients.table.uses' | translate }}:</span>
+            </td>
+            <td class="py-1 text-right">{{ ingredient.usos }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

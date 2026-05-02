@@ -5,18 +5,25 @@ import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
 import { CheckboxModule } from 'primeng/checkbox';
+import { LucideAngularModule, Languages } from "lucide-angular";
 import { MenuService } from '../../../../../services/menu.service';
 import { DinningRoomStateService } from '../../../../../services/dinning-room-state.service';
 import { FormsModule } from '@angular/forms';
+import { TranslationsService } from '../../../../../services/translations.service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { TooltipModule } from 'primeng/tooltip';
 @Component({
   selector: 'app-public-cart-page',
-  imports: [NgFor, NgIf, RouterLink, CurrencyPipe, ButtonModule, SelectModule, CheckboxModule, JsonPipe, FormsModule],
+  imports: [NgFor, NgIf, RouterLink, CurrencyPipe, ButtonModule, SelectModule, CheckboxModule, FormsModule, LucideAngularModule, TranslatePipe, TooltipModule],
   templateUrl: './public-cart-page.component.html',
 })
 
 export class PublicCartPageComponent {
   private menuService = inject(MenuService);
   private dinningRoomStateService = inject(DinningRoomStateService);
+  private languageService = inject(TranslationsService);
+
+   readonly Languages = Languages;
 
   cartItems = toSignal(this.menuService.cartItems$, { initialValue: [] });
   subtotal = computed(() =>
@@ -66,6 +73,11 @@ export class PublicCartPageComponent {
     this.selectedTable.set(null);
     
     this.checked.set(false);
+    
+  }
+
+   changeLanguage() {
+    this.languageService.toggleLang();
     
   }
 }

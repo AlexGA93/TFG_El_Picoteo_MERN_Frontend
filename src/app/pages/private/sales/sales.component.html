@@ -1,1 +1,185 @@
-<p class="animate__animated animate__fadeIn">ventas works!</p>
+<section class="recipes-page space-y-6">
+  <div class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <a
+        class="recipes-page__back-link inline-flex items-center gap-2 text-sm font-medium mb-3"
+        [routerLink]="['/private/dashboard']"
+      >
+        <lucide-icon [img]="ArrowBigLeftDash" />
+        {{ 'common.back_to_dashboard' | translate }}
+      </a>
+
+      <h1 class="recipes-page__title text-2xl font-bold">{{ 'sales.title' | translate }}</h1>
+      <p class="recipes-page__subtitle text-sm">{{ 'sales.subtitle' | translate }}</p>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm p-5">
+      <shared-loader />
+    </div>
+  } @else if (loadError()) {
+    <div class="recipes-page__state recipes-page__state--error rounded-2xl px-6 py-4 text-sm shadow-sm">
+      {{ loadError() | translate }}
+    </div>
+  } @else {
+    <div class="recipes-page__panel rounded-2xl p-4">
+      <div class="flex flex-wrap gap-2">
+        @for (period of periods(); track period) {
+          <button
+            type="button"
+            class="p-ripple p-button p-component p-button-sm"
+            [ngClass]="selectedPeriod() === period ? 'p-button-success' : 'p-button-secondary'"
+            (click)="setPeriod(period)"
+          >
+            {{ period === ALL_PERIODS ? ('sales.filters.all_periods' | translate) : period }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mx-4">
+      <article class="general-card rounded-xl p-4">
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-slate-500">{{ 'sales.kpis.revenue' | translate }}</p>
+          <lucide-icon [img]="CircleDollarSign" class="w-4 h-4 title__icon"></lucide-icon>
+        </div>
+        <p class="text-3xl font-bold text-emerald-400">{{ formatCurrency(totalIngresos()) }}</p>
+      </article>
+
+      <article class="general-card rounded-xl p-4">
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-slate-500">{{ 'sales.kpis.expenses' | translate }}</p>
+          <lucide-icon [img]="ChartColumn" class="w-4 h-4 title__icon"></lucide-icon>
+        </div>
+        <p class="text-3xl font-bold text-rose-400">{{ formatCurrency(totalGastos()) }}</p>
+      </article>
+
+      <article class="general-card rounded-xl p-4">
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-slate-500">{{ 'sales.kpis.profit' | translate }}</p>
+          <lucide-icon [img]="TrendingUp" class="w-4 h-4 title__icon"></lucide-icon>
+        </div>
+        <p class="text-3xl font-bold" [ngClass]="totalGanancia() >= 0 ? 'text-emerald-400' : 'text-rose-400'">
+          {{ formatCurrency(totalGanancia()) }}
+        </p>
+      </article>
+
+      <article class="general-card rounded-xl p-4">
+        <p class="text-sm text-slate-500">{{ 'sales.kpis.orders' | translate }}</p>
+        <p class="text-3xl font-bold">{{ totalOrdenes() }}</p>
+        <p class="text-xs text-slate-400 mt-1">{{ 'sales.kpis.margin' | translate }}: {{ margenGlobal() }}%</p>
+      </article>
+    </div>
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <article class="recipes-page__panel rounded-2xl p-4 xl:col-span-2">
+        <h2 class="font-semibold mb-3">{{ 'sales.charts.profit_trend' | translate }}</h2>
+        @if (filteredMetrics().length) {
+          <div class="w-full overflow-x-auto">
+            <svg viewBox="0 0 640 220" class="min-w-[640px] w-full h-[220px]">
+              <line x1="24" y1="196" x2="616" y2="196" stroke="#334155" stroke-width="1"></line>
+              <polyline
+                [attr.points]="gainLinePoints()"
+                fill="none"
+                stroke="#10b981"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></polyline>
+            </svg>
+            <div class="grid gap-2 mt-3" [style.gridTemplateColumns]="'repeat(' + filteredMetrics().length + ', minmax(0, 1fr))'">
+              @for (item of filteredMetrics(); track item.periodo) {
+                <p class="text-xs text-center text-slate-400">{{ item.periodo }}</p>
+              }
+            </div>
+          </div>
+        }
+      </article>
+
+      <article class="recipes-page__panel rounded-2xl p-4">
+        <h2 class="font-semibold mb-3">{{ 'sales.charts.margin' | translate }}</h2>
+        <div class="flex flex-col items-center justify-center gap-3">
+          <div
+            class="w-36 h-36 rounded-full relative flex items-center justify-center"
+            [style.background]="donutBackground()"
+          >
+            <div class="w-24 h-24 rounded-full bg-slate-900 flex items-center justify-center text-lg font-bold">
+              {{ margenGlobal() }}%
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 text-center">{{ 'sales.charts.margin_caption' | translate }}</p>
+        </div>
+      </article>
+    </div>
+
+    <article class="recipes-page__panel rounded-2xl p-4">
+      <h2 class="font-semibold mb-3">{{ 'sales.charts.revenue_vs_expenses' | translate }}</h2>
+      <div class="space-y-4">
+        @for (item of filteredMetrics(); track item.periodo) {
+          <div class="general-card rounded-lg p-3">
+            <div class="flex items-center justify-between mb-2">
+              <p class="font-semibold">{{ item.periodo }}</p>
+              <p class="text-sm" [ngClass]="item.ganancia >= 0 ? 'text-emerald-400' : 'text-rose-400'">
+                {{ 'sales.table.profit' | translate }}: {{ formatCurrency(item.ganancia) }}
+              </p>
+            </div>
+
+            <div class="space-y-2">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span>{{ 'sales.table.revenue' | translate }}</span>
+                  <span>{{ formatCurrency(item.ingreso) }}</span>
+                </div>
+                <div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
+                  <div class="h-2 bg-emerald-500 rounded-full" [style.width]="barWidth(item.ingreso, maxScaleValue())"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span>{{ 'sales.table.expenses' | translate }}</span>
+                  <span>{{ formatCurrency(item.gasto) }}</span>
+                </div>
+                <div class="w-full h-2 bg-slate-700 rounded-full overflow-hidden">
+                  <div class="h-2 bg-rose-500 rounded-full" [style.width]="barWidth(item.gasto, maxScaleValue())"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </article>
+
+    <div class="recipes-page__panel overflow-hidden rounded-2xl">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200">
+          <thead class="recipes-page__table-head">
+            <tr>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'sales.table.period' | translate }}</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'sales.table.revenue' | translate }}</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'sales.table.expenses' | translate }}</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'sales.table.profit' | translate }}</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'sales.table.orders' | translate }}</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'sales.table.margin' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            @for (item of filteredMetrics(); track item.periodo) {
+              <tr class="recipes-page__row">
+                <td class="px-4 py-4 text-center align-middle font-semibold">{{ item.periodo }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ formatCurrency(item.ingreso) }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ formatCurrency(item.gasto) }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm" [ngClass]="item.ganancia >= 0 ? 'text-emerald-400' : 'text-rose-400'">
+                  {{ formatCurrency(item.ganancia) }}
+                </td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.ordenes }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.margen }}%</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</section>

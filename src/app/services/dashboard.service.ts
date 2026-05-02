@@ -25,6 +25,12 @@ export class DashboardService {
         }
 
         const headers = new HttpHeaders().set('x-auth-token', getFromLocalStorage("user"));
-        return this.http.get<DashboardResponse>(`${this._baseUrl}/databases/dashboard`, { headers }).pipe(shareReplay(1));
+        const response =  this.http.get<DashboardResponse>(`${this._baseUrl}/databases/dashboard`, { headers });
+
+        response.subscribe(console.log)
+        
+        
+
+        return response
     }
 }

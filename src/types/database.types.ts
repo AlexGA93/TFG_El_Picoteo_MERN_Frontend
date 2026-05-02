@@ -50,10 +50,23 @@ export interface DashboardFinancePeriodData {
   numeroOrdenes: number;
 }
 
+export interface DashboardIngredients {
+  id: number;
+  id_producto_stock: number;
+  producto: string;
+  id_inventory: number;
+  ingrediente: string;
+  tipo: InventoryItemType;
+  cantidades: number;
+  unidad: InventoryItemUnits;
+  fecha_registro: string;
+}
+
 export interface DashboardData {
   recipes: DashboardRecipe[],
   stock: DashboardStock[],
   inventory: DashboardInventory[],
+  ingredients: DashboardIngredients[],
   ventas: DashboardFinancePeriodData[],
   gastos: DashboardFinancePeriodData[],
 }

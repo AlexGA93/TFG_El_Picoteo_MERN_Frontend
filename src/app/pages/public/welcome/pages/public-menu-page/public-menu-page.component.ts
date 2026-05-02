@@ -9,7 +9,10 @@ import { StockResponse } from "../../../../../../types/stock.types";
 import { MenuService } from "../../../../../services/menu.service";
 import { MenuProduct, MenuResponse, MenuViewState } from "../../../../../../types/menu.types";
 import { LoaderComponent } from "../../../../../shared/loader/loader.component";
-import { LucideAngularModule, Plus, Minus, ShoppingCart, Home } from "lucide-angular";
+import { LucideAngularModule, Plus, Minus, ShoppingCart, Home, Languages } from "lucide-angular";
+import { TranslationsService } from "../../../../../services/translations.service";
+import { TranslatePipe } from '@ngx-translate/core';
+import { TooltipModule } from 'primeng/tooltip';
 
 const INITIAL_MENU_STATE: MenuViewState = {
   loading: true,
@@ -20,18 +23,20 @@ const INITIAL_MENU_STATE: MenuViewState = {
 
 @Component({
   selector: "app-public-menu-page",
-  imports: [RouterLink, CurrencyPipe, ButtonModule, LoaderComponent, LucideAngularModule],
+  imports: [RouterLink, CurrencyPipe, ButtonModule, LoaderComponent, LucideAngularModule, TranslatePipe, TooltipModule],
   templateUrl: "./public-menu-page.component.html",
 })
 export class PublicMenuPageComponent {
   // inyectamos el servicio
   private stockService = inject(MenuService);
+  private languageService = inject(TranslationsService);
 
   // iconos lucide
   readonly Plus = Plus;
   readonly Minus = Minus;
   readonly ShoppingCart = ShoppingCart;
   readonly Home = Home;
+  readonly Languages = Languages;
 
   // creamos una señal para almacenar los datos del stock
   stockData = toSignal(
@@ -91,5 +96,10 @@ export class PublicMenuPageComponent {
     if (product && product.id) {
       this.stockService.removeFromCart(product.id);
     }
+  }
+
+  changeLanguage() {
+    this.languageService.toggleLang();
+    
   }
 }

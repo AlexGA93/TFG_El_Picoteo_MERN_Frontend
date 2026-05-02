@@ -8,6 +8,7 @@ import { InventoryComponent } from "./inventory/inventory.component";
 import { SalesComponent } from "./sales/sales.component";
 import { ExpensesComponent } from "./exxpenses/expenses.component";
 import { DinningRoom } from "./dinning-room/dinning-room.component";
+import { IngredientsComponent } from "./ingredients/ingredients.component";
 // import {InventarioComponent} from "./inventario/inventario.component";
 
 export const privateRoutes: Routes = [
@@ -28,6 +29,9 @@ export const privateRoutes: Routes = [
 
             // inventario
             { path: 'inventario', component: InventoryComponent },
+
+            // ingredientes
+            { path: 'ingredientes', component: IngredientsComponent },
             
             // ventas
             { path: 'ventas', component: SalesComponent },
