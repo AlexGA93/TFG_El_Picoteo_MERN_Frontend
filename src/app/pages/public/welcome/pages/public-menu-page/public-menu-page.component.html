@@ -1,4 +1,6 @@
-<section class="min-h-screen px-4 py-8 md:px-8 animate__animated animate__fadeIn">
+<section
+  class="min-h-screen px-4 py-8 md:px-8 animate__animated animate__fadeIn"
+>
   <div
     class="mx-auto max-w-6xl rounded-[2rem] border border-white/10 bg-black/30 p-4 shadow-2xl backdrop-blur-md md:p-6"
   >
@@ -7,30 +9,50 @@
         class="rounded-3xl border border-white/10 bg-black/25 p-6 text-white backdrop-blur-sm"
       >
         <p class="text-sm uppercase tracking-[0.35em] text-green-300">
-          Carta publica
-        </p>
-        <h1 class="mt-3 text-4xl font-bold md:text-6xl">
-          Sabores para compartir
-        </h1>
-        <p class="mt-4 max-w-2xl text-lg text-white/80">
-          Explora una seleccion destacada de El Picoteo y prepara tu pedido
-          antes de entrar al local.
+          {{ 'menu.title' | translate }}
         </p>
 
-        <div class="mt-6 flex flex-wrap gap-3">
+        <h1 class="mt-3 text-4xl font-bold md:text-6xl">
+          {{ 'menu.subtitle' | translate }}
+        </h1>
+
+        <p class="mt-4 max-w-2xl text-lg text-white/80">
+          {{ 'menu.description' | translate }}
+        </p>
+
+        <div class="flex flex-row items-center justify-between">
+          <div class="mt-6 flex flex-wrap gap-3">
+            <p-button
+              routerLink="/public/cart"
+              [label]="'menu.cart' | translate"
+              styleClass="btn-green btn-green-dimensions flex-1"
+            >
+              <lucide-icon
+                [img]="ShoppingCart"
+                class="mr-2 w-4 h-4"
+              ></lucide-icon>
+            </p-button>
+
+            <p-button
+              routerLink="/public/welcome"
+              [label]="'menu.home' | translate"
+              styleClass="btn-green btn-green-dimensions flex-1"
+            >
+              <lucide-icon [img]="Home" class="mr-2 w-4 h-4"></lucide-icon>
+            </p-button>
+          </div>
+
           <p-button
-            routerLink="/public/cart"
-            label="Ver carrito"
-            styleClass="btn-green btn-green-dimensions flex-1"
+            type="button"
+            (click)="changeLanguage()"
+            pTooltip="{{ 'common.change_language' | translate }}"
+            tooltipPosition="bottom"
+            severity="info"
+            [rounded]="true"
+            [text]="true"
+            class="p-2"
           >
-            <lucide-icon [img]="ShoppingCart" class="mr-2 w-4 h-4"></lucide-icon>
-          </p-button>
-          <p-button
-            routerLink="/public/welcome"
-            label="Volver al inicio"
-            styleClass="btn-green btn-green-dimensions flex-1"
-          >
-            <lucide-icon [img]="Home" class="mr-2 w-4 h-4"></lucide-icon>
+            <lucide-icon [img]="Languages" class="w-5 h-5"></lucide-icon>
           </p-button>
         </div>
       </header>
@@ -41,7 +63,7 @@
         >
           <div class="max-w-xl">
             <h2 class="text-2xl font-semibold text-red-200">
-              No hemos podido cargar la carta
+              {{ 'menu.error' | translate }}
             </h2>
             <p class="mt-3 text-sm md:text-base">{{ menuError() }}</p>
           </div>
@@ -81,7 +103,7 @@
                       <div
                         class="mb-5 flex h-56 items-center justify-center rounded-2xl bg-black/20 text-sm text-white/50"
                       >
-                        Imagen no disponible
+                        {{ 'menu.image_not_available' | translate }}
                       </div>
                     }
 
@@ -95,32 +117,50 @@
                     </div>
 
                     <div class="mt-5 grid gap-4 md:grid-cols-2">
-                      <div class="rounded-2xl bg-black/20 p-4 text-sm text-white/75">
-                        <p class="font-medium text-white/90">Dificultad</p>
+                      <div
+                        class="rounded-2xl bg-black/20 p-4 text-sm text-white/75"
+                      >
+                        <p class="font-medium text-white/90">
+                          {{ 'menu.difficulty' | translate }}
+                        </p>
                         <p class="mt-1">{{ menuProduct.dificultad }}</p>
                       </div>
 
-                      <div class="rounded-2xl bg-black/20 p-4 text-sm text-white/75">
-                        <p class="font-medium text-white/90">T.Estimado</p>
+                      <div
+                        class="rounded-2xl bg-black/20 p-4 text-sm text-white/75"
+                      >
+                        <p class="font-medium text-white/90">
+                          {{ 'menu.estimated_time' | translate }}
+                        </p>
                         <p class="mt-1">
                           {{ menuProduct.tiempo_produccion_min }} min
                         </p>
                       </div>
 
-                      <!-- Botones de cantidad -->
-                       <div class="flex items-center gap-4">
-                        <button (click)="addOne(menuProduct.nombre_producto)" class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2">
+                      <div class="flex items-center gap-4">
+                        <button
+                          (click)="addOne(menuProduct.nombre_producto)"
+                          class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2"
+                        >
                           <lucide-icon [img]="Plus" class="w-4 h-4"></lucide-icon>
-                          Agregar
+                          {{ 'menu.add' | translate }}
                         </button>
-                        <span class="text-lg font-semibold px-3 py-1 bg-white/10 rounded-md">{{ menuProduct.cantidad || 0 }}</span>
-                        <button (click)="removeOne(menuProduct.nombre_producto)" class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2">
+
+                        <span
+                          class="text-lg font-semibold px-3 py-1 bg-white/10 rounded-md"
+                        >
+                          {{ menuProduct.cantidad || 0 }}
+                        </span>
+
+                        <button
+                          (click)="removeOne(menuProduct.nombre_producto)"
+                          class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2"
+                        >
                           <lucide-icon [img]="Minus" class="w-4 h-4"></lucide-icon>
-                          Quitar
+                          {{ 'menu.remove' | translate }}
                         </button>
                       </div>
                     </div>
-
                   </article>
                 }
               </div>
@@ -130,10 +170,10 @@
               >
                 <div>
                   <h2 class="text-2xl font-semibold text-white">
-                    La carta esta vacia
+                    {{ 'menu.empty_title' | translate }}
                   </h2>
                   <p class="mt-3">
-                    Todavia no hay productos disponibles para mostrar.
+                    {{ 'menu.empty_text' | translate }}
                   </p>
                 </div>
               </section>
@@ -144,10 +184,10 @@
             >
               <div>
                 <h2 class="text-2xl font-semibold text-white">
-                  La carta esta vacia
+                  {{ 'menu.empty_title' | translate }}
                 </h2>
                 <p class="mt-3">
-                  Todavia no hay productos disponibles para mostrar.
+                  {{ 'menu.empty_text' | translate }}
                 </p>
               </div>
             </section>

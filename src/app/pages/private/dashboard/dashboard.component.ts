@@ -17,6 +17,7 @@ import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
 import { DashboardRecipes } from "../components/dashboard/dahboard-recipes/dahboard-recipes.component";
 import { TranslatePipe } from "@ngx-translate/core";
+import { DashboardIngredients } from "../components/dashboard/dashboard-ingredients/dashboard-ingredients.component";
 
 interface DashboardViewState {
   loading: boolean;
@@ -36,6 +37,7 @@ const INITIAL_DASHBOARD_STATE: DashboardViewState = {
   imports: [
     CommonModule,
     DashboardStock,
+    DashboardIngredients,
     DashboardInventory,
     DashboardSales,
     LucideAngularModule,
@@ -56,14 +58,18 @@ export class DashboardComponent {
   dashboardState = toSignal(
     this.dashboardService.getDashboardData().pipe(
       map(
-        (response): DashboardViewState => ({
+        (response): DashboardViewState => {
+          console.log(response);
+          
+          return {
           loading: false,
           message: response.message,
           data: response.data,
           error: response.success
             ? null
             : response.message || "No se pudo cargar el dashboard.",
-        }),
+        }
+        },
       ),
       catchError((error: HttpErrorResponse) =>
         of({
@@ -87,11 +93,10 @@ export class DashboardComponent {
   // 2️⃣ Crear signals derivadas para cada sección
   dashboardRecipesData = computed(() => this.dashboardData()?.recipes ?? []);
   dashboardStockData = computed(() => this.dashboardData()?.stock ?? []);
-  dashboardInventoryData = computed(
-    () => this.dashboardData()?.inventory ?? [],
-  );
+  dashboardInventoryData = computed(() => this.dashboardData()?.inventory ?? []);
   dashboardVentasData = computed(() => this.dashboardData()?.ventas ?? []);
   dashboardGastosData = computed(() => this.dashboardData()?.gastos ?? []);
+  dashboardIngredients = computed(() => this.dashboardData()?.ingredients ?? []);
 
   // loader
   isLoading = computed(() => this.dashboardState().loading);

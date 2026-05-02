@@ -8,7 +8,8 @@
     "edit": "Editar",
     "delete": "Eliminar",
     "new": "Nuevo",
-    "back_to_dashboard": "Volver al dashboard"
+    "back_to_dashboard": "Volver al dashboard",
+    "change_language": "Cambiar idioma"
   },
 
   "navbar": {
@@ -113,6 +114,8 @@
     "empty": "No hay elementos de inventario disponibles.",
     "items_count": "{{count}} elementos",
     "new": "Nuevo",
+    "items": "Artículos",
+  "total_price": "Precio total",
 
     "modal": {
       "title": "Nuevo elemento de inventario",
@@ -150,6 +153,44 @@
     }
   },
 
+  "ingredients": {
+    "title": "Ingredientes",
+    "subtitle": "Consulta disponibilidad, filtra por categoría y revisa el uso de cada ingrediente en tus recetas.",
+    "error_loading": "No se pudieron cargar los ingredientes.",
+    "empty_filtered": "No hay ingredientes para los filtros seleccionados.",
+    "actions": {
+      "manage": "Gestionar"
+    },
+    "view": {
+      "summary": "Resumen",
+      "detail": "Detalle"
+    },
+    "kpis": {
+      "unique": "Ingredientes únicos",
+      "records": "Registros filtrados",
+      "categories": "Categorías activas"
+    },
+    "filters": {
+      "search": "Buscar",
+      "search_placeholder": "Ingrediente o receta",
+      "type": "Tipo",
+      "unit": "Unidad",
+      "all_types": "Todos",
+      "all_units": "Todas",
+      "clear": "Limpiar filtros"
+    },
+    "table": {
+      "ingredient": "Ingrediente",
+      "recipe": "Receta",
+      "category": "Categoría",
+      "quantity": "Cantidad",
+      "total_quantity": "Cantidad total",
+      "affected_recipes": "Recetas afectadas",
+      "uses": "Usos",
+      "date": "Fecha"
+    }
+  },
+
   "stock": {
     "title": "Stock",
     "quantity_label": "Cantidad disponible",
@@ -162,7 +203,33 @@
 
   "sales": {
     "title": "Ventas",
-    "orders": "{{count}} órdenes"
+    "subtitle": "Analiza ingresos, gastos y ganancias por periodo para tomar mejores decisiones.",
+    "orders": "{{count}} órdenes",
+    "error_loading": "No se pudieron cargar las ventas.",
+    "filters": {
+      "all_periods": "Todos los periodos"
+    },
+    "kpis": {
+      "revenue": "Ingresos",
+      "expenses": "Gastos",
+      "profit": "Ganancia neta",
+      "orders": "Órdenes",
+      "margin": "Margen global"
+    },
+    "charts": {
+      "profit_trend": "Tendencia de ganancia",
+      "margin": "Distribución del margen",
+      "margin_caption": "Porcentaje de ingreso convertido en ganancia neta.",
+      "revenue_vs_expenses": "Ingresos vs gastos por periodo"
+    },
+    "table": {
+      "period": "Periodo",
+      "revenue": "Ingresos",
+      "expenses": "Gastos",
+      "profit": "Ganancia",
+      "orders": "Órdenes",
+      "margin": "Margen"
+    }
   },
 
   "expenses": {
@@ -195,5 +262,42 @@
       "chairs_number": "Número de sillas",
       "submit": "Agregar nodo"
     }
-  }
+  },
+  "cart": {
+  "title": "Carrito",
+  "order_title": "Tu pedido",
+  "continue_shopping": "Seguir pidiendo",
+  "empty": "Tu carrito está vacío. Añade algunos productos desde el menú para continuar con tu pedido.",
+  "quantity": "Cantidad",
+  "summary": {
+    "title": "Resumen",
+    "subtotal": "Subtotal",
+    "fees": "Gastos de gestión",
+    "total": "Total"
+  },
+  "dine_in": "Para comer en mesa",
+  "select_table": "Seleccione una mesa",
+  "continue_order": "Continuar pedido",
+  "back_home": "Volver al inicio"
+},
+"menu": {
+  "title": "Carta pública",
+  "subtitle": "Sabores para compartir",
+  "description": "Explora una selección destacada de El Picoteo y prepara tu pedido antes de entrar al local.",
+
+  "cart": "Ver carrito",
+  "home": "Volver al inicio",
+
+  "error": "No hemos podido cargar la carta",
+  "empty_title": "La carta está vacía",
+  "empty_text": "Todavía no hay productos disponibles para mostrar.",
+
+  "image_not_available": "Imagen no disponible",
+
+  "difficulty": "Dificultad",
+  "estimated_time": "Tiempo estimado",
+
+  "add": "Agregar",
+  "remove": "Quitar"
+}
 }

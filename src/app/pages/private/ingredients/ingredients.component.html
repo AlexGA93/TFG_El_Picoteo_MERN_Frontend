@@ -1,0 +1,176 @@
+<section class="recipes-page space-y-6">
+  <div class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <a
+        class="recipes-page__back-link inline-flex items-center gap-2 text-sm font-medium mb-3"
+        [routerLink]="['/private/dashboard']"
+      >
+        <lucide-icon [img]="ArrowBigLeftDash" />
+        {{ 'common.back_to_dashboard' | translate }}
+      </a>
+
+      <h1 class="recipes-page__title text-2xl font-bold">{{ 'ingredients.title' | translate }}</h1>
+      <p class="recipes-page__subtitle text-sm">
+        {{ 'ingredients.subtitle' | translate }}
+      </p>
+    </div>
+
+    <div class="flex gap-2">
+      <button
+        type="button"
+        class="p-ripple p-button p-component"
+        [ngClass]="viewMode() === 'resumen' ? 'p-button-success' : 'p-button-secondary'"
+        (click)="setViewMode('resumen')"
+      >
+        <lucide-icon [img]="Layers" class="mr-2 h-4 w-4"></lucide-icon>
+        {{ 'ingredients.view.summary' | translate }}
+      </button>
+
+      <button
+        type="button"
+        class="p-ripple p-button p-component"
+        [ngClass]="viewMode() === 'detalle' ? 'p-button-info' : 'p-button-secondary'"
+        (click)="setViewMode('detalle')"
+      >
+        <lucide-icon [img]="ListTree" class="mr-2 h-4 w-4"></lucide-icon>
+        {{ 'ingredients.view.detail' | translate }}
+      </button>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm p-5">
+      <shared-loader />
+    </div>
+  } @else if (loadError()) {
+    <div class="recipes-page__state recipes-page__state--error rounded-2xl px-6 py-4 text-sm shadow-sm">
+      {{ loadError() | translate }}
+    </div>
+  } @else {
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mx-4">
+      <article class="general-card rounded-xl p-4">
+        <p class="text-sm text-slate-500">{{ 'ingredients.kpis.unique' | translate }}</p>
+        <p class="text-3xl font-bold">{{ totalUniqueIngredients() }}</p>
+      </article>
+
+      <article class="general-card rounded-xl p-4">
+        <p class="text-sm text-slate-500">{{ 'ingredients.kpis.records' | translate }}</p>
+        <p class="text-3xl font-bold">{{ totalRegisters() }}</p>
+      </article>
+
+      <article class="general-card rounded-xl p-4">
+        <p class="text-sm text-slate-500">{{ 'ingredients.kpis.categories' | translate }}</p>
+        <p class="text-3xl font-bold">{{ totalCategories() }}</p>
+      </article>
+    </div>
+
+    <div class="recipes-page__panel rounded-2xl p-4 space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+        <label class="flex flex-col gap-1">
+          <span class="text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.filters.search' | translate }}</span>
+          <div class="flex items-center gap-2 rounded-xl border px-3 py-2">
+            <lucide-icon [img]="Search" class="w-4 h-4"></lucide-icon>
+            <input
+              type="text"
+              class="w-full outline-none bg-transparent"
+              [placeholder]="'ingredients.filters.search_placeholder' | translate"
+              [ngModel]="searchTerm()"
+              (ngModelChange)="searchTerm.set($event)"
+            />
+          </div>
+        </label>
+
+        <label class="flex flex-col gap-1">
+          <span class="text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.filters.type' | translate }}</span>
+          <select
+            class="rounded-xl border px-3 py-2"
+            [ngModel]="selectedType()"
+            (ngModelChange)="selectedType.set($event)"
+          >
+            @for (type of ingredientTypes(); track type) {
+              <option [value]="type">{{ type === ALL_TYPES ? ('ingredients.filters.all_types' | translate) : type }}</option>
+            }
+          </select>
+        </label>
+
+        <label class="flex flex-col gap-1">
+          <span class="text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.filters.unit' | translate }}</span>
+          <select
+            class="rounded-xl border px-3 py-2"
+            [ngModel]="selectedUnit()"
+            (ngModelChange)="selectedUnit.set($event)"
+          >
+            @for (unit of ingredientUnits(); track unit) {
+              <option [value]="unit">{{ unit === ALL_UNITS ? ('ingredients.filters.all_units' | translate) : unit }}</option>
+            }
+          </select>
+        </label>
+
+        <div class="flex items-end">
+          <button type="button" class="p-ripple p-button p-component p-button-secondary w-full" (click)="clearFilters()">
+            <lucide-icon [img]="Filter" class="mr-2 h-4 w-4"></lucide-icon>
+            {{ 'ingredients.filters.clear' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    @if (!filteredIngredients().length) {
+      <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm">
+        {{ 'ingredients.empty_filtered' | translate }}
+      </div>
+    } @else if (viewMode() === 'resumen') {
+      <div class="recipes-page__panel overflow-hidden rounded-2xl">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200">
+            <thead class="recipes-page__table-head">
+              <tr>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.ingredient' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.category' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.total_quantity' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.affected_recipes' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              @for (item of groupedIngredients(); track item.ingrediente + item.tipo + item.unidad) {
+                <tr class="recipes-page__row">
+                  <td class="px-4 py-4 text-center align-middle font-semibold">{{ item.ingrediente }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.tipo }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.cantidadTotal }} {{ item.unidad | unitFormat }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.recetas.size }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    } @else {
+      <div class="recipes-page__panel overflow-hidden rounded-2xl">
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-slate-200">
+            <thead class="recipes-page__table-head">
+              <tr>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.ingredient' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.recipe' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.category' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.quantity' | translate }}</th>
+                <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">{{ 'ingredients.table.date' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              @for (item of filteredIngredients(); track item.id) {
+                <tr class="recipes-page__row">
+                  <td class="px-4 py-4 text-center align-middle font-semibold">{{ item.ingrediente }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.producto }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.tipo }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.cantidades }} {{ item.unidad | unitFormat }}</td>
+                  <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.fecha_registro | date:'dd/MM/yyyy HH:mm' }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+  }
+</section>
