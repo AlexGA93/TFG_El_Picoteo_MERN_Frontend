@@ -234,6 +234,7 @@
 
   "expenses": {
     "title": "Expenses",
+    "error_loading": "Expenses could not be loaded.",
     "orders": "{{count}} orders"
   },
 

@@ -3,26 +3,28 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 import { CommonModule } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { DashboardStock } from "../components/dashboard/dashboard-stock/dashboard-stock.component";
 import { DashboardInventory } from "../components/dashboard/dashboard-inventory/dashboard-inventory.component";
 import { DashboardSales } from "../components/dashboard/dashboard-sales/dashboard-sales.component";
 import { DashboardExpenses } from "../components/dashboard/dashboard-expenses/dashboard-expenses.component";
 import { DashboardService } from "../../../services/dashboard.service";
 import { LucideAngularModule } from "lucide-angular";
 import { LoaderComponent } from "../../../shared/loader/loader.component";
-import { catchError, map, of, startWith } from "rxjs";
-import { DashboardData } from "../../../../types/database.types";
+import { catchError, forkJoin, map, of, startWith } from "rxjs";
+import { DashboardData, DashboardFinancePeriodData } from "../../../../types/database.types";
 
 import { ToastModule } from "primeng/toast";
 import { MessageService } from "primeng/api";
 import { DashboardRecipes } from "../components/dashboard/dahboard-recipes/dahboard-recipes.component";
-import { TranslatePipe } from "@ngx-translate/core";
 import { DashboardIngredients } from "../components/dashboard/dashboard-ingredients/dashboard-ingredients.component";
+import { SalesService } from "../../../services/sales.service";
+import { Purchase, Sale } from "../../../../types/finance.types";
 
 interface DashboardViewState {
   loading: boolean;
   message: string;
   data: DashboardData | null;
+  sales: Sale[];
+  purchases: Purchase[];
   error: string | null;
 }
 
@@ -30,13 +32,14 @@ const INITIAL_DASHBOARD_STATE: DashboardViewState = {
   loading: true,
   message: "",
   data: null,
+  sales: [],
+  purchases: [],
   error: null,
 };
 @Component({
   selector: "app-dashboard",
   imports: [
     CommonModule,
-    DashboardStock,
     DashboardIngredients,
     DashboardInventory,
     DashboardSales,
@@ -45,7 +48,6 @@ const INITIAL_DASHBOARD_STATE: DashboardViewState = {
     ToastModule,
     DashboardRecipes,
     DashboardExpenses,
-    TranslatePipe
   ],
   providers: [MessageService],
   templateUrl: "./dashboard.component.html",
@@ -53,21 +55,26 @@ const INITIAL_DASHBOARD_STATE: DashboardViewState = {
 export class DashboardComponent {
   // Inyectar el servicio
   private dashboardService = inject(DashboardService);
+  private salesService = inject(SalesService);
   private messageService = inject(MessageService);
 
   dashboardState = toSignal(
-    this.dashboardService.getDashboardData().pipe(
+    forkJoin({
+      dashboardResponse: this.dashboardService.getDashboardData(),
+      salesResponse: this.salesService.getSales(),
+      purchasesResponse: this.salesService.getPurchases(),
+    }).pipe(
       map(
-        (response): DashboardViewState => {
-          console.log(response);
-          
+        ({ dashboardResponse, salesResponse, purchasesResponse }): DashboardViewState => {
           return {
           loading: false,
-          message: response.message,
-          data: response.data,
-          error: response.success
+          message: dashboardResponse.message || salesResponse.message || purchasesResponse.message,
+          data: dashboardResponse.data,
+          sales: salesResponse.data ?? [],
+          purchases: purchasesResponse.data ?? [],
+          error: dashboardResponse.success && salesResponse.success && purchasesResponse.success
             ? null
-            : response.message || "No se pudo cargar el dashboard.",
+            : dashboardResponse.message || salesResponse.message || purchasesResponse.message || "No se pudo cargar el dashboard.",
         }
         },
       ),
@@ -76,6 +83,8 @@ export class DashboardComponent {
           loading: false,
           message: "",
           data: null,
+          sales: [],
+          purchases: [],
           error: error.error?.message || "Error al cargar el dashboard.",
         }),
       ),
@@ -94,8 +103,8 @@ export class DashboardComponent {
   dashboardRecipesData = computed(() => this.dashboardData()?.recipes ?? []);
   dashboardStockData = computed(() => this.dashboardData()?.stock ?? []);
   dashboardInventoryData = computed(() => this.dashboardData()?.inventory ?? []);
-  dashboardVentasData = computed(() => this.dashboardData()?.ventas ?? []);
-  dashboardGastosData = computed(() => this.dashboardData()?.gastos ?? []);
+  dashboardVentasData = computed(() => this.groupSalesByMonth(this.dashboardState().sales));
+  dashboardGastosData = computed(() => this.groupPurchasesByMonth(this.dashboardState().purchases));
   dashboardIngredients = computed(() => this.dashboardData()?.ingredients ?? []);
 
   // loader
@@ -125,5 +134,41 @@ export class DashboardComponent {
         this.lastShownErrorToast.set(error);
       }
     });
+  }
+
+  private groupSalesByMonth(data: Sale[]): DashboardFinancePeriodData[] {
+    return this.groupByMonth(data.map((item) => ({ date: item.fecha_venta, amount: item.total_venta })));
+  }
+
+  private groupPurchasesByMonth(data: Purchase[]): DashboardFinancePeriodData[] {
+    return this.groupByMonth(data.map((item) => ({ date: item.fecha_compra, amount: item.total_compra })));
+  }
+
+  private groupByMonth(data: Array<{ date: string; amount: number }>): DashboardFinancePeriodData[] {
+    const formatter = new Intl.DateTimeFormat("es-ES", { month: "short", year: "numeric" });
+    const grouped = new Map<string, { total: number; count: number; date: Date }>();
+
+    data.forEach((item) => {
+      const parsedDate = new Date(item.date);
+      if (Number.isNaN(parsedDate.getTime())) return;
+
+      const label = formatter.format(parsedDate);
+      const current = grouped.get(label);
+      grouped.set(label, {
+        total: (current?.total ?? 0) + Number(item.amount || 0),
+        count: (current?.count ?? 0) + 1,
+        date: parsedDate,
+      });
+    });
+
+    return Array.from(grouped.entries())
+      .map(([periodo, value]) => ({
+        periodo,
+        totalDinero: Number(value.total.toFixed(2)),
+        numeroOrdenes: value.count,
+        date: value.date,
+      }))
+      .sort((a, b) => a.date.getTime() - b.date.getTime())
+      .map(({ date: _date, ...item }) => item as DashboardFinancePeriodData);
   }
 }

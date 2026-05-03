@@ -1,4 +1,5 @@
 <section class="recipes-page space-y-6">
+  <p-toast />
   <div class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
     <div>
       <a
@@ -12,7 +13,55 @@
       <h1 class="recipes-page__title text-2xl font-bold">{{ 'sales.title' | translate }}</h1>
       <p class="recipes-page__subtitle text-sm">{{ 'sales.subtitle' | translate }}</p>
     </div>
+
+    <button
+      type="button"
+      class="p-ripple p-button p-component p-button-success"
+      (click)="openCreateForm()"
+    >
+      <lucide-icon [img]="Plus" class="mr-2 h-4 w-4"></lucide-icon>
+      {{ 'common.new' | translate }}
+    </button>
   </div>
+
+  @if (isFormOpen()) {
+    <article class="recipes-page__panel rounded-2xl p-4">
+      <form class="grid grid-cols-1 md:grid-cols-2 gap-4" [formGroup]="saleForm" (ngSubmit)="saveSale()">
+        <div>
+          <label class="text-sm font-medium block mb-1">Fecha venta</label>
+          <input type="datetime-local" class="w-full p-inputtext p-component" formControlName="fecha_venta" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium block mb-1">Método pago</label>
+          <select class="w-full p-inputtext p-component" formControlName="metodo_pago">
+            @for (method of paymentMethods; track method) {
+              <option [value]="method">{{ method }}</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium block mb-1">ID usuario</label>
+          <input type="number" class="w-full p-inputtext p-component" formControlName="id_usuario" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium block mb-1">Total venta</label>
+          <input type="number" step="0.01" class="w-full p-inputtext p-component" formControlName="total_venta" />
+        </div>
+
+        <div class="md:col-span-2 flex gap-2 justify-end">
+          <button type="button" class="p-button p-component p-button-secondary" (click)="closeForm()">
+            {{ 'common.cancel' | translate }}
+          </button>
+          <button type="submit" class="p-button p-component p-button-success">
+            {{ editingId() ? ('common.edit' | translate) : ('common.new' | translate) }}
+          </button>
+        </div>
+      </form>
+    </article>
+  }
 
   @if (isLoading()) {
     <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm p-5">
@@ -175,6 +224,46 @@
                 </td>
                 <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.ordenes }}</td>
                 <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.margen }}%</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="recipes-page__panel overflow-hidden rounded-2xl">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200">
+          <thead class="recipes-page__table-head">
+            <tr>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">ID</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Fecha</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Método</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Usuario</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Total</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            @for (item of salesRows(); track item.id) {
+              <tr class="recipes-page__row">
+                <td class="px-4 py-4 text-center align-middle font-semibold">{{ item.id }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.fecha_venta | date:'short' }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.metodo_pago }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.id_usuario }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm text-emerald-400">{{ formatCurrency(item.total_venta) }}</td>
+                <td class="px-4 py-4 text-center">
+                  <div class="flex gap-2 justify-center">
+                    <button type="button" class="p-button p-component p-button-info p-button-sm" (click)="openEditForm(item)">
+                      <lucide-icon [img]="PencilLine" class="mr-2 h-4 w-4"></lucide-icon>
+                      {{ 'common.edit' | translate }}
+                    </button>
+                    <button type="button" class="p-button p-component p-button-danger p-button-sm" (click)="deleteSale(item.id)">
+                      <lucide-icon [img]="Eraser" class="mr-2 h-4 w-4"></lucide-icon>
+                      {{ 'common.delete' | translate }}
+                    </button>
+                  </div>
+                </td>
               </tr>
             }
           </tbody>

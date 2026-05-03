@@ -36,13 +36,7 @@ export interface DashboardInventory {
   totalPrice: number;
 }
 
-export type DashboardFinancePeriodLabel =
-  | "Hoy"
-  | "Ayer"
-  | "Semana Pasada"
-  | "Mes Pasado"
-  | "Ultimo Trimestre"
-  | "Ultimo Yr";
+export type DashboardFinancePeriodLabel = string;
 
 export interface DashboardFinancePeriodData {
   periodo: DashboardFinancePeriodLabel;

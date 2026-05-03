@@ -234,6 +234,7 @@
 
   "expenses": {
     "title": "Gastos",
+    "error_loading": "No se pudieron cargar los gastos.",
     "orders": "{{count}} órdenes"
   },
 
