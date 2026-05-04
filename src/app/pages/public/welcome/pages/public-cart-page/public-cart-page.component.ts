@@ -12,6 +12,10 @@ import { FormsModule } from '@angular/forms';
 import { TranslationsService } from '../../../../../services/translations.service';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
+import { DinningRoomOrderSnapshot } from '../../../../../../types/dinning-room.types';
+import { SalesService } from '../../../../../services/sales.service';
+import { SaleTransactionPayload } from '../../../../../../types/finance.types';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-public-cart-page',
   imports: [NgFor, NgIf, RouterLink, CurrencyPipe, ButtonModule, SelectModule, CheckboxModule, FormsModule, LucideAngularModule, TranslatePipe, TooltipModule],
@@ -22,6 +26,7 @@ export class PublicCartPageComponent {
   private menuService = inject(MenuService);
   private dinningRoomStateService = inject(DinningRoomStateService);
   private languageService = inject(TranslationsService);
+  private salesService = inject(SalesService);
 
    readonly Languages = Languages;
 
@@ -60,19 +65,68 @@ export class PublicCartPageComponent {
 
   continueWithOrder() {
     // aplicamos logica para conformar informacion de pedido y realizamos acciones
-    console.log({
+    const payload = {
       cartItems: this.cartItems(),
       selectedTable: this.selectedTable(),
       totalPrice: this.total(),
-    })
-    
-    // preparamos funcionalidad en servicio que registremos un pedido emulando el pago para confirmar pedido registrando estos datosnot
-    
-    // cuando se efectue el pedido, se limpia el carrito y se resetean las selecciones de mesa y silla
-    this.menuService.clearCart();
-    this.selectedTable.set(null);
-    
-    this.checked.set(false);
+    };
+
+    console.log(payload);
+
+    const salePayload: SaleTransactionPayload = {
+      fecha_venta: new Date().toISOString(),
+      metodo_pago: 'efectivo',
+      id_usuario: 1,
+      total_venta: payload.totalPrice,
+      items: payload.cartItems.map((item) => ({
+        id_stock: Number(item.id),
+        cantidad: item.cantidad ?? 1,
+        precio_unitario: item.precio_producto,
+        subtotal: (item.cantidad ?? 1) * item.precio_producto,
+      })),
+      table: payload.selectedTable
+        ? {
+            id: payload.selectedTable.id,
+            name: payload.selectedTable.name,
+          }
+        : undefined,
+    };
+
+    this.salesService.createSaleTransaction(salePayload).subscribe({
+      next: (response) => {
+        if (!response.success) {
+          console.error('No se pudo registrar la venta:', response.message);
+          return;
+        }
+
+        if (this.checked() && payload.selectedTable) {
+          const orderSnapshot: DinningRoomOrderSnapshot = {
+            tableId: payload.selectedTable.id,
+            tableName: payload.selectedTable.name,
+            totalPrice: payload.totalPrice,
+            createdAt: new Date().toISOString(),
+            items: payload.cartItems.map((item) => ({
+              id: item.id,
+              nombre_producto: item.nombre_producto,
+              precio_producto: item.precio_producto,
+              cantidad: item.cantidad ?? 1,
+            })),
+          };
+
+          this.dinningRoomStateService.assignOrderToTable(
+            payload.selectedTable.id,
+            orderSnapshot,
+          );
+        }
+
+        this.menuService.clearCart();
+        this.selectedTable.set(null);
+        this.checked.set(false);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error registrando la venta:', error.error?.message || error.message);
+      },
+    });
     
   }
 

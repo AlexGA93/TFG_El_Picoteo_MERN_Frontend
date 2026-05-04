@@ -3,7 +3,7 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../env/environment";
 import { getFromLocalStorage } from "@utils/local-storage";
-import { ApiResponse, Purchase, Sale } from "../../types/finance.types";
+import { ApiResponse, Purchase, Sale, SaleTransactionPayload } from "../../types/finance.types";
 
 @Injectable({
   providedIn: "root",
@@ -21,6 +21,10 @@ export class SalesService {
   }
 
   createSale(payload: Omit<Sale, "id">): Observable<ApiResponse<Sale>> {
+    return this.http.post<ApiResponse<Sale>>(`${this.baseUrl}/public/sales`, payload);
+  }
+
+  createSaleTransaction(payload: SaleTransactionPayload): Observable<ApiResponse<Sale>> {
     return this.http.post<ApiResponse<Sale>>(`${this.baseUrl}/public/sales`, payload);
   }
 

@@ -85,7 +85,7 @@
               <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">ID</th>
               <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Fecha</th>
               <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Proveedor</th>
-              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Usuario</th>
+              <!-- <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Usuario</th> -->
               <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Total</th>
               <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Acciones</th>
             </tr>
@@ -96,7 +96,7 @@
                 <td class="px-4 py-4 text-center align-middle font-semibold">{{ item.id }}</td>
                 <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.fecha_compra | date:'short' }}</td>
                 <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.proveedor }}</td>
-                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.id_usuario }}</td>
+                <!-- <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.id_usuario }}</td> -->
                 <td class="recipes-page__cell px-4 py-4 text-center text-sm text-rose-400">{{ formatCurrency(item.total_compra) }}</td>
                 <td class="px-4 py-4 text-center">
                   <div class="flex gap-2 justify-center">

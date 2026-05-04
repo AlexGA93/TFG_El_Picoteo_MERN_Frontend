@@ -39,3 +39,22 @@ export interface ApiResponse<T> {
   message: string;
   data: T;
 }
+
+export interface SaleTransactionItemPayload {
+  id_stock: number;
+  cantidad: number;
+  precio_unitario: number;
+  subtotal: number;
+}
+
+export interface SaleTransactionPayload {
+  fecha_venta: string;
+  metodo_pago: PaymentMethod;
+  id_usuario: number;
+  total_venta: number;
+  items: SaleTransactionItemPayload[];
+  table?: {
+    id: string;
+    name: string;
+  };
+}
