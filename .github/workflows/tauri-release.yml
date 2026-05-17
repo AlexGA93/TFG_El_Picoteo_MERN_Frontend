@@ -2,14 +2,12 @@ name: "Tauri Release"
 
 on:
   push:
-    branches:
-      - desktop
     tags:
       - 'v*'
   workflow_dispatch:
 
 jobs:
-  build:
+  tauri:
     permissions:
       contents: write
 
@@ -19,7 +17,6 @@ jobs:
         platform:
           - ubuntu-22.04
           - windows-latest
-          - macos-latest
 
     runs-on: ${{ matrix.platform }}
 
@@ -51,15 +48,63 @@ jobs:
       - name: Build Angular
         run: npm run build
 
-      - name: Build Tauri App
+      - name: Build Tauri App (Debian/Ubuntu and Windows)
         uses: tauri-apps/tauri-action@v0
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         with:
-          tagName: app-v__VERSION__
-          releaseName: "App v__VERSION__"
+          tagName: ${{ github.ref_name }}
+          releaseName: "App ${{ github.ref_name }}"
           releaseBody: "Nueva release automática"
           releaseDraft: false
           prerelease: false
+          args: ${{ matrix.platform == 'ubuntu-22.04' && '--bundles deb' || '--bundles nsis,msi' }}
+
+  arch:
+    name: Build Arch package
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-22.04
+    container: archlinux:latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Arch dependencies
+        run: |
+          pacman -Syu --noconfirm
+          pacman -S --noconfirm --needed \
+            base-devel \
+            nodejs npm \
+            rustup \
+            webkit2gtk-4.1 \
+            gtk3
+          rustup default stable
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build Angular
+        run: npm run build
+
+      - name: Build Tauri binary (release)
+        run: |
+          cd src-tauri
+          cargo build --release
+
+      - name: Build Arch package
+        run: |
+          mkdir -p packaging/arch
+          cp src-tauri/target/release/app packaging/arch/elpicoteo-bin
+          cp src-tauri/icons/128x128.png packaging/arch/elpicoteo.png
+          cd packaging/arch
+          makepkg -f --noconfirm
+
+      - name: Upload Arch package to release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: packaging/arch/*.pkg.tar.zst
