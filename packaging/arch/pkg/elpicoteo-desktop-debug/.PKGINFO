@@ -6,8 +6,8 @@ xdata = pkgtype=debug
 pkgver = 0.1.0-1
 pkgdesc = Detached debugging symbols for elpicoteo-desktop
 url = https://example.com/elpicoteo
-builddate = 1779007876
+builddate = 1779013567
 packager = Unknown Packager
-size = 2332112
+size = 2331920
 arch = x86_64
 license = MIT

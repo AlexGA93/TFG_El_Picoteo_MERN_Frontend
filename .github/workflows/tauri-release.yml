@@ -105,8 +105,16 @@ jobs:
           chown -R builder:builder "$PWD"
           su builder -c "cd '$PWD/packaging/arch' && makepkg -f --noconfirm"
 
+      - name: Traceability info (commit and checksums)
+        run: |
+          echo "Release tag: ${{ github.ref_name }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          sha256sum packaging/arch/*.pkg.tar.zst | tee packaging/arch/SHA256SUMS.txt
+
       - name: Upload Arch package to release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
-          files: packaging/arch/*.pkg.tar.zst
+          files: |
+            packaging/arch/*.pkg.tar.zst
+            packaging/arch/SHA256SUMS.txt
