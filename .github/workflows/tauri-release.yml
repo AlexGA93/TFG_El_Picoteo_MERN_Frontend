@@ -93,7 +93,7 @@ jobs:
 
       - name: Build Tauri binary (release)
         run: |
-          npx tauri build --bundles none
+          npx tauri build --bundles deb
 
       - name: Build Arch package
         run: |
