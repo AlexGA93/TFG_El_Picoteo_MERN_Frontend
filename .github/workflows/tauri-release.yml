@@ -101,8 +101,9 @@ jobs:
           mkdir -p packaging/arch
           cp src-tauri/target/release/app packaging/arch/elpicoteo-bin
           cp src-tauri/icons/128x128.png packaging/arch/elpicoteo.png
-          cd packaging/arch
-          makepkg -f --noconfirm
+          useradd -m builder || true
+          chown -R builder:builder "$PWD"
+          su builder -c "cd '$PWD/packaging/arch' && makepkg -f --noconfirm"
 
       - name: Upload Arch package to release
         uses: softprops/action-gh-release@v2
