@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=El Picoteo
+Comment=El Picoteo desktop application
+Exec=elpicoteo
+Icon=elpicoteo
+Terminal=false
+Categories=Office;
+StartupWMClass=elpicoteo

@@ -1,0 +1,16 @@
+pkgname=elpicoteo-desktop
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="El Picoteo desktop app (Tauri + Angular)"
+arch=('x86_64')
+url='https://example.com/elpicoteo'
+license=('MIT')
+depends=('webkit2gtk-4.1' 'gtk3')
+source=('elpicoteo-bin' 'elpicoteo.desktop' 'elpicoteo.png')
+sha256sums=('SKIP' 'SKIP' 'SKIP')
+
+package() {
+  install -Dm755 "$srcdir/elpicoteo-bin" "$pkgdir/usr/bin/elpicoteo"
+  install -Dm644 "$srcdir/elpicoteo.desktop" "$pkgdir/usr/share/applications/elpicoteo.desktop"
+  install -Dm644 "$srcdir/elpicoteo.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/elpicoteo.png"
+}
