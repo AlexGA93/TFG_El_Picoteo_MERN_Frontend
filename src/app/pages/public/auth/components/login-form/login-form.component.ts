@@ -14,7 +14,6 @@ import {
 import { emailPattern } from "@utils/regular-expressions";
 import { AuthenticationService } from "../../../../../services/authentication.service";
 import {
-  ErrorBodyType,
   LocginErrorResponseType,
 } from "../../../../../../types/general.types";
 import { LoginAlert } from "../login-alert/login-alert.component";
@@ -88,28 +87,13 @@ export class LoginFormComponent {
     this.authService.login({ email, password }).subscribe((response) => {
       if (!response) {
         this.router.navigate(["/private/"]);
-      } else {
-        let responseSuccess = (response as LocginErrorResponseType).success;
-        let responseErrors = (response as LocginErrorResponseType).errors;
-
-        if (responseSuccess && !response) {
-          //asignamos los mensajes de error a la senal
-          this.loginErrorsMessages.set(response); // Updated to use responseErrors
-
-          this.hasError.set(true);
-          this.isPosting.set(false);
-          // esperamos dos segundos y hacemos desaparecer el alert
-          this.timeOutErrorModal();
-          return;
-        } else if (response && response.mssg) {
-          console.log(response.mssg);
-          this.loginErrorsMessages.set(response);
-          this.hasError.set(true);
-          this.isPosting.set(false);
-          // esperamos dos segundos y hacemos desaparecer el alert
-          this.timeOutErrorModal();
-        }
+        return;
       }
+
+      this.loginErrorsMessages.set(response);
+      this.hasError.set(true);
+      this.isPosting.set(false);
+      this.timeOutErrorModal();
     });
   }
 
