@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { AuthLayoutComponent } from "../layouts/auth-layout/auth-layout.component";
 import { LoginComponent } from "./pages/login/login.component";
+import { guestGuard } from "../../../guards/guest.guard";
 
 export const authRoutes: Routes = [
     {
@@ -13,6 +14,7 @@ export const authRoutes: Routes = [
             {
                 // default route - login
                 path: 'login',
+                canActivate: [guestGuard],
                 component: LoginComponent
             },
             // {

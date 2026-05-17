@@ -56,6 +56,7 @@ const INITIAL_INGREDIENTS_STATE: IngredientsViewState = {
 })
 export class RecipeCreateModalComponent {
   @ViewChild("fileInput") fileInput?: ElementRef<HTMLInputElement>;
+  readonly validUnits: Units[] = ["kg", "litros", "unidad", "metros", "gramos"];
 
   // inyecciones de servicios
   private formBuilder = inject(FormBuilder);
@@ -88,7 +89,7 @@ export class RecipeCreateModalComponent {
   // inputs/outputs
   visible = input<boolean>(false);
   close = output<void>();
-  save = output<FormData>();
+  save = output<void>();
 
   // formulario reactivo
   recipeForm = this.formBuilder.group({
@@ -169,8 +170,8 @@ export class RecipeCreateModalComponent {
             detail: response.message || "La receta se ha creado correctamente.",
           });
 
-          // emitimos el evento con los datos del formulario
-          this.save.emit(formData);
+          // emitimos el evento vacio a modo de senal de creacion exitosa para que el padre reaccione
+          this.save.emit();
           
           this.onClose();
         } else {

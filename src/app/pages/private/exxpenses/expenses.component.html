@@ -1,1 +1,120 @@
-<p class="animate__animated animate__fadeIn">gastos works!</p>
+<section class="recipes-page space-y-6">
+  <p-toast />
+
+  <div class="recipes-page__header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div>
+      <a
+        class="recipes-page__back-link inline-flex items-center gap-2 text-sm font-medium mb-3"
+        [routerLink]="['/private/dashboard']"
+      >
+        <lucide-icon [img]="ArrowBigLeftDash" />
+        {{ 'common.back_to_dashboard' | translate }}
+      </a>
+
+      <h1 class="recipes-page__title text-2xl font-bold">{{ 'expenses.title' | translate }}</h1>
+    </div>
+
+    <button
+      type="button"
+      class="p-ripple p-button p-component p-button-success"
+      (click)="openCreateForm()"
+    >
+      <lucide-icon [img]="Plus" class="mr-2 h-4 w-4"></lucide-icon>
+      {{ 'common.new' | translate }}
+    </button>
+  </div>
+
+  @if (isFormOpen()) {
+    <article class="recipes-page__panel rounded-2xl p-4">
+      <form class="grid grid-cols-1 md:grid-cols-2 gap-4" [formGroup]="purchaseForm" (ngSubmit)="savePurchase()">
+        <div>
+          <label class="text-sm font-medium block mb-1">Fecha compra</label>
+          <input type="datetime-local" class="w-full p-inputtext p-component" formControlName="fecha_compra" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium block mb-1">Proveedor</label>
+          <input type="text" class="w-full p-inputtext p-component" formControlName="proveedor" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium block mb-1">ID usuario</label>
+          <input type="number" class="w-full p-inputtext p-component" formControlName="id_usuario" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium block mb-1">Total compra</label>
+          <input type="number" step="0.01" class="w-full p-inputtext p-component" formControlName="total_compra" />
+        </div>
+
+        <div class="md:col-span-2 flex gap-2 justify-end">
+          <button type="button" class="p-button p-component p-button-secondary" (click)="closeForm()">
+            {{ 'common.cancel' | translate }}
+          </button>
+          <button type="submit" class="p-button p-component p-button-success">
+            {{ editingId() ? ('common.edit' | translate) : ('common.new' | translate) }}
+          </button>
+        </div>
+      </form>
+    </article>
+  }
+
+  @if (isLoading()) {
+    <div class="recipes-page__state rounded-2xl px-6 py-10 text-center shadow-sm p-5">
+      <shared-loader />
+    </div>
+  } @else if (loadError()) {
+    <div class="recipes-page__state recipes-page__state--error rounded-2xl px-6 py-4 text-sm shadow-sm">
+      {{ loadError() | translate }}
+    </div>
+  } @else {
+    <article class="general-card rounded-xl p-4 max-w-sm">
+      <div class="flex items-center justify-between">
+        <p class="text-sm text-slate-500">{{ 'sales.kpis.expenses' | translate }}</p>
+        <lucide-icon [img]="CircleDollarSign" class="w-4 h-4 title__icon"></lucide-icon>
+      </div>
+      <p class="text-3xl font-bold text-rose-400">{{ formatCurrency(totalExpenses()) }}</p>
+      <p class="text-xs text-slate-400 mt-1">{{ 'expenses.orders' | translate:{ count: purchases().length } }}</p>
+    </article>
+
+    <div class="recipes-page__panel overflow-hidden rounded-2xl">
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-slate-200">
+          <thead class="recipes-page__table-head">
+            <tr>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">ID</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Fecha</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Proveedor</th>
+              <!-- <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Usuario</th> -->
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Total</th>
+              <th class="recipes-page__table-heading px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            @for (item of purchases(); track item.id) {
+              <tr class="recipes-page__row">
+                <td class="px-4 py-4 text-center align-middle font-semibold">{{ item.id }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.fecha_compra | date:'short' }}</td>
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.proveedor }}</td>
+                <!-- <td class="recipes-page__cell px-4 py-4 text-center text-sm">{{ item.id_usuario }}</td> -->
+                <td class="recipes-page__cell px-4 py-4 text-center text-sm text-rose-400">{{ formatCurrency(item.total_compra) }}</td>
+                <td class="px-4 py-4 text-center">
+                  <div class="flex gap-2 justify-center">
+                    <button type="button" class="p-button p-component p-button-info p-button-sm" (click)="openEditForm(item)">
+                      <lucide-icon [img]="PencilLine" class="mr-2 h-4 w-4"></lucide-icon>
+                      {{ 'common.edit' | translate }}
+                    </button>
+                    <button type="button" class="p-button p-component p-button-danger p-button-sm" (click)="deletePurchase(item.id)">
+                      <lucide-icon [img]="Eraser" class="mr-2 h-4 w-4"></lucide-icon>
+                      {{ 'common.delete' | translate }}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</section>

@@ -111,6 +111,7 @@ export class DinningRoom implements AfterViewInit, OnDestroy {
         label: String(target.data("label") ?? target.id()),
         type: target.hasClass("mesa") ? "mesa" : "silla",
         parentTable: target.data("tableId") || undefined,
+        currentOrder: target.data("currentOrder") || undefined,
       };
 
       this.selectedNode.set(selectedNode);
@@ -268,5 +269,32 @@ export class DinningRoom implements AfterViewInit, OnDestroy {
     this.persistGraphState();
     this.selectedNode.set(null);
     this.closeNodeDialog();
+  }
+
+  public clearOrderFromSelectedNode(): void {
+    const node = this.selectedNode();
+    if (!node) {
+      return;
+    }
+
+    const tableId = node.type === "mesa" ? node.id : node.parentTable;
+    if (!tableId) {
+      return;
+    }
+
+    this.dinningRoomStateService.clearOrderFromTable(tableId);
+
+    if (this.cy) {
+      const tableNode = this.cy.getElementById(tableId);
+      if (tableNode.length > 0) {
+        tableNode.removeData("currentOrder");
+      }
+      this.persistGraphState();
+    }
+
+    this.selectedNode.set({
+      ...node,
+      currentOrder: undefined,
+    });
   }
 }

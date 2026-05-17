@@ -65,6 +65,8 @@ export class RecipesComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
+          console.log({ recetas:response });
+          
           this.recipesState.set({
             loading: false,
             message: response.message,
@@ -98,31 +100,37 @@ export class RecipesComponent {
     this.isCreateRecipeDialogVisible.set(false);
   }
 
-  onRecipeCreated(formData: FormData): void {
-    const nombre = String(formData.get("nombre") ?? "");
-    const precio = Number(formData.get("precio") ?? 0);
-    const tiempoProduccion = Number(formData.get("tiempo_produccion_min") ?? 0);
-    const dificultad = String(formData.get("dificultad") ?? "");
+  // onRecipeCreated(formData: FormData): void {
+  //   const nombre = String(formData.get("nombre") ?? "");
+  //   const precio = Number(formData.get("precio") ?? 0);
+  //   const tiempoProduccion = Number(formData.get("tiempo_produccion_min") ?? 0);
+  //   const dificultad = String(formData.get("dificultad") ?? "");
 
-    const recipeToInsert: RecipesData = {
-      id: Date.now(),
-      nombre,
-      precio,
-      tiempo_produccion_min: tiempoProduccion,
-      dificultad,
-      ingredients: [],
-    };
+  //   const recipeToInsert: RecipesData = {
+  //     id: Date.now(),
+  //     nombre,
+  //     precio,
+  //     tiempo_produccion_min: tiempoProduccion,
+  //     dificultad,
+  //     ingredients: [],
+  //   };
 
-    this.recipesState.update((state) => ({
-      ...state,
-      data: [recipeToInsert, ...(state.data ?? [])],
-    }));
+  //   this.recipesState.update((state) => ({
+  //     ...state,
+  //     data: [recipeToInsert, ...(state.data ?? [])],
+  //   }));
 
+  //   this.closeCreateRecipeDialog();
+
+  //   // Cuando tengas el endpoint de creacion, aqui puedes hacer el POST
+  //   // y despues volver a ejecutar this.loadRecipes() para sincronizar con backend.
+  // }
+
+  onRecipeCreated(): void {
     this.closeCreateRecipeDialog();
-
-    // Cuando tengas el endpoint de creacion, aqui puedes hacer el POST
-    // y despues volver a ejecutar this.loadRecipes() para sincronizar con backend.
+  this.loadRecipes();
   }
+
 
   /**
    * @description Función para eliminar una receta por su ID

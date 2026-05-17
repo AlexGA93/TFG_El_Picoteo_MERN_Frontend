@@ -62,32 +62,65 @@
         </div>
       }
 
+      @if (node.currentOrder) {
+        <div class="dinning-room-dialog__card dinning-room-dialog__card--default">
+          <p class="dinning-room-dialog__label">
+            Pedido actual
+          </p>
+          <p class="dinning-room-dialog__value">
+            Mesa: {{ node.currentOrder.tableName }}
+          </p>
+          <p class="dinning-room-dialog__value">
+            Total: {{ node.currentOrder.totalPrice | currency: "EUR" : "symbol" : "1.2-2" : "es-ES" }}
+          </p>
+          <p class="dinning-room-dialog__value">
+            Fecha: {{ node.currentOrder.createdAt | date:'short' }}
+          </p>
+          <p class="dinning-room-dialog__value">
+            Productos:
+            @for (item of node.currentOrder.items; track item.id ?? $index) {
+              <span> {{ item.nombre_producto }} x{{ item.cantidad }}</span>
+            }
+          </p>
+        </div>
+      }
+
     </div>
 
-    <ng-template pTemplate="footer">
+  }
 
-      <div class="dinning-room-dialog__footer">
+  <ng-template pTemplate="footer">
 
+    <div class="dinning-room-dialog__footer">
+
+      <button
+        type="button"
+        class="dinning-room-dialog__button dinning-room-dialog__button--primary"
+        (click)="close.emit()"
+      >
+        {{ 'common.close' | translate }}
+      </button>
+
+      @if (selectedNode()?.type === 'mesa' && selectedNode()?.currentOrder) {
         <button
           type="button"
           class="dinning-room-dialog__button dinning-room-dialog__button--primary"
-          (click)="close.emit()"
+          (click)="clearOrder.emit()"
         >
-          {{ 'common.close' | translate }}
+          Finalizar comanda
         </button>
+      }
 
-        <button
-          type="button"
-          class="dinning-room-dialog__button dinning-room-dialog__button--danger"
-          (click)="delete.emit()"
-        >
-          {{ 'common.delete' | translate }}
-        </button>
+      <button
+        type="button"
+        class="dinning-room-dialog__button dinning-room-dialog__button--danger"
+        (click)="delete.emit()"
+      >
+        {{ 'common.delete' | translate }}
+      </button>
 
-      </div>
+    </div>
 
-    </ng-template>
-
-  }
+  </ng-template>
 
 </p-dialog>

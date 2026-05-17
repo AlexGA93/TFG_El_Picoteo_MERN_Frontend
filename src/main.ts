@@ -7,6 +7,7 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 
 registerLocaleData(localeEs, 'es-ES');
+registerLocaleData(localeEs, 'es');
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

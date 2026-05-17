@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Core, ElementDefinition } from "cytoscape";
+import { DinningRoomOrderSnapshot } from "../../types/dinning-room.types";
 
 const STORAGE_KEY = "dinning-room-graph";
 const INITIAL_DINNING_ROOM_ELEMENTS: ElementDefinition[] = [
@@ -51,6 +52,45 @@ export class DinningRoomStateService {
       .elements()
       .map((element) => element.json() as ElementDefinition);
     this.saveGraphElements(currentElements);
+  }
+
+  public assignOrderToTable(
+    tableId: string,
+    order: DinningRoomOrderSnapshot,
+  ): void {
+    const updatedElements = this.graphElements.map((element) => {
+      if (element.data?.["id"] !== tableId || element.classes !== "mesa") {
+        return element;
+      }
+
+      return {
+        ...element,
+        data: {
+          ...element.data,
+          currentOrder: order,
+        },
+      };
+    });
+
+    this.saveGraphElements(updatedElements);
+  }
+
+  public clearOrderFromTable(tableId: string): void {
+    const updatedElements = this.graphElements.map((element) => {
+      if (element.data?.["id"] !== tableId || element.classes !== "mesa") {
+        return element;
+      }
+
+      const currentData = { ...(element.data ?? {}) };
+      delete currentData["currentOrder"];
+
+      return {
+        ...element,
+        data: currentData,
+      };
+    });
+
+    this.saveGraphElements(updatedElements);
   }
 
   private loadInitialState(): ElementDefinition[] {
