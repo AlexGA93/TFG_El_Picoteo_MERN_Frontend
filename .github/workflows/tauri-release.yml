@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - desktop
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 jobs:
