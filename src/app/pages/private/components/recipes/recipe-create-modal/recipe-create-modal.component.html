@@ -157,11 +157,14 @@
                 <label class="text-xs text-slate-500">
                   {{ 'recipes.form.unit' | translate }}
                 </label>
-                <input
-                  type="text"
+                <select
                   formControlName="unidad"
                   class="w-full rounded-md border border-slate-300 px-2 py-1 text-sm"
-                />
+                >
+                  @for (unit of validUnits; track unit) {
+                    <option [value]="unit">{{ unit }}</option>
+                  }
+                </select>
               </div>
 
               <button
@@ -212,5 +215,5 @@
     </div>
   </form>
 
-  <pre>{{ recipeForm.value | json }}</pre>
+  <!-- <pre>{{ recipeForm.value | json }}</pre> -->
 </p-dialog>

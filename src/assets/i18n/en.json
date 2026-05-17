@@ -9,7 +9,11 @@
     "delete": "Delete",
     "new": "New",
     "back_to_dashboard": "Back to dashboard",
-    "change_language": "Change language"
+    "change_language": "Change language",
+    "actions": {
+      "save_changes": "Save changes",
+      "delete": "Delete"
+    }
   },
 
   "navbar": {

@@ -23,7 +23,7 @@ import { catchError, map, of, startWith } from "rxjs";
 import { HttpErrorResponse } from "@angular/common/http";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { InventoryService } from "../../../../../services/inventario.service";
-import { InventoryData } from "../../../../../../types/inventario.types";
+import { InventoryData, Units } from "../../../../../../types/inventario.types";
 import { RecetasService } from "../../../../../services/recetas.service";
 import {
   RecipesData,
@@ -42,7 +42,7 @@ interface IngredientsViewState {
 type IngredientForm = FormGroup<{
   id_inventory: FormControl<number>;
   cantidad: FormControl<number>;
-  unidad: FormControl<string>;
+  unidad: FormControl<Units>;
 }>;
 
 const INITIAL_INGREDIENTS_STATE: IngredientsViewState = {
@@ -60,6 +60,7 @@ const INITIAL_INGREDIENTS_STATE: IngredientsViewState = {
 })
 export class RecipeEditModalComponent {
   @ViewChild("fileInput") fileInput?: ElementRef<HTMLInputElement>;
+  readonly validUnits: Units[] = ["kg", "litros", "unidad", "metros", "gramos"];
   imagePreviewUrl: string | null = null;
   private objectPreviewUrl: string | null = null;
   private readonly backendRootUrl = environment.baseUrl.replace(
@@ -395,6 +396,10 @@ export class RecipeEditModalComponent {
     cantidad: number,
     unidad: string,
   ): IngredientForm {
+    const normalizedUnit = this.validUnits.includes(unidad as Units)
+      ? (unidad as Units)
+      : this.validUnits[0];
+
     return this.formBuilder.group({
       id_inventory: this.formBuilder.control(id_inventory, {
         nonNullable: true,
@@ -404,7 +409,7 @@ export class RecipeEditModalComponent {
         nonNullable: true,
         validators: [Validators.required, Validators.min(0.01)],
       }),
-      unidad: this.formBuilder.control(unidad, {
+      unidad: this.formBuilder.control(normalizedUnit, {
         nonNullable: true,
         validators: [Validators.required],
       }),

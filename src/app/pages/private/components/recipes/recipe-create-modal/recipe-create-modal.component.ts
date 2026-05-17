@@ -56,6 +56,7 @@ const INITIAL_INGREDIENTS_STATE: IngredientsViewState = {
 })
 export class RecipeCreateModalComponent {
   @ViewChild("fileInput") fileInput?: ElementRef<HTMLInputElement>;
+  readonly validUnits: Units[] = ["kg", "litros", "unidad", "metros", "gramos"];
 
   // inyecciones de servicios
   private formBuilder = inject(FormBuilder);

@@ -65,6 +65,8 @@ export class RecipesComponent {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
+          console.log({ recetas:response });
+          
           this.recipesState.set({
             loading: false,
             message: response.message,
