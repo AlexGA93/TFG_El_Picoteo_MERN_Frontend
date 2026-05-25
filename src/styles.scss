@@ -9,6 +9,11 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    background-color: #121212;
+}
+
+:root {
+  color-scheme: dark;
 }
 
 // Background utility for welcome/auth routes only
