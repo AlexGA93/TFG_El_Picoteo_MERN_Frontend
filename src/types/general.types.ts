@@ -73,6 +73,8 @@ export interface AddNewInventoryResponseType {
 
 export interface LocginErrorResponseType {
   success?: boolean;
+  message?: string;
+  error?: ErrorBodyType[];
   errors?: ErrorBodyType[];
   mssg?: string;
 }

@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../env/environment';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {
-  ErrorBodyType,
   JWTValidationResponseType,
   LocginErrorResponseType,
   LoginFormType,
-  LoginResponseType,
   LoginSuccessResponse,
   UserDataType,
 } from '../../types/general.types';
@@ -14,7 +12,6 @@ import { BehaviorSubject, Observable, map, catchError, of } from 'rxjs';
 import {
   deleteFromLocalStorage,
   getFromLocalStorage,
-  saveToLocalStorage,
 } from '@utils/local-storage';
 
 @Injectable({
@@ -62,10 +59,21 @@ export class AuthenticationService {
         // return true;
       }),
       catchError((errorPayload) => {
-        console.log({errorPayload});
-        let errorResponse = errorPayload.error as LocginErrorResponseType;
-        // Return an observable to satisfy the expected return type
-        return of(errorResponse);
+        const httpError = errorPayload as HttpErrorResponse;
+        const backendError = (httpError.error ?? {}) as Partial<LocginErrorResponseType>;
+
+        const normalizedError: LocginErrorResponseType = {
+          success: false,
+          message:
+            backendError.message ||
+            backendError.mssg ||
+            (httpError.status === 0
+              ? 'No se pudo conectar con el servidor.'
+              : 'Error al iniciar sesión.'),
+          error: backendError.error || backendError.errors || [],
+        };
+
+        return of(normalizedError);
       })
     );
   }
