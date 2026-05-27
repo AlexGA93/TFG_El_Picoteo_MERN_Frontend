@@ -136,6 +136,17 @@ export class InventoryEditModal {
         });
         return;
       }
+
+      const currentItem = this.inventoryItem();
+      const itemId = currentItem?.id;
+      if (!itemId) {
+        this.messageService.add({
+          severity: "error",
+          summary: "Error",
+          detail: "No se ha podido identificar el item a editar.",
+        });
+        return;
+      }
   
       const formData = new FormData();
 
@@ -157,12 +168,13 @@ export class InventoryEditModal {
         "fecha",
         String(this.inventoryForm.get("fecha")?.value ?? ""),
       );
-  
-      console.log({ formData });
-  
+
       const data: InventoryCreateDTO = this.inventoryForm.getRawValue();
+      
+      console.log(data);
+      
       // llamamos al servicio
-      this.inventoryService.updateInventoryItem(1,data).subscribe({
+      this.inventoryService.updateInventoryItem(itemId, data).subscribe({
         next: (response) => {
           console.log({ response });
           this.messageService.add({
