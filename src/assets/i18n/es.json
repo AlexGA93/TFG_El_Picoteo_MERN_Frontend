@@ -303,6 +303,7 @@
   "estimated_time": "Tiempo estimado",
 
   "add": "Agregar",
-  "remove": "Quitar"
+  "remove": "Quitar",
+  "clear_cart": "Vaciar carrito"
 }
 }

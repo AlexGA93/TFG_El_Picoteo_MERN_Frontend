@@ -1,15 +1,13 @@
-import { CurrencyPipe, NgFor } from "@angular/common";
+import { CurrencyPipe, NgIf } from "@angular/common";
 import { Component, computed, inject } from "@angular/core";
 import { RouterLink } from "@angular/router";
 import { ButtonModule } from "primeng/button";
-import { StockService } from "../../../../../services/stock.service";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { catchError, map, of, startWith } from "rxjs";
-import { StockResponse } from "../../../../../../types/stock.types";
 import { MenuService } from "../../../../../services/menu.service";
 import { MenuProduct, MenuResponse, MenuViewState } from "../../../../../../types/menu.types";
 import { LoaderComponent } from "../../../../../shared/loader/loader.component";
-import { LucideAngularModule, Plus, Minus, ShoppingCart, Home, Languages } from "lucide-angular";
+import { LucideAngularModule, Plus, Minus, ShoppingCart, Home, Languages, Trash2 } from "lucide-angular";
 import { TranslationsService } from "../../../../../services/translations.service";
 import { TranslatePipe } from '@ngx-translate/core';
 import { TooltipModule } from 'primeng/tooltip';
@@ -23,7 +21,7 @@ const INITIAL_MENU_STATE: MenuViewState = {
 
 @Component({
   selector: "app-public-menu-page",
-  imports: [RouterLink, CurrencyPipe, ButtonModule, LoaderComponent, LucideAngularModule, TranslatePipe, TooltipModule],
+  imports: [RouterLink, CurrencyPipe, NgIf, ButtonModule, LoaderComponent, LucideAngularModule, TranslatePipe, TooltipModule],
   templateUrl: "./public-menu-page.component.html",
 })
 export class PublicMenuPageComponent {
@@ -37,6 +35,7 @@ export class PublicMenuPageComponent {
   readonly ShoppingCart = ShoppingCart;
   readonly Home = Home;
   readonly Languages = Languages;
+  readonly Trash2 = Trash2;
 
   // creamos una señal para almacenar los datos del stock
   stockData = toSignal(
@@ -66,36 +65,44 @@ export class PublicMenuPageComponent {
   menuError   = computed(() => this.stockData().error);
   // loader
   isLoading   = computed(() => this.stockData().loading);
+  cartItems = toSignal(this.stockService.cartItems$, { initialValue: [] });
+  hasCartItems = computed(() => this.cartItems().length > 0);
+  cartItemsCount = computed(() =>
+    this.cartItems().reduce((total, item) => total + (item.cantidad ?? 1), 0),
+  );
+  cartItemsById = computed(() => {
+    const quantities = new Map<number, number>();
+    this.cartItems().forEach((item) => {
+      if (item.id !== undefined) {
+        quantities.set(item.id, item.cantidad ?? 1);
+      }
+    });
+    return quantities;
+  });
 
   // funciones
-  addOne(productName: string) {
-    
-    // actualizamos la cifra de la signal de menuData
-    const product = this.menuData()?.find(p => p.nombre_producto === productName);
-    if (product) {
-      if (!product.cantidad) {
-        product.cantidad = 1;
-      } else {
-        product.cantidad++;
-      }
+  addOne(product: MenuProduct) {
+    if (product.id === undefined) {
+      return;
     }
-    
-    // llamamos a la función del servicio para actualizar el carrito
-    this.stockService.addToCart(product as MenuProduct);
-    
+    this.stockService.addToCart(product);
   }
 
-  removeOne(productName: string) {
-    const product = this.menuData()?.find(p => p.nombre_producto === productName);
-    
-    if (product && product.cantidad && product.cantidad > 0) {
-      product.cantidad--;
+  removeOne(productId?: number) {
+    if (productId !== undefined) {
+      this.stockService.removeFromCart(productId);
     }
+  }
 
-    // llamamos a la función del servicio para actualizar el carrito
-    if (product && product.id) {
-      this.stockService.removeFromCart(product.id);
+  clearCart() {
+    this.stockService.clearCart();
+  }
+
+  getProductQuantity(productId?: number) {
+    if (productId === undefined) {
+      return 0;
     }
+    return this.cartItemsById().get(productId) ?? 0;
   }
 
   changeLanguage() {

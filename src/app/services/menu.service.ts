@@ -26,22 +26,37 @@ export class MenuService {
     // sacamos el indice del producto que queremos agregar al carrito.
     const existingItemIndex = currentItems.findIndex(item => item.id === product.id);
 
+    let updatedItems: MenuProduct[];
+
     if (existingItemIndex !== -1) {
-      // Si el producto ya está en el carrito, incrementamos la cantidad.
-      currentItems[existingItemIndex].cantidad = (currentItems[existingItemIndex].cantidad || 0) + 1;
+      // Si el producto ya está en el carrito, incrementamos la cantidad sin mutar el array original.
+      updatedItems = currentItems.map((item, index) =>
+        index === existingItemIndex
+          ? { ...item, cantidad: (item.cantidad || 0) + 1 }
+          : item
+      );
     } else {
-      // Si el producto no está en el carrito, lo agregamos con cantidad 1.
-      currentItems.push({ ...product, cantidad: 1 });
+      // Si el producto no está en el carrito, lo agregamos con cantidad 1 creando un nuevo array.
+      updatedItems = [...currentItems, { ...product, cantidad: 1 }];
     }
 
     // Actualizamos el estado del carrito con los nuevos productos.
-    this.cartItems.next(currentItems);
+    this.cartItems.next(updatedItems);
   } 
 
   // función para eliminar un producto del carrito.
   removeFromCart(productId: number) {
     const currentItems = this.cartItems.getValue();
-    const updatedItems = currentItems.filter(item => item.id !== productId);
+    const updatedItems = currentItems
+      .map((item) => {
+        if (item.id !== productId) {
+          return item;
+        }
+
+        const nextCantidad = (item.cantidad || 0) - 1;
+        return { ...item, cantidad: nextCantidad };
+      })
+      .filter((item) => (item.cantidad || 0) > 0);
     this.cartItems.next(updatedItems);
   } 
 

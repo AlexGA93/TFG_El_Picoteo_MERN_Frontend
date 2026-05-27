@@ -22,16 +22,26 @@
 
         <div class="flex flex-row items-center justify-between">
           <div class="mt-6 flex flex-wrap gap-3">
-            <p-button
-              routerLink="/public/cart"
-              [label]="'menu.cart' | translate"
-              styleClass="btn-green btn-green-dimensions flex-1"
-            >
-              <lucide-icon
-                [img]="ShoppingCart"
-                class="mr-2 w-4 h-4"
-              ></lucide-icon>
-            </p-button>
+            <div class="relative inline-block">
+              <p-button
+                routerLink="/public/cart"
+                [label]="'menu.cart' | translate"
+                [styleClass]="hasCartItems() ? 'cart-button btn-green btn-green-dimensions flex-1 !bg-amber-500 !border-amber-500 !text-white hover:!bg-amber-500 hover:!border-amber-500' : 'cart-button btn-green btn-green-dimensions flex-1'"
+              >
+                <lucide-icon
+                  [img]="ShoppingCart"
+                  class="mr-2 w-4 h-4"
+                ></lucide-icon>
+              </p-button>
+
+              @if (cartItemsCount() > 0) {
+                <span
+                  class="absolute -top-3 -right-3 z-10 flex min-w-6 h-6 items-center justify-center rounded-full bg-red-700 px-2 text-base font-extrabold text-white shadow-[0_0_0_4px_rgba(255,255,255,0.3),0_10px_22px_rgba(185,28,28,0.6)] animate-pulse"
+                >
+                  {{ cartItemsCount() }}
+                </span>
+              }
+            </div>
 
             <p-button
               routerLink="/public/welcome"
@@ -39,6 +49,16 @@
               styleClass="btn-green btn-green-dimensions flex-1"
             >
               <lucide-icon [img]="Home" class="mr-2 w-4 h-4"></lucide-icon>
+            </p-button>
+
+            <p-button
+              *ngIf="hasCartItems()"
+              type="button"
+              (onClick)="clearCart()"
+              [label]="'menu.clear_cart' | translate"
+              styleClass="btn-green btn-green-dimensions flex-1 !bg-red-700 !border-red-700 !text-white hover:!bg-red-700 hover:!border-red-700"
+            >
+              <lucide-icon [img]="Trash2" class="mr-2 w-4 h-4"></lucide-icon>
             </p-button>
           </div>
 
@@ -139,7 +159,7 @@
 
                       <div class="flex items-center gap-4">
                         <button
-                          (click)="addOne(menuProduct.nombre_producto)"
+                          (click)="addOne(menuProduct)"
                           class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2"
                         >
                           <lucide-icon [img]="Plus" class="w-4 h-4"></lucide-icon>
@@ -149,11 +169,11 @@
                         <span
                           class="text-lg font-semibold px-3 py-1 bg-white/10 rounded-md"
                         >
-                          {{ menuProduct.cantidad || 0 }}
+                          {{ getProductQuantity(menuProduct.id) }}
                         </span>
 
                         <button
-                          (click)="removeOne(menuProduct.nombre_producto)"
+                          (click)="removeOne(menuProduct.id)"
                           class="rounded-lg bg-white/20 px-4 py-2 text-white hover:bg-white/30 font-semibold flex items-center gap-2"
                         >
                           <lucide-icon [img]="Minus" class="w-4 h-4"></lucide-icon>
