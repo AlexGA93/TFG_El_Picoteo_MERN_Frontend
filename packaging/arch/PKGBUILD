@@ -1,5 +1,5 @@
 pkgname=elpicoteo-desktop
-pkgver=1.0.1
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="El Picoteo desktop app (Tauri + Angular)"
 arch=('x86_64')
