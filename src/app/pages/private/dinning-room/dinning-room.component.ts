@@ -181,12 +181,11 @@ export class DinningRoom implements AfterViewInit, OnDestroy {
             id: chairId,
             label: `Silla ${i}`,
             tableId: payload.parentTable,
+            parent: payload.parentTable,
           },
           position: chairPosition,
           classes: "silla",
         };
-
-        console.log(result);
 
         nodesStack.push(result);
       }

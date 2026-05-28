@@ -4,22 +4,167 @@ import { DinningRoomOrderSnapshot } from "../../types/dinning-room.types";
 
 const STORAGE_KEY = "dinning-room-graph";
 const INITIAL_DINNING_ROOM_ELEMENTS: ElementDefinition[] = [
-  // {
-  //   data: { id: "mesa-1", label: "Mesa 1" },
-  //   classes: "mesa",
-  // },
-  // { data: { id: "silla-1", label: "Silla 1", parent: "mesa-1" }, classes: "silla" },
-  // { data: { id: "silla-2", label: "Silla 2", parent: "mesa-1" }, classes: "silla" },
-  // { data: { id: "silla-3", label: "Silla 3", parent: "mesa-1" }, classes: "silla" },
-  // { data: { id: "silla-4", label: "Silla 4", parent: "mesa-1" }, classes: "silla" },
-  // {
-  //   data: { id: "mesa-2", label: "Mesa 2" },
-  //   classes: "mesa",
-  // },
-  // { data: { id: "silla-5", label: "Silla 1", parent: "mesa-2" }, classes: "silla" },
-  // { data: { id: "silla-6", label: "Silla 2", parent: "mesa-2" }, classes: "silla" },
-  // { data: { id: "silla-7", label: "Silla 3", parent: "mesa-2" }, classes: "silla" },
-  // { data: { id: "silla-8", label: "Silla 4", parent: "mesa-2" }, classes: "silla" },
+  // Mesa 1
+  {
+    data: { id: "mesa-1", label: "Mesa 1" },
+    position: { x: 120, y: 120 },
+    classes: "mesa",
+  },
+  {
+    data: { id: "silla-1-1", label: "Silla 1", tableId: "mesa-1", parent: "mesa-1" },
+    position: { x: 120, y: 60 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-1-2", label: "Silla 2", tableId: "mesa-1", parent: "mesa-1" },
+    position: { x: 170, y: 120 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-1-3", label: "Silla 3", tableId: "mesa-1", parent: "mesa-1" },
+    position: { x: 120, y: 180 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-1-4", label: "Silla 4", tableId: "mesa-1", parent: "mesa-1" },
+    position: { x: 70, y: 120 },
+    classes: "silla",
+  },
+
+  // Mesa 2
+  {
+    data: { id: "mesa-2", label: "Mesa 2" },
+    position: { x: 320, y: 120 },
+    classes: "mesa",
+  },
+  {
+    data: { id: "silla-2-1", label: "Silla 1", tableId: "mesa-2", parent: "mesa-2" },
+    position: { x: 320, y: 60 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-2-2", label: "Silla 2", tableId: "mesa-2", parent: "mesa-2" },
+    position: { x: 370, y: 120 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-2-3", label: "Silla 3", tableId: "mesa-2", parent: "mesa-2" },
+    position: { x: 320, y: 180 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-2-4", label: "Silla 4", tableId: "mesa-2", parent: "mesa-2" },
+    position: { x: 270, y: 120 },
+    classes: "silla",
+  },
+
+  // Mesa 3
+  {
+    data: { id: "mesa-3", label: "Mesa 3" },
+    position: { x: 520, y: 120 },
+    classes: "mesa",
+  },
+  {
+    data: { id: "silla-3-1", label: "Silla 1", tableId: "mesa-3", parent: "mesa-3" },
+    position: { x: 520, y: 60 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-3-2", label: "Silla 2", tableId: "mesa-3", parent: "mesa-3" },
+    position: { x: 570, y: 120 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-3-3", label: "Silla 3", tableId: "mesa-3", parent: "mesa-3" },
+    position: { x: 520, y: 180 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-3-4", label: "Silla 4", tableId: "mesa-3", parent: "mesa-3" },
+    position: { x: 470, y: 120 },
+    classes: "silla",
+  },
+
+  // Mesa 4
+  {
+    data: { id: "mesa-4", label: "Mesa 4" },
+    position: { x: 120, y: 280 },
+    classes: "mesa",
+  },
+  {
+    data: { id: "silla-4-1", label: "Silla 1", tableId: "mesa-4", parent: "mesa-4" },
+    position: { x: 120, y: 220 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-4-2", label: "Silla 2", tableId: "mesa-4", parent: "mesa-4" },
+    position: { x: 170, y: 280 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-4-3", label: "Silla 3", tableId: "mesa-4", parent: "mesa-4" },
+    position: { x: 120, y: 340 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-4-4", label: "Silla 4", tableId: "mesa-4", parent: "mesa-4" },
+    position: { x: 70, y: 280 },
+    classes: "silla",
+  },
+
+  // Mesa 5
+  {
+    data: { id: "mesa-5", label: "Mesa 5" },
+    position: { x: 320, y: 280 },
+    classes: "mesa",
+  },
+  {
+    data: { id: "silla-5-1", label: "Silla 1", tableId: "mesa-5", parent: "mesa-5" },
+    position: { x: 320, y: 220 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-5-2", label: "Silla 2", tableId: "mesa-5", parent: "mesa-5" },
+    position: { x: 370, y: 280 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-5-3", label: "Silla 3", tableId: "mesa-5", parent: "mesa-5" },
+    position: { x: 320, y: 340 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-5-4", label: "Silla 4", tableId: "mesa-5", parent: "mesa-5" },
+    position: { x: 270, y: 280 },
+    classes: "silla",
+  },
+
+  // Mesa 6
+  {
+    data: { id: "mesa-6", label: "Mesa 6" },
+    position: { x: 520, y: 280 },
+    classes: "mesa",
+  },
+  {
+    data: { id: "silla-6-1", label: "Silla 1", tableId: "mesa-6", parent: "mesa-6" },
+    position: { x: 520, y: 220 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-6-2", label: "Silla 2", tableId: "mesa-6", parent: "mesa-6" },
+    position: { x: 570, y: 280 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-6-3", label: "Silla 3", tableId: "mesa-6", parent: "mesa-6" },
+    position: { x: 520, y: 340 },
+    classes: "silla",
+  },
+  {
+    data: { id: "silla-6-4", label: "Silla 4", tableId: "mesa-6", parent: "mesa-6" },
+    position: { x: 470, y: 280 },
+    classes: "silla",
+  },
 ];
 
 @Injectable({
